@@ -1,4 +1,70 @@
 .employee-container {
   display: flex;
   justify-content: center;
+  width: 100%;
+  padding: 0;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add {
+  border: none;
+  outline: none;
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
+  background-color: var(--blue-1);
+  object-fit: fill;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  object-fit: fill;
+}
+
+.add-img {
+  width: 35px;
+  height: 35px;
+}
+
+.above-content {
+  width: 900px;
+  padding-top: 15px;
+}
+
+.employee-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.employee-form__buttons {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+}
+
+.employee-form__buttons button {
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid;
+  width: 100px;
+  height: 30px;
+}
+
+.employee-form__inputs {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.employee-form__inputs input {
+  outline: none;
+  font-size: 1rem;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.employee-form-label {
+  margin-right: 10px;
 }

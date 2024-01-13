@@ -2,26 +2,34 @@
   <thead>
     <tr>
       <th>Id</th>
-      <th>Date of birth</th>
       <th>Full name</th>
+      <th>Date of birth</th>
       <th>Gender</th>
       <th>Salary</th>
+      <th>Action</th>
     </tr>
   </thead>
-  <tbody>
-    <tr>
-      <td>Dom</td>
-      <td>6000</td>
-      <td>6000</td>
-      <td>6000</td>
-      <td>6000</td>
-    </tr>
-    <tr class="active-row">
-      <td>Melissa</td>
-      <td>5150</td>
-      <td>5150</td>
-      <td>5150</td>
-      <td>5150</td>
+  <tbody *ngFor="let item of data">
+    <tr class="{{ item.isOdd ? 'active-row' : '' }}">
+      <td>{{ item.id }}</td>
+      <td>{{ item.fullName }}</td>
+      <td>{{ item.dateOfBirth }}</td>
+      <td>{{ item.gender }}</td>
+      <td>{{ item.salary }}</td>
+      <td class="actions">
+        <img
+          src="../../assets/pen.png"
+          alt="edit"
+          class="action"
+          (click)="onEdit(item)"
+        />
+        <img
+          src="../../assets/delete.png"
+          alt="delete"
+          class="action"
+          (click)="onDelete(item)"
+        />
+      </td>
     </tr>
     <!-- and so on... -->
   </tbody>

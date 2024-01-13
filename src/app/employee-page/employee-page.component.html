@@ -1,3 +1,25 @@
 <div class="employee-container">
-  <app-employee-table></app-employee-table>
+  <div class="above-content">
+    <form #empForm="ngForm" (ngSubmit)="onSubmit(empForm.value)" class="employee-form">
+      <div class="employee-form__inputs">
+        <input ngModel type="text" hidden name="id" />
+        <input ngModel type="text" name="firstName" placeholder="First name" />
+        <input ngModel type="text" name="middleName" placeholder="Middle name" />
+        <input ngModel type="text" name="lastName" placeholder="Last name" />
+        <input ngModel type="number" name="salary" placeholder="Salary" min="0" />
+        <input ngModel type="text" name="gender" placeholder="Gender" />
+        <div>
+          <label class="employee-form-label" for="Date of birth"
+            >Date of birth <input ngModel name="dateOfBirth" type="date"
+          /></label>
+        </div>
+      </div>
+      <div class="employee-form__buttons">
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <app-employee-table [data]="data"></app-employee-table>
+  <!-- <div *ngFor="let item of data"><p>{{ item.salary }}</p></div> -->
 </div>

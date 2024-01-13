@@ -1,4 +1,4 @@
-interface IEmployee {
+export interface IEmployee {
   id: number;
   dateOfBirth: Date;
   firstName: string;
@@ -6,4 +6,7 @@ interface IEmployee {
   lastName: string;
   middleName: string;
   salary: number;
+  classOdd?: string;
+  isOdd?: boolean;
+  fullName: string;
 }

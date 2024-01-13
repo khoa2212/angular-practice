@@ -9,17 +9,27 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { DepartmentsPageComponent } from './departments-page/departments-page.component';
 import { EmployeeTableComponent } from './employee-table/employee-table.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, EmployeePageComponent, ErrorPageComponent, DepartmentsPageComponent, EmployeeTableComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    EmployeePageComponent,
+    ErrorPageComponent,
+    DepartmentsPageComponent,
+    EmployeeTableComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterOutlet,
     RouterLink,
     RouterLinkActive,
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
