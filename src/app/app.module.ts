@@ -11,6 +11,8 @@ import { DepartmentsPageComponent } from './departments-page/departments-page.co
 import { EmployeeTableComponent } from './employee-table/employee-table.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 @NgModule({
   declarations: [
@@ -23,12 +25,14 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     RouterOutlet,
     RouterLink,
     RouterLinkActive,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ToastrModule.forRoot(),
   ],
   bootstrap: [AppComponent],
 })

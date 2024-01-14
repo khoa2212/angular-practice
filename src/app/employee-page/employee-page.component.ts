@@ -2,6 +2,7 @@ import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { EmployeeService } from './employee.service';
 import { IEmployee } from '@interfaces/IEmployee';
 import { IEmpForm } from '@interfaces/IEmpForm';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-employee-page',
@@ -11,19 +12,22 @@ import { IEmpForm } from '@interfaces/IEmpForm';
 export class EmployeePageComponent implements OnInit, OnChanges {
   data: IEmployee[] = [];
 
-  constructor(private employeeService: EmployeeService) {}
+  constructor(
+    private employeeService: EmployeeService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.getAll();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("change");
+    console.log('change');
   }
 
   ngDoCheck(): void {
     // console.log(this.data);
-    console.log("check")
+    console.log('check');
   }
 
   getAll() {
@@ -47,7 +51,7 @@ export class EmployeePageComponent implements OnInit, OnChanges {
   }
 
   onSubmit(form: IEmpForm) {
-    const newEmp: Omit<IEmployee, "id"> = {
+    const newEmp: Omit<IEmployee, 'id'> = {
       fullName: `${form.lastName} ${form.middleName} ${form.lastName}`,
       lastName: form.lastName,
       middleName: form.middleName,
@@ -57,6 +61,13 @@ export class EmployeePageComponent implements OnInit, OnChanges {
       dateOfBirth: form.dateOfBirth,
     };
 
-    this.employeeService.addEmp(newEmp);
+    this.employeeService.addEmp(newEmp).subscribe(
+      (res: any) => {
+        console.log('🚀 ~ res:', res);
+      },
+      (err: any) => {
+        console.log('🚀 ~ err:', err);
+      }
+    );
   }
 }

@@ -21,6 +21,6 @@ export class EmployeeService {
   }
 
   addEmp(emp: Omit<IEmployee, "id">): Observable<string> {
-    return this.httpClient.post<string>(empApi.add, emp, httpOptions).pipe();
+    return this.httpClient.post<string>(empApi.add, emp).pipe();
   }
 }
