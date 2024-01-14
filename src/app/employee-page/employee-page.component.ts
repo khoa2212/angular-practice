@@ -22,12 +22,12 @@ export class EmployeePageComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('change');
+    // console.log('change');
   }
 
   ngDoCheck(): void {
     // console.log(this.data);
-    console.log('check');
+    // console.log('check');
   }
 
   getAll() {
