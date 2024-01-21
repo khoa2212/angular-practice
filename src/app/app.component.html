@@ -25,6 +25,14 @@
           >Departments</a
         >
       </li>
+      <li *ngIf="isAuth">
+        <a
+          class="navigate__option"
+          routerLink="/private-router"
+          routerLinkActive="navigate__option-active"
+          >Private router</a
+        >
+      </li>
     </ul>
   </nav>
 </header>

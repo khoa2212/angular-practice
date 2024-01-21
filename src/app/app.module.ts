@@ -13,6 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PrivateRouterComponent } from './private-router/private-router.component';
+import { ForbiddenPageComponent } from './forbidden-page/forbidden-page.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ErrorPageComponent,
     DepartmentsPageComponent,
     EmployeeTableComponent,
+    PrivateRouterComponent,
+    ForbiddenPageComponent,
   ],
   imports: [
     BrowserModule,

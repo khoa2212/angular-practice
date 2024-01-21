@@ -3,6 +3,7 @@ import { EmployeeService } from './employee.service';
 import { IEmployee } from '@interfaces/IEmployee';
 import { IEmpForm } from '@interfaces/IEmpForm';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee-page',
@@ -14,7 +15,7 @@ export class EmployeePageComponent implements OnInit, OnChanges {
 
   constructor(
     private employeeService: EmployeeService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
   ) {}
 
   ngOnInit(): void {
@@ -61,14 +62,16 @@ export class EmployeePageComponent implements OnInit, OnChanges {
       dateOfBirth: form.dateOfBirth,
     };
 
-    this.employeeService.addEmp(newEmp).subscribe(
-      (res: any) => {
-        console.log('🚀 ~ res:', res);
-      },
-      (err: any) => {
-        console.log('🚀 ~ err:', err);
-      }
-    );
-    this.toastr.error('Invalid email or password');
+    // this.employeeService.addEmp(newEmp).subscribe(
+    //   (res: any) => {
+    //     console.log('🚀 ~ res:', res);
+    //   },
+    //   (err: any) => {
+    //     console.log('🚀 ~ err:', err);
+    //   }
+    // );
+    console.log('🚀 ~ employee:', this.employeeService.employee);
+    this.employeeService.addEmp(newEmp);
+    this.toastr.success('login success');
   }
 }
