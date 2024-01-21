@@ -18,7 +18,7 @@ export class EmployeePageComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit(): void {
-    this.getAll();
+    // this.getAll();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -69,5 +69,6 @@ export class EmployeePageComponent implements OnInit, OnChanges {
         console.log('🚀 ~ err:', err);
       }
     );
+    this.toastr.error('Invalid email or password');
   }
 }
