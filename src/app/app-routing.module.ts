@@ -1,25 +1,37 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { EmployeePageComponent } from './employee-page/employee-page.component';
-import { DepartmentsPageComponent } from './departments-page/departments-page.component';
-import { ErrorPageComponent } from './error-page/error-page.component';
-import { ForbiddenPageComponent } from './forbidden-page/forbidden-page.component';
-import { PrivateRouterComponent } from './private-router/private-router.component';
-import { AuthGuard } from './employee-page/auth.guard';
+import {
+  DepartmentComponent,
+  EmployeeComponent,
+  ProjectComponent,
+} from './modules';
+import { NotFoundComponent } from './shared/components';
+import { HomeComponent } from './modules/home/home.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
-  { path: 'employees', component: EmployeePageComponent },
-  { path: 'departments', component: DepartmentsPageComponent },
-  { path: 'forbidden', component: ForbiddenPageComponent },
   {
-    path: 'private-router',
-    component: PrivateRouterComponent,
-    canActivate: [AuthGuard],
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full',
   },
-  { path: '**', component: ErrorPageComponent },
+  {
+    path: 'home',
+    component: HomeComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'department',
+        pathMatch: 'full',
+      },
+      { path: 'department', component: DepartmentComponent },
+      { path: 'employee', component: EmployeeComponent },
+      { path: 'project', component: ProjectComponent },
+    ],
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
+  },
 ];
 
 @NgModule({

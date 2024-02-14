@@ -1,6 +1,4 @@
-FROM node:20.10.0
-
-RUN mkdir -p /app
+FROM node:20.10.0:alpine
 
 WORKDIR /app
 
@@ -14,4 +12,4 @@ RUN npm install -g @angular/cli
 
 EXPOSE 4200
 
-# CMD [ "npm", "start" ]
+CMD [ "npm", "start" ]

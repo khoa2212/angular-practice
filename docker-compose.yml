@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  angular-fe:
+    container_name: dojo-ui
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    command: sh -c "ng serve --host 0.0.0.0"
+    ports:
+      - "4200:4200"

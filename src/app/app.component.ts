@@ -1,5 +1,4 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
-import { EmployeeService } from './employee-page/employee.service';
 
 @Component({
   selector: 'app-root',
@@ -7,15 +6,7 @@ import { EmployeeService } from './employee-page/employee.service';
   styleUrl: './app.component.css',
 })
 export class AppComponent implements OnInit {
-  constructor(private employeeService: EmployeeService) {}
+  constructor() {}
 
-  isAuth: boolean = false;
-
-  ngOnInit(): void {
-    this.employeeService.autoLogin();
-  }
-
-  ngDoCheck(): void {
-    this.isAuth = this.employeeService.employee !== null;
-  }
+  ngOnInit(): void {}
 }
