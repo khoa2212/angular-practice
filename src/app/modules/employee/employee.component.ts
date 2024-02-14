@@ -49,10 +49,34 @@ export class EmployeeComponent {
   }
 
   onNext(): void {
+    const page = this.currentPage + 1;
+    this.employeeList$ = this.#employeeRefetch$.pipe(
+      startWith(true),
+      switchMap(() =>
+        this.employeeService.findEmployees$(
+          page,
+          DEFAULT_PAGE_SIZE,
+          DEFAULT_DEPARTMENT_FILTER
+        )
+      )
+    );
 
+    this.currentPage = page;
   }
 
   onPrev(): void {
+    const page = this.currentPage - 1;
+    this.employeeList$ = this.#employeeRefetch$.pipe(
+      startWith(true),
+      switchMap(() =>
+        this.employeeService.findEmployees$(
+          page,
+          DEFAULT_PAGE_SIZE,
+          DEFAULT_DEPARTMENT_FILTER
+        )
+      )
+    );
 
+    this.currentPage = page;
   }
 }

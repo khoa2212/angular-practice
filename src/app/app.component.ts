@@ -1,4 +1,5 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
+import { ImagePaths } from './assets/image-path';
 
 @Component({
   selector: 'app-root',
@@ -6,7 +7,7 @@ import { Component, OnChanges, OnInit } from '@angular/core';
   styleUrl: './app.component.css',
 })
 export class AppComponent implements OnInit {
-  constructor() {}
+  constructor(public imagePaths: ImagePaths) {}
 
   ngOnInit(): void {}
 }

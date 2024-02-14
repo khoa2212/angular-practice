@@ -113,7 +113,10 @@
                   : 'border-t'
               }}"
             >
-              price
+              <span class="flex gap-2">
+                <img class="cursor-pointer" src="./pen.png" alt="Edit" />
+                <img class="cursor-pointer" src="./delete.png" alt="Delete" />
+              </span>
             </td>
           </tr>
         </tbody>
@@ -138,6 +141,7 @@
                 ? 'bg-[#cccccc] pointer-events-none'
                 : 'cursor-pointer'
             }}"
+            (click)="onPrev()"
           >
             <img
               src="https://www.tailwindtap.com/assets/travelagency-admin/leftarrow.svg"
@@ -156,10 +160,11 @@
           </li>
           <li
             class="flex items-center justify-center w-[36px] rounded-[6px] h-[36px] border-[1px] border-solid border-[#E4E4EB] {{
-              currentPage === employeeList.lastPage
+              currentPage === employeeList.lastPage - 1
                 ? 'bg-[#cccccc] pointer-events-none'
                 : 'cursor-pointer'
             }}"
+            (click)="onNext()"
           >
             <img
               src="https://www.tailwindtap.com/assets/travelagency-admin/rightarrow.svg"
