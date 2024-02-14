@@ -38,19 +38,28 @@
     </div>
 
     <div class="hidden lg:flex lg:gap-x-12">
-      <a href="/home/department" class="text-sm font-semibold leading-6 text-gray-900"
+      <a
+        href="/home/department"
+        class="text-sm font-semibold leading-6 text-gray-900"
         >Department</a
       >
-      <a href="/home/employee" class="text-sm font-semibold leading-6 text-gray-900"
+      <a
+        href="/home/employee"
+        class="text-sm font-semibold leading-6 text-gray-900"
         >Employee</a
       >
-      <a href="/home/project" class="text-sm font-semibold leading-6 text-gray-900"
+      <a
+        href="/home/project"
+        class="text-sm font-semibold leading-6 text-gray-900"
         >Project</a
       >
     </div>
-    <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+    <div class="hidden lg:flex lg:flex-1 lg:justify-end gap-3">
       <a href="/home" class="text-sm font-semibold leading-6 text-gray-900"
-        >Log in</a
+        >Login</a
+      >
+      <a href="/home" class="text-sm font-semibold leading-6 text-gray-900"
+        >Signup</a
       >
     </div>
   </nav>
@@ -75,7 +84,11 @@
             alt=""
           />
         </a>
-        <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" (click)="onToggle()">
+        <button
+          type="button"
+          class="-m-2.5 rounded-md p-2.5 text-gray-700"
+          (click)="onToggle()"
+        >
           <span class="sr-only">Close menu</span>
           <svg
             class="h-6 w-6"
@@ -116,7 +129,12 @@
             <a
               href="/home"
               class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-              >Log in</a
+              >Login</a
+            >
+            <a
+              href="/home"
+              class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+              >Signup</a
             >
           </div>
         </div>

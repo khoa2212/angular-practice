@@ -1,3 +1,3 @@
-export const environment = {
-  urlPath: 'http://localhost:8080/dojo/api',
+export const ENVIRONMENT = {
+  BASE_URL: 'http://localhost:8080/dojo/api',
 };
