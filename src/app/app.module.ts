@@ -16,7 +16,6 @@ import {
 } from './modules';
 import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './modules/home/home.component';
-import { AssetModule } from './assets/asset.module';
 
 @NgModule({
   declarations: [
@@ -33,7 +32,6 @@ import { AssetModule } from './assets/asset.module';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    AssetModule,
     RouterOutlet,
     RouterLink,
     RouterLinkActive,

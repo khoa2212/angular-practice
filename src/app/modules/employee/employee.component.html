@@ -1,4 +1,29 @@
-<div class="min-h-screen h-full flex justify-center items-center">
+<div
+  class="min-h-screen h-full flex flex-col gap-3 py-10 items-center"
+>
+  <div class="w-full flex justify-between max-w-4xl 2xl:max-w-none">
+    <button
+      title="Add employee"
+      class="rounded-full basis-10 bg-slate-600 hover:bg-slate-800 px-1 py-1"
+    >
+      <img class="w-8 h-8" src="../../../assets/add.png" alt="Add" />
+    </button>
+
+    <!-- Select menu -->
+    <select
+      id="department-selections"
+      (change)="onSelectDepartment($event)"
+      class="overflow-y-auto bg-gray-50 border basis-60 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+    >
+      <option value="all" selected>All Departments</option>
+      <option
+        *ngFor="let department of departmentList$ | async"
+        value="{{ department.id }}"
+      >
+        {{ department.departmentName }}
+      </option>
+    </select>
+  </div>
   <div *ngIf="employeeList$ | async as employeeList" class="w-full max-w-4xl">
     <div
       class="w-full overflow-x-scroll md:overflow-auto max-w-7xl 2xl:max-w-none"
@@ -32,6 +57,11 @@
               class="py-3 px-3 text-[#212B36] sm:text-base font-bold whitespace-nowrap"
             >
               Salary
+            </th>
+            <th
+              class="py-3 px-3 text-[#212B36] sm:text-base font-bold whitespace-nowrap"
+            >
+              Department
             </th>
             <th
               class="py-3 px-3 text-[#212B36] sm:text-base font-bold whitespace-nowrap"
@@ -113,9 +143,28 @@
                   : 'border-t'
               }}"
             >
+              {{ employee.department.departmentName }}
+            </td>
+            <td
+              class="py-2 px-3 font-normal text-base whitespace-nowrap {{
+                i === 0
+                  ? 'border-t-2 border-black'
+                  : i === employeeList.employees.length
+                  ? 'border-y'
+                  : 'border-t'
+              }}"
+            >
               <span class="flex gap-2">
-                <img class="cursor-pointer" src="./pen.png" alt="Edit" />
-                <img class="cursor-pointer" src="./delete.png" alt="Delete" />
+                <img
+                  class="cursor-pointer w-5 h-5"
+                  src="../../../assets/pen.png"
+                  alt="Edit"
+                />
+                <img
+                  class="cursor-pointer w-5 h-5"
+                  src="../../../assets/delete.png"
+                  alt="Delete"
+                />
               </span>
             </td>
           </tr>
@@ -131,7 +180,7 @@
       </div>
       <div class="flex">
         <ul
-          class="flex justify-center items-center gap-x-[10px] z-30"
+          class="flex justify-center items-center gap-x-[10px] z-9"
           role="navigation"
           aria-label="Pagination"
         >
@@ -160,7 +209,8 @@
           </li>
           <li
             class="flex items-center justify-center w-[36px] rounded-[6px] h-[36px] border-[1px] border-solid border-[#E4E4EB] {{
-              currentPage === employeeList.lastPage - 1
+              currentPage === employeeList.lastPage - 1 ||
+              employeeList.lastPage === 1
                 ? 'bg-[#cccccc] pointer-events-none'
                 : 'cursor-pointer'
             }}"

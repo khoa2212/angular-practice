@@ -3,7 +3,11 @@ import { AppRoutingModule } from 'app/app-routing.module';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
-import { HeaderComponent, NotFoundComponent } from './components';
+import {
+  HeaderComponent,
+  NotFoundComponent,
+  LoadingComponent,
+} from './components';
 
 @NgModule({
   imports: [
@@ -13,7 +17,7 @@ import { HeaderComponent, NotFoundComponent } from './components';
     RouterLinkActive,
     CommonModule,
   ],
-  declarations: [HeaderComponent, NotFoundComponent],
-  exports: [HeaderComponent, NotFoundComponent],
+  declarations: [HeaderComponent, NotFoundComponent, LoadingComponent],
+  exports: [HeaderComponent, NotFoundComponent, LoadingComponent],
 })
 export class SharedModule {}

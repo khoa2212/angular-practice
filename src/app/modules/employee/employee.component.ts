@@ -4,7 +4,7 @@ import {
   DEFAULT_DEPARTMENT_FILTER,
   NUMBER_OF_PAGINATION,
 } from 'app/constants/constants';
-import { EmployeeService } from 'app/service';
+import { DepartmentService, EmployeeService } from 'app/service';
 import { Subject, startWith, switchMap } from 'rxjs';
 
 @Component({
@@ -14,6 +14,7 @@ import { Subject, startWith, switchMap } from 'rxjs';
 })
 export class EmployeeComponent {
   readonly #employeeRefetch$ = new Subject<void>();
+  readonly #departmentRefetch$ = new Subject<void>();
 
   currentPage: number = DEFAULT_PAGE_NUMBER;
   pageSize: number = DEFAULT_PAGE_SIZE;
@@ -24,14 +25,37 @@ export class EmployeeComponent {
     startWith(true),
     switchMap(() =>
       this.employeeService.findEmployees$(
-        DEFAULT_PAGE_NUMBER,
-        DEFAULT_PAGE_SIZE,
+        this.currentPage,
+        this.pageSize,
         DEFAULT_DEPARTMENT_FILTER
       )
     )
   );
 
-  constructor(private employeeService: EmployeeService) {}
+  departmentList$ = this.#departmentRefetch$.pipe(
+    startWith(true),
+    switchMap(() => this.departmentService.findAll$())
+  );
+
+  constructor(
+    private employeeService: EmployeeService,
+    private departmentService: DepartmentService
+  ) {}
+
+  onSelectDepartment(event: any): void {
+    const departmentId = event.target.value === "all" ? DEFAULT_DEPARTMENT_FILTER : +event.target.value;
+    
+    this.employeeList$ = this.#employeeRefetch$.pipe(
+      startWith(true),
+      switchMap(() =>
+        this.employeeService.findEmployees$(
+          this.currentPage,
+          this.pageSize,
+          departmentId,
+        )
+      )
+    );
+  }
 
   onSelectPage(page: number): void {
     this.employeeList$ = this.#employeeRefetch$.pipe(
@@ -39,7 +63,7 @@ export class EmployeeComponent {
       switchMap(() =>
         this.employeeService.findEmployees$(
           page,
-          DEFAULT_PAGE_SIZE,
+          this.pageSize,
           DEFAULT_DEPARTMENT_FILTER
         )
       )
@@ -55,7 +79,7 @@ export class EmployeeComponent {
       switchMap(() =>
         this.employeeService.findEmployees$(
           page,
-          DEFAULT_PAGE_SIZE,
+          this.pageSize,
           DEFAULT_DEPARTMENT_FILTER
         )
       )
@@ -71,7 +95,7 @@ export class EmployeeComponent {
       switchMap(() =>
         this.employeeService.findEmployees$(
           page,
-          DEFAULT_PAGE_SIZE,
+          this.pageSize,
           DEFAULT_DEPARTMENT_FILTER
         )
       )
