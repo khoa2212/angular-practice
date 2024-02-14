@@ -1,0 +1,285 @@
+<div
+  #employeeModal
+  id="employee-modal"
+  tabindex="-1"
+  class="bg-[#00000066] h-full flex overflow-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0"
+>
+  <form
+    [formGroup]="addEmployeeForm"
+    (ngSubmit)="onSubmit()"
+    class="relative p-4 w-full max-w-xl max-h-full"
+  >
+    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+      <button
+        type="button"
+        class="top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+        data-modal-hide="popup-modal"
+        (click)="close()"
+      >
+        <svg
+          class="w-3 h-3"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 14 14"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+          />
+        </svg>
+        <span class="sr-only">Close modal</span>
+      </button>
+      <div class="p-4 md:p-5">
+        <div class="grid grid-cols-2 gap-2">
+          <div class="col-span-1 flex flex-col gap-2">
+            <div id="input-group" class="relative">
+              <label
+                for="firstName"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >First name <span class="text-red-500">*</span></label
+              >
+              <input
+                type="text"
+                id="firstName"
+                formControlName="firstName"
+                placeholder="First name"
+                class="bg-gray-50 border {{
+                  addEmployeeForm.get('firstName')?.errors &&
+                  isDirtyOrTouched('firstName')
+                    ? 'border-red-500 outline-red-500'
+                    : 'border-gray-300'
+                }}  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              />
+              <div
+                *ngFor="let validation of validateMessages.firstName"
+                class="z-10"
+              >
+                <span
+                  *ngIf="
+                    isDirtyOrTouched('firstName') &&
+                    addEmployeeForm.get('firstName')?.hasError(validation.type)
+                  "
+                  class="hide-tooltip absolute top-0 left-[27%] z-10 border py-1 border-red-500 bg-gray-200 rounded-lg w-3/4 text-center font-bold text-xs text-red-500"
+                >
+                  {{ validation.message }}
+                </span>
+              </div>
+            </div>
+            <div id="input-group" class="relative">
+              <label
+                for="middleName"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Middle name</label
+              >
+              <input
+                type="text"
+                id="middleName"
+                formControlName="middleName"
+                class="bg-gray-50 border {{
+                  addEmployeeForm.get('middleName')?.errors &&
+                  isDirtyOrTouched('middleName')
+                    ? 'border-red-500 outline-red-500'
+                    : 'border-gray-300'
+                }}  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Middle name"
+              />
+
+              <div
+                *ngFor="let validation of validateMessages.middleName"
+                class="z-10"
+              >
+                <span
+                  *ngIf="
+                    isDirtyOrTouched('middleName') &&
+                    addEmployeeForm.get('middleName')?.hasError(validation.type)
+                  "
+                  class="hide-tooltip absolute top-0 left-[27%] z-10 border py-1 border-red-500 bg-gray-200 rounded-lg w-3/4 text-center font-bold text-xs text-red-500"
+                >
+                  {{ validation.message }}
+                </span>
+              </div>
+            </div>
+            <div>
+              <label
+                for="salary"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Salary</label
+              >
+              <input
+                type="number"
+                id="salary"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="0"
+                min="0"
+                oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"
+              />
+            </div>
+            <div>
+              <label
+                for="department"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Gender <span class="text-red-500">*</span></label
+              >
+              <span
+                class="w-full p-2.5 flex gap-10 bg-gray-50 border border-gray-300 text-sm rounded-lg"
+              >
+                <span class="flex gap-2 items-center">
+                  <input
+                    name="female"
+                    value="FEMALE"
+                    type="radio"
+                    (change)="onRadioChange($event)"
+                  />
+                  <label for="female">Female</label>
+                </span>
+                <span class="flex gap-2 items-center">
+                  <input
+                    name="male"
+                    value="MALE"
+                    type="radio"
+                    (change)="onRadioChange($event)"
+                  />
+                  <label for="male">Male</label>
+                </span>
+              </span>
+            </div>
+          </div>
+          <div class="col-span-1 flex flex-col gap-2">
+            <div id="input-group" class="relative">
+              <label
+                for="lastName"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Last name <span class="text-red-500">*</span></label
+              >
+              <input
+                type="text"
+                id="lastName"
+                formControlName="lastName"
+                class="bg-gray-50 border {{
+                  addEmployeeForm.get('lastName')?.errors &&
+                  isDirtyOrTouched('lastName')
+                    ? 'border-red-500 outline-red-500'
+                    : 'border-gray-300'
+                }}  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Last name"
+              />
+              <div
+                *ngFor="let validation of validateMessages.lastName"
+                class="z-10"
+              >
+                <span
+                  *ngIf="
+                    isDirtyOrTouched('lastName') &&
+                    addEmployeeForm.get('lastName')?.hasError(validation.type)
+                  "
+                  class="hide-tooltip absolute top-0 left-[27%] z-10 border py-1 border-red-500 bg-gray-200 rounded-lg w-3/4 text-center font-bold text-xs text-red-500"
+                >
+                  {{ validation.message }}
+                </span>
+              </div>
+            </div>
+            <div id="input-group" class="relative">
+              <label
+                for="dateOfBirth"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Date of birth <span class="text-red-500">*</span></label
+              >
+              <input
+                type="date"
+                id="dateOfBirth"
+                formControlName="dateOfBirth"
+                class="bg-gray-50 border {{
+                  addEmployeeForm.get('dateOfBirth')?.errors &&
+                  isDirtyOrTouched('dateOfBirth')
+                    ? 'border-red-500 outline-red-500'
+                    : 'border-gray-300'
+                }}  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              />
+
+              <div
+                *ngFor="let validation of validateMessages.dateOfBirth"
+                class="z-10"
+              >
+                <span
+                  *ngIf="
+                    isDirtyOrTouched('dateOfBirth') &&
+                    addEmployeeForm
+                      .get('dateOfBirth')
+                      ?.hasError(validation.type)
+                  "
+                  class="hide-tooltip absolute top-0 left-[27%] z-10 border py-1 border-red-500 bg-gray-200 rounded-lg w-3/4 text-center font-bold text-xs text-red-500"
+                >
+                  {{ validation.message }}
+                </span>
+              </div>
+            </div>
+            <div>
+              <label
+                for="department"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Department <span class="text-red-500">*</span></label
+              >
+              <select
+                id="department-selections"
+                formControlName="department"
+                class="bg-gray-50 border {{
+                  addEmployeeForm?.errors?.['requiredSelection'] &&
+                  isDirtyOrTouched('department')
+                    ? 'border-red-500 outline-red-500'
+                    : 'border-gray-300'
+                }}  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              >
+                <option value="0">Choose a department</option>
+                <option
+                  *ngFor="let department of departments"
+                  value="{{ department.id }}"
+                >
+                  {{ department.departmentName }}
+                </option>
+              </select>
+
+              <div
+                *ngFor="let validation of validateMessages.department"
+                class="z-10"
+              >
+                <span
+                  *ngIf="
+                    isDirtyOrTouched('department') &&
+                    addEmployeeForm?.errors?.['requiredSelection']
+                  "
+                  class="hide-tooltip absolute top-0 left-[27%] z-10 border py-1 border-red-500 bg-gray-200 rounded-lg w-3/4 text-center font-bold text-xs text-red-500"
+                >
+                  {{ validation.message }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex w-full justify-end pt-2">
+          <button
+            data-modal-hide="popup-modal"
+            type="submit"
+            [ngClass]="{ 'bg-blue-400': addEmployeeForm.invalid }"
+            [disabled]="addEmployeeForm.invalid"
+            class="text-white bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center"
+          >
+            Add Employee
+          </button>
+          <button
+            data-modal-hide="popup-modal"
+            type="button"
+            class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+            (click)="close()"
+          >
+            No, cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

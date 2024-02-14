@@ -5,6 +5,7 @@
     <button
       title="Add employee"
       class="rounded-full basis-10 bg-slate-600 hover:bg-slate-800 px-1 py-1"
+      (click)="onShowModal()"
     >
       <img class="w-8 h-8" src="../../../assets/add.png" alt="Add" />
     </button>
@@ -225,3 +226,4 @@
     </div>
   </div>
 </div>
+<app-employee-modal [departments]="departmentList$ | async" #modal></app-employee-modal>

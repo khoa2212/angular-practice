@@ -16,6 +16,7 @@ import {
 } from './modules';
 import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './modules/home/home.component';
+import { EmployeeModalComponent } from './modules/employee/employee-modal/employee-modal.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { HomeComponent } from './modules/home/home.component';
     EmployeeComponent,
     ProjectComponent,
     HomeComponent,
+    EmployeeModalComponent,
   ],
   imports: [
     BrowserModule,
