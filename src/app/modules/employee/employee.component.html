@@ -91,14 +91,17 @@
                   : 'border-t'
               }}"
             >
-              <a class="text-blue-500 hover:text-blue-800 underline cursor-pointer">{{
-                employee.firstName +
-                  " " +
-                  (employee.middleName === null
-                    ? ""
-                    : employee.middleName + " ") +
-                  employee.lastName
-              }}</a>
+              <a
+                class="text-blue-500 hover:text-blue-800 underline cursor-pointer"
+                >{{
+                  employee.firstName +
+                    " " +
+                    (employee.middleName === null
+                      ? ""
+                      : employee.middleName + " ") +
+                    employee.lastName
+                }}</a
+              >
             </td>
             <td
               class="py-2 px-3 font-normal text-base whitespace-nowrap {{
@@ -164,6 +167,7 @@
                   class="cursor-pointer w-5 h-5"
                   src="../../../assets/delete.png"
                   alt="Delete"
+                  (click)="onDeleteEmployee(employee.id)"
                 />
               </span>
             </td>
@@ -185,7 +189,7 @@
       </div>
       <div class="flex">
         <ul
-          class="flex justify-center items-center gap-x-[10px] z-9"
+          class="flex justify-center items-center gap-x-[10px]"
           role="navigation"
           aria-label="Pagination"
         >
@@ -233,5 +237,6 @@
 <app-employee-modal
   [departments]="departmentList$ | async"
   (addEmployee)="onAddEmployee($event)"
+  (editEmployee)="onEditEmployee($event)"
   #modal
 ></app-employee-modal>

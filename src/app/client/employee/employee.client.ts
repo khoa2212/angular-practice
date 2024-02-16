@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Employee, EmployeeList } from 'app/model';
+import { DeleteSuccess, Employee, EmployeeList } from 'app/model';
 import { ENVIRONMENT } from 'environment/environment';
 import { EMPLOYEE } from 'app/constants';
 
@@ -24,8 +24,32 @@ export class EmployeeClient {
     return employees;
   }
 
-  add$(newEmployee: Omit<Employee, "id" | "department" | "status">): Observable<Employee> {
-    const employee = this.httpClient.post<Employee>(`${ENVIRONMENT.BASE_URL}/${EMPLOYEE.ADD}`, newEmployee);
+  add$(
+    newEmployee: Omit<Employee, 'id' | 'department' | 'status'>
+  ): Observable<Employee> {
+    const employee = this.httpClient.post<Employee>(
+      `${ENVIRONMENT.BASE_URL}/${EMPLOYEE.ADD}`,
+      newEmployee
+    );
     return employee;
+  }
+
+  update$(
+    employee: Omit<Employee, 'department' | 'status'>
+  ): Observable<Employee> {
+    const updatedEmployee = this.httpClient.put<Employee>(
+      `${ENVIRONMENT.BASE_URL}/${EMPLOYEE.UPDATE}`,
+      employee
+    );
+    return updatedEmployee;
+  }
+
+  delete$(id: number): Observable<DeleteSuccess> {
+    const data = this.httpClient.delete<DeleteSuccess>(
+      `${ENVIRONMENT.BASE_URL}/${EMPLOYEE.DELETE}`,
+      { body: { id } }
+    );
+
+    return data;
   }
 }

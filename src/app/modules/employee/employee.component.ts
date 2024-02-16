@@ -32,7 +32,6 @@ export class EmployeeComponent implements OnInit {
 
   departmentId: number = DEFAULT_DEPARTMENT_FILTER;
 
-
   @ViewChild('modal', { static: false }) modal!: EmployeeModalComponent;
 
   employeeList$ = this.#employeeRefetch$.pipe(
@@ -67,6 +66,40 @@ export class EmployeeComponent implements OnInit {
     });
   }
 
+  chooseNumberOfPagination(): void {
+    this.employeeList$.subscribe((value) => {
+      if (NUMBER_OF_PAGINATION.length > value.lastPage) {
+        const page =
+          value.totalCount % this.pageSize === 0
+            ? value.lastPage - 1
+            : value.lastPage;
+        this.numberOfPagination = Array.from({ length: page }, (_, i) => i + 1);
+      } else {
+        this.numberOfPagination = NUMBER_OF_PAGINATION;
+      }
+    });
+  }
+
+  refreshPage(): void {
+    this.employeeList$ = this.#employeeRefetch$.pipe(
+      startWith(true),
+      switchMap(() =>
+        this.employeeService.findEmployees$(
+          DEFAULT_PAGE_NUMBER,
+          DEFAULT_PAGE_SIZE,
+          DEFAULT_DEPARTMENT_FILTER
+        )
+      )
+    );
+
+    this.departmentId = DEFAULT_DEPARTMENT_FILTER;
+    const selectBox = document.getElementById('department-selections') ?? '';
+    if (selectBox instanceof HTMLSelectElement) {
+      selectBox.value = '0';
+    }
+    this.chooseNumberOfPagination();
+  }
+
   onSelectDepartment(event: any): void {
     this.currentPage = 1;
 
@@ -86,18 +119,7 @@ export class EmployeeComponent implements OnInit {
       )
     );
 
-    this.employeeList$.subscribe((value) => {
-      if (this.numberOfPagination.length > value.lastPage) {
-        const page =
-          value.lastPage % this.pageSize === 0
-            ? value.lastPage - 1
-            : value.lastPage;
-        this.numberOfPagination = Array.from({ length: page }, (_, i) => i + 1);
-      }
-      else {
-        this.numberOfPagination = NUMBER_OF_PAGINATION;
-      }
-    });
+    this.chooseNumberOfPagination();
   }
 
   onSelectPage(page: number): void {
@@ -168,24 +190,45 @@ export class EmployeeComponent implements OnInit {
       },
     });
 
-    this.employeeList$ = this.#employeeRefetch$.pipe(
-      startWith(true),
-      switchMap(() =>
-        this.employeeService.findEmployees$(
-          DEFAULT_PAGE_NUMBER,
-          DEFAULT_PAGE_SIZE,
-          DEFAULT_DEPARTMENT_FILTER
-        )
-      )
-    );
+    this.refreshPage();
   }
 
   onEditEmployee(employee: Omit<Employee, 'department' | 'status'>): void {
-    console.log('🚀 ~ employee:', employee);
+    this.employeeService.update$(employee).subscribe({
+      next: (res) => {
+        this.toastrService.success(MESSAGE.UPDATE_EMPLOYEE_SUCCESS);
+        this.modal.close();
+      },
+      error: (err) => {
+        if (err.error?.validationErrors) {
+          this.toastrService.error(err.error.validationErrors[0]);
+        } else {
+          this.toastrService.error(err.error.message);
+        }
+      },
+    });
+
+    this.refreshPage();
   }
 
   onSelectEmployee(employee: Employee): void {
     this.modal.open(employee);
   }
 
+  onDeleteEmployee(id: number): void {
+    this.employeeService.delete$(id).subscribe({
+      next: (res) => {
+        this.toastrService.success(MESSAGE.DELETE_EMPLOYEE_SUCCESS);
+      },
+      error: (err) => {
+        if (err.error?.validationErrors) {
+          this.toastrService.error(err.error.validationErrors[0]);
+        } else {
+          this.toastrService.error(err.error.message);
+        }
+      },
+    });
+
+    this.refreshPage();
+  }
 }

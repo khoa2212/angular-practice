@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Employee, EmployeeList } from 'app/model';
+import { DeleteSuccess, Employee, EmployeeList } from 'app/model';
 import { EmployeeClient } from 'app/client';
 
 @Injectable({
@@ -26,4 +26,12 @@ export class EmployeeService {
   add$(newEmployee: Omit<Employee, "id" | "department" | "status">): Observable<Employee> {
     return this.employeeClient.add$(newEmployee);
   }
-}
+
+  update$(employee: Omit<Employee, "department" | "status">): Observable<Employee> {
+    return this.employeeClient.update$(employee);
+  }
+
+  delete$(id: number): Observable<DeleteSuccess> {
+    return this.employeeClient.delete$(id);
+  }
+ }

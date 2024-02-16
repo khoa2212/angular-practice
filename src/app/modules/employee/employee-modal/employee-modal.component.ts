@@ -172,25 +172,33 @@ export class EmployeeModalComponent {
   }
 
   onSubmit(): void {
-    console.log(this.addEmployeeForm);
+    const data = this.addEmployeeForm.getRawValue();
+
     if (!this.selectedEmployee) {
       const newEmployee: Omit<Employee, 'id' | 'department' | 'status'> = {
-        firstName:
-          this.addEmployeeForm.controls['firstName'].value?.trim() ?? '',
-        lastName: this.addEmployeeForm.controls['lastName'].value?.trim() ?? '',
-        middleName:
-          this.addEmployeeForm.controls['middleName'].value?.trim() ?? '',
-        dateOfBirth: new Date(
-          this.addEmployeeForm.controls['dateOfBirth'].value ?? '1800-01-01'
-        ),
-        gender: this.addEmployeeForm.controls['gender'].value ?? Gender.FEMALE,
-        salary: this.addEmployeeForm.controls['salary'].value ?? 0,
-        departmentId: this.addEmployeeForm.controls['department'].value ?? 1,
+        firstName: data.firstName?.trim() ?? '',
+        lastName: data.lastName?.trim() ?? '',
+        middleName: data.middleName?.trim() ?? '',
+        dateOfBirth: new Date(data.dateOfBirth ?? '1800-01-01'),
+        gender: data.gender ?? Gender.FEMALE,
+        salary: data.salary ?? 0,
+        departmentId: data.department ?? 1,
       };
 
       this.addEmployee.emit(newEmployee);
     } else {
-      console.log('else');
+      const employee: Omit<Employee, 'department' | 'status'> = {
+        id: this.selectedEmployee.id,
+        firstName: data.firstName?.trim() ?? '',
+        lastName: data.lastName?.trim() ?? '',
+        middleName: data.middleName?.trim() ?? '',
+        dateOfBirth: new Date(data.dateOfBirth ?? '1800-01-01'),
+        gender: data.gender ?? Gender.FEMALE,
+        salary: data.salary ?? 0,
+        departmentId: data.department ?? 1,
+      };
+
+      this.editEmployee.emit(employee);
     }
   }
 
