@@ -12,8 +12,8 @@ export interface Employee {
     gender: Gender;
     status: Status
     department: Department;
+    departmentId?: number;
 }
-
 
 export interface EmployeeList {
     employees: Employee[];

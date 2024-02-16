@@ -25,3 +25,5 @@ export const DEFAULT_PAGE_NUMBER = 1;
 
 export const DEFAULT_DEPARTMENT_FILTER = 0; // not filter by department id will find all
 
+export const EMPLOYEE_MAX_SALARY = 100000;
+

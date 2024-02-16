@@ -38,7 +38,7 @@ import { EmployeeModalComponent } from './modules/employee/employee-modal/employ
     RouterLink,
     RouterLinkActive,
     HttpClientModule,
-    ToastrModule.forRoot({ progressBar: true, timeOut: 2000 }),
+    ToastrModule.forRoot({ progressBar: true, timeOut: 1000 }),
   ],
   bootstrap: [AppComponent],
 })

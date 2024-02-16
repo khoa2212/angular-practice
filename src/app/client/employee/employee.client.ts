@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { EmployeeList } from 'app/model';
+import { Employee, EmployeeList } from 'app/model';
 import { ENVIRONMENT } from 'environment/environment';
 import { EMPLOYEE } from 'app/constants';
 
@@ -22,5 +22,10 @@ export class EmployeeClient {
     );
 
     return employees;
+  }
+
+  add$(newEmployee: Omit<Employee, "id" | "department" | "status">): Observable<Employee> {
+    const employee = this.httpClient.post<Employee>(`${ENVIRONMENT.BASE_URL}/${EMPLOYEE.ADD}`, newEmployee);
+    return employee;
   }
 }

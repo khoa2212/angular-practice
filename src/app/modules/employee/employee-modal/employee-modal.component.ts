@@ -1,8 +1,16 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { Department } from 'app/model';
 import {
-  genderRequiredValidator,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { EMPLOYEE_MAX_SALARY } from 'app/constants';
+import { Department, Employee, Gender } from 'app/model';
+;
+import {
   noWhitespaceValidator,
   selectBoxRequiredValidator,
   specialCharacterValidator,
@@ -19,7 +27,9 @@ export class EmployeeModalComponent {
 
   @Input() departments: Department[] | null = [];
 
-  private _prevSelected: any = null;
+  @Output() addEmployee = new EventEmitter<
+    Omit<Employee, 'id' | 'department' | 'status'>
+  >();
 
   addEmployeeForm = this.formBuilder.group({
     firstName: [
@@ -40,10 +50,9 @@ export class EmployeeModalComponent {
     ],
     middleName: ['', [noWhitespaceValidator(), specialCharacterValidator()]],
     dateOfBirth: ['', [Validators.required]],
-    salary: [0, [Validators.max(1000000)]],
-    department: [0],
-    female: [''],
-    male: [''],
+    salary: [0, [Validators.max(EMPLOYEE_MAX_SALARY)]],
+    department: [0, [selectBoxRequiredValidator()]],
+    gender: [Gender.FEMALE],
   });
 
   validateMessages = {
@@ -93,7 +102,7 @@ export class EmployeeModalComponent {
     ],
     department: [
       {
-        type: 'required',
+        type: 'requiredSelection',
         message: 'Department is required',
       },
     ],
@@ -121,20 +130,21 @@ export class EmployeeModalComponent {
     this.modal.nativeElement.style.display = 'none';
   }
 
-  onRadioChange(event: any): void {
-    const target = event.target;
-
-    if (!this._prevSelected) {
-      this._prevSelected = target;
-      return;
-    }
-
-    this._prevSelected.checked = false;
-    this._prevSelected = target;
-  }
-
   onSubmit(): void {
-    console.log('🚀 ~ addEmployeeForm:', this.addEmployeeForm);
+    const newEmployee: Omit<Employee, 'id' | 'department' | 'status'> = {
+      firstName: this.addEmployeeForm.controls['firstName'].value?.trim() ?? '',
+      lastName: this.addEmployeeForm.controls['lastName'].value?.trim() ?? '',
+      middleName:
+        this.addEmployeeForm.controls['middleName'].value?.trim() ?? '',
+      dateOfBirth: new Date(
+        this.addEmployeeForm.controls['dateOfBirth'].value ?? '1800-01-01'
+      ),
+      gender: this.addEmployeeForm.controls['gender'].value ?? Gender.FEMALE,
+      salary: this.addEmployeeForm.controls['salary'].value ?? 0,
+      departmentId: this.addEmployeeForm.controls['department'].value ?? 1,
+    };
+
+    this.addEmployee.emit(newEmployee);
   }
 
   isDirtyOrTouched(fieldName: string): boolean | undefined {

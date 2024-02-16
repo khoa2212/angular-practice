@@ -2,7 +2,7 @@
   #employeeModal
   id="employee-modal"
   tabindex="-1"
-  class="bg-[#00000066] h-full flex overflow-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0"
+  class="bg-[#00000066] h-full hidden overflow-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0"
 >
   <form
     [formGroup]="addEmployeeForm"
@@ -103,7 +103,7 @@
                 </span>
               </div>
             </div>
-            <div>
+            <div id="input-group" class="relative">
               <label
                 for="salary"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -112,11 +112,32 @@
               <input
                 type="number"
                 id="salary"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                formControlName="salary"
+                class="bg-gray-50 border {{
+                  addEmployeeForm.get('salary')?.errors &&
+                  isDirtyOrTouched('salary')
+                    ? 'border-red-500 outline-red-500'
+                    : 'border-gray-300'
+                }}  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="0"
                 min="0"
                 oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"
               />
+
+              <div
+                *ngFor="let validation of validateMessages.salary"
+                class="z-10"
+              >
+                <span
+                  *ngIf="
+                    isDirtyOrTouched('salary') &&
+                    addEmployeeForm.get('salary')?.hasError(validation.type)
+                  "
+                  class="hide-tooltip absolute top-0 left-[27%] z-10 border py-1 border-red-500 bg-gray-200 rounded-lg w-3/4 text-center font-bold text-xs text-red-500"
+                >
+                  {{ validation.message }}
+                </span>
+              </div>
             </div>
             <div>
               <label
@@ -128,22 +149,12 @@
                 class="w-full p-2.5 flex gap-10 bg-gray-50 border border-gray-300 text-sm rounded-lg"
               >
                 <span class="flex gap-2 items-center">
-                  <input
-                    name="female"
-                    value="FEMALE"
-                    type="radio"
-                    (change)="onRadioChange($event)"
-                  />
+                  <input name="gender" formControlName="gender" value="FEMALE" type="radio" checked />
                   <label for="female">Female</label>
                 </span>
                 <span class="flex gap-2 items-center">
-                  <input
-                    name="male"
-                    value="MALE"
-                    type="radio"
-                    (change)="onRadioChange($event)"
-                  />
-                  <label for="male">Male</label>
+                  <input name="gender" formControlName="gender" value="MALE" type="radio" />
+                  <label for="Male">Male</label>
                 </span>
               </span>
             </div>
@@ -217,7 +228,7 @@
                 </span>
               </div>
             </div>
-            <div>
+            <div id="input-group" class="relative">
               <label
                 for="department"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -227,7 +238,7 @@
                 id="department-selections"
                 formControlName="department"
                 class="bg-gray-50 border {{
-                  addEmployeeForm?.errors?.['requiredSelection'] &&
+                  addEmployeeForm.get('department')?.errors &&
                   isDirtyOrTouched('department')
                     ? 'border-red-500 outline-red-500'
                     : 'border-gray-300'
@@ -249,7 +260,7 @@
                 <span
                   *ngIf="
                     isDirtyOrTouched('department') &&
-                    addEmployeeForm?.errors?.['requiredSelection']
+                    addEmployeeForm.get('department')?.hasError(validation.type)
                   "
                   class="hide-tooltip absolute top-0 left-[27%] z-10 border py-1 border-red-500 bg-gray-200 rounded-lg w-3/4 text-center font-bold text-xs text-red-500"
                 >
@@ -264,16 +275,16 @@
           <button
             data-modal-hide="popup-modal"
             type="submit"
-            [ngClass]="{ 'bg-blue-400': addEmployeeForm.invalid }"
+            [ngClass]="{ 'bg-blue-300': addEmployeeForm.invalid }"
             [disabled]="addEmployeeForm.invalid"
             class="text-white bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center"
           >
-            Add Employee
+            Add employee
           </button>
           <button
             data-modal-hide="popup-modal"
             type="button"
-            class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+            class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-gray-200 rounded-lg border border-gray-200 hover:bg-gray-300 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
             (click)="close()"
           >
             No, cancel

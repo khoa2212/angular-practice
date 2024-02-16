@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { EmployeeList } from 'app/model';
+import { Employee, EmployeeList } from 'app/model';
 import { EmployeeClient } from 'app/client';
 
 @Injectable({
@@ -21,5 +21,10 @@ export class EmployeeService {
     );
 
     return employees;
+  }
+
+  add$(newEmployee: Omit<Employee, "id" | "department" | "status">): Observable<Employee> {
+    console.log('here service');
+    return this.employeeClient.add$(newEmployee);
   }
 }

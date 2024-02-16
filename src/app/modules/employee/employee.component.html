@@ -1,6 +1,4 @@
-<div
-  class="min-h-screen h-full flex flex-col gap-3 py-10 items-center"
->
+<div class="min-h-screen h-full flex flex-col gap-3 py-10 items-center">
   <div class="w-full flex justify-between max-w-4xl 2xl:max-w-none">
     <button
       title="Add employee"
@@ -16,7 +14,7 @@
       (change)="onSelectDepartment($event)"
       class="overflow-y-auto bg-gray-50 border basis-60 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
     >
-      <option value="all" selected>All Departments</option>
+      <option value="0" selected>All Departments</option>
       <option
         *ngFor="let department of departmentList$ | async"
         value="{{ department.id }}"
@@ -177,7 +175,12 @@
     >
       <div class="text-lg">
         Showing {{ pageSize * (currentPage - 1) + 1 }} to
-        {{ pageSize * currentPage }} of {{ employeeList.totalCount }} entries
+        {{
+          employeeList.totalCount < pageSize
+            ? employeeList.totalCount
+            : pageSize * currentPage
+        }}
+        of {{ employeeList.totalCount }} entries
       </div>
       <div class="flex">
         <ul
@@ -226,4 +229,8 @@
     </div>
   </div>
 </div>
-<app-employee-modal [departments]="departmentList$ | async" #modal></app-employee-modal>
+<app-employee-modal
+  [departments]="departmentList$ | async"
+  (addEmployee)="addEmployee($event)"
+  #modal
+></app-employee-modal>

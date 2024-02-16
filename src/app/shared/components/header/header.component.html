@@ -39,27 +39,37 @@
 
     <div class="hidden lg:flex lg:gap-x-12">
       <a
-        href="/home/department"
-        class="text-sm font-semibold leading-6 text-gray-900"
+        routerLink="/home/department"
+        routerLinkActive="text-blue-500"
+        [routerLinkActiveOptions]="{exact: true}"
+        class="text-sm font-semibold leading-6 text-gray-900 hover:text-blue-500"
       >
         Department
       </a>
       <a
-        href="/home/employee"
-        class="text-sm font-semibold leading-6 text-gray-900"
+        routerLink="/home/employee"
+        routerLinkActive="text-blue-500"
+        [routerLinkActiveOptions]="{exact: true}"
+        class="text-sm font-semibold leading-6 text-gray-900 hover:text-blue-500 active:text-blue-500"
         >Employee</a
       >
       <a
-        href="/home/project"
-        class="text-sm font-semibold leading-6 text-gray-900"
+        routerLink="/home/project"
+        routerLinkActive="text-blue-500"
+        [routerLinkActiveOptions]="{exact: true}"
+        class="text-sm font-semibold leading-6 text-gray-900 hover:text-blue-500"
         >Project</a
       >
     </div>
     <div class="hidden lg:flex lg:flex-1 lg:justify-end gap-3">
-      <a href="/home" class="text-sm font-semibold leading-6 text-gray-900"
+      <a
+        href="/home"
+        class="bg-blue-600 text-white rounded-md px-3 py-2 text-sm font-semibold leading-6"
         >Login</a
       >
-      <a href="/home" class="text-sm font-semibold leading-6 text-gray-900"
+      <a
+        href="/home"
+        class="bg-gray-200 rounded-md px-3 py-2 text-sm font-semibold leading-6 text-gray-900"
         >Signup</a
       >
     </div>
