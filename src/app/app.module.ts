@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,6 +17,7 @@ import {
 import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './modules/home/home.component';
 import { EmployeeModalComponent } from './modules/employee/employee-modal/employee-modal.component';
+import { LoadingInterceptor } from './service';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,13 @@ import { EmployeeModalComponent } from './modules/employee/employee-modal/employ
     RouterLinkActive,
     HttpClientModule,
     ToastrModule.forRoot({ progressBar: true, timeOut: 1000 }),
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

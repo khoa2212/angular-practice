@@ -10,7 +10,7 @@ import {
   DEFAULT_DEPARTMENT_FILTER,
   NUMBER_OF_PAGINATION,
 } from 'app/constants/constants';
-import { DepartmentService, EmployeeService } from 'app/service';
+import { DepartmentService, EmployeeService, LoaderService } from 'app/service';
 import { Subject, startWith, switchMap } from 'rxjs';
 import { EmployeeModalComponent } from './employee-modal/employee-modal.component';
 import { Employee } from 'app/model';
@@ -53,7 +53,8 @@ export class EmployeeComponent implements OnInit {
   constructor(
     private employeeService: EmployeeService,
     private departmentService: DepartmentService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    public loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {

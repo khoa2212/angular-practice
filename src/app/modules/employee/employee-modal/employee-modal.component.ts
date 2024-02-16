@@ -36,6 +36,8 @@ export class EmployeeModalComponent {
 
   selectedEmployee: Employee | null = null;
 
+  isLoading: boolean = false;
+
   addEmployeeForm = this.formBuilder.group({
     firstName: [
       '',
@@ -172,6 +174,7 @@ export class EmployeeModalComponent {
   }
 
   onSubmit(): void {
+    this.isLoading = true;
     const data = this.addEmployeeForm.getRawValue();
 
     if (!this.selectedEmployee) {
@@ -200,6 +203,8 @@ export class EmployeeModalComponent {
 
       this.editEmployee.emit(employee);
     }
+
+    this.isLoading = false;
   }
 
   isDirtyOrTouched(fieldName: string): boolean | undefined {
