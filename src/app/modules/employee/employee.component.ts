@@ -32,6 +32,7 @@ export class EmployeeComponent implements OnInit {
 
   departmentId: number = DEFAULT_DEPARTMENT_FILTER;
 
+
   @ViewChild('modal', { static: false }) modal!: EmployeeModalComponent;
 
   employeeList$ = this.#employeeRefetch$.pipe(
@@ -93,6 +94,9 @@ export class EmployeeComponent implements OnInit {
             : value.lastPage;
         this.numberOfPagination = Array.from({ length: page }, (_, i) => i + 1);
       }
+      else {
+        this.numberOfPagination = NUMBER_OF_PAGINATION;
+      }
     });
   }
 
@@ -144,13 +148,12 @@ export class EmployeeComponent implements OnInit {
   }
 
   onShowModal(): void {
-    this.modal.open();
+    this.modal.open(null);
   }
 
-  addEmployee(
+  onAddEmployee(
     newEmployee: Omit<Employee, 'id' | 'department' | 'status'>
   ): void {
-    console.log('🚀 ~ newEmployee:', newEmployee);
     this.employeeService.add$(newEmployee).subscribe({
       next: (res) => {
         this.toastrService.success(MESSAGE.ADD_EMPLOYEE_SUCCESS);
@@ -176,4 +179,13 @@ export class EmployeeComponent implements OnInit {
       )
     );
   }
+
+  onEditEmployee(employee: Omit<Employee, 'department' | 'status'>): void {
+    console.log('🚀 ~ employee:', employee);
+  }
+
+  onSelectEmployee(employee: Employee): void {
+    this.modal.open(employee);
+  }
+
 }

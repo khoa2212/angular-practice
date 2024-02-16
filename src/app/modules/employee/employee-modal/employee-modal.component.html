@@ -149,11 +149,22 @@
                 class="w-full p-2.5 flex gap-10 bg-gray-50 border border-gray-300 text-sm rounded-lg"
               >
                 <span class="flex gap-2 items-center">
-                  <input name="gender" formControlName="gender" value="FEMALE" type="radio" checked />
+                  <input
+                    name="gender"
+                    formControlName="gender"
+                    value="FEMALE"
+                    type="radio"
+                    checked
+                  />
                   <label for="female">Female</label>
                 </span>
                 <span class="flex gap-2 items-center">
-                  <input name="gender" formControlName="gender" value="MALE" type="radio" />
+                  <input
+                    name="gender"
+                    formControlName="gender"
+                    value="MALE"
+                    type="radio"
+                  />
                   <label for="Male">Male</label>
                 </span>
               </span>
@@ -275,9 +286,10 @@
           <button
             data-modal-hide="popup-modal"
             type="submit"
-            [ngClass]="{ 'bg-blue-300': addEmployeeForm.invalid }"
             [disabled]="addEmployeeForm.invalid"
-            class="text-white bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center"
+            class="{{
+              addEmployeeForm.invalid ? 'bg-blue-200 pointer-events-none' : ''
+            }} text-white bg-blue-500 hover:bg-blue-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center"
           >
             Add employee
           </button>

@@ -24,7 +24,6 @@ export class EmployeeService {
   }
 
   add$(newEmployee: Omit<Employee, "id" | "department" | "status">): Observable<Employee> {
-    console.log('here service');
     return this.employeeClient.add$(newEmployee);
   }
 }

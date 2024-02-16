@@ -9,7 +9,6 @@ import {
 import { FormBuilder, Validators } from '@angular/forms';
 import { EMPLOYEE_MAX_SALARY } from 'app/constants';
 import { Department, Employee, Gender } from 'app/model';
-;
 import {
   noWhitespaceValidator,
   selectBoxRequiredValidator,
@@ -30,6 +29,12 @@ export class EmployeeModalComponent {
   @Output() addEmployee = new EventEmitter<
     Omit<Employee, 'id' | 'department' | 'status'>
   >();
+
+  @Output() editEmployee = new EventEmitter<
+    Omit<Employee, 'department' | 'status'>
+  >();
+
+  selectedEmployee: Employee | null = null;
 
   addEmployeeForm = this.formBuilder.group({
     firstName: [
@@ -122,7 +127,43 @@ export class EmployeeModalComponent {
 
   constructor(private formBuilder: FormBuilder) {}
 
-  open(): void {
+  open(employee: Employee | null): void {
+    this.selectedEmployee = employee;
+
+    if (this.selectedEmployee) {
+      this.addEmployeeForm.controls.firstName.setValue(
+        this.selectedEmployee.firstName ?? ''
+      );
+      this.addEmployeeForm.controls.lastName.setValue(
+        this.selectedEmployee.lastName ?? ''
+      );
+      this.addEmployeeForm.controls.middleName.setValue(
+        this.selectedEmployee.middleName ?? ''
+      );
+      this.addEmployeeForm.controls.dateOfBirth.setValue(
+        this.selectedEmployee.dateOfBirth.toString() ?? ''
+      );
+      this.addEmployeeForm.controls.gender.setValue(
+        this.selectedEmployee.gender ?? Gender.FEMALE
+      );
+      this.addEmployeeForm.controls.salary.setValue(
+        this.selectedEmployee.salary ?? 0
+      );
+      this.addEmployeeForm.controls.department.setValue(
+        this.selectedEmployee.department.id ?? 0
+      );
+    } else {
+      this.addEmployeeForm.reset({
+        firstName: '',
+        lastName: '',
+        middleName: '',
+        dateOfBirth: '',
+        gender: Gender.FEMALE,
+        salary: 0,
+        department: 0,
+      });
+    }
+
     this.modal.nativeElement.style.display = 'flex';
   }
 
@@ -131,20 +172,26 @@ export class EmployeeModalComponent {
   }
 
   onSubmit(): void {
-    const newEmployee: Omit<Employee, 'id' | 'department' | 'status'> = {
-      firstName: this.addEmployeeForm.controls['firstName'].value?.trim() ?? '',
-      lastName: this.addEmployeeForm.controls['lastName'].value?.trim() ?? '',
-      middleName:
-        this.addEmployeeForm.controls['middleName'].value?.trim() ?? '',
-      dateOfBirth: new Date(
-        this.addEmployeeForm.controls['dateOfBirth'].value ?? '1800-01-01'
-      ),
-      gender: this.addEmployeeForm.controls['gender'].value ?? Gender.FEMALE,
-      salary: this.addEmployeeForm.controls['salary'].value ?? 0,
-      departmentId: this.addEmployeeForm.controls['department'].value ?? 1,
-    };
+    console.log(this.addEmployeeForm);
+    if (!this.selectedEmployee) {
+      const newEmployee: Omit<Employee, 'id' | 'department' | 'status'> = {
+        firstName:
+          this.addEmployeeForm.controls['firstName'].value?.trim() ?? '',
+        lastName: this.addEmployeeForm.controls['lastName'].value?.trim() ?? '',
+        middleName:
+          this.addEmployeeForm.controls['middleName'].value?.trim() ?? '',
+        dateOfBirth: new Date(
+          this.addEmployeeForm.controls['dateOfBirth'].value ?? '1800-01-01'
+        ),
+        gender: this.addEmployeeForm.controls['gender'].value ?? Gender.FEMALE,
+        salary: this.addEmployeeForm.controls['salary'].value ?? 0,
+        departmentId: this.addEmployeeForm.controls['department'].value ?? 1,
+      };
 
-    this.addEmployee.emit(newEmployee);
+      this.addEmployee.emit(newEmployee);
+    } else {
+      console.log('else');
+    }
   }
 
   isDirtyOrTouched(fieldName: string): boolean | undefined {
