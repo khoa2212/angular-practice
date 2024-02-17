@@ -1,76 +1,144 @@
-<div class="min-h-screen h-full flex justify-center">
-  <div class="w-full max-w-4xl px-2">
+<div
+  *ngIf="{
+    departments: departmentList$ | async,
+    projectList: projectList$ | async
+  } as data"
+  class="min-h-screen h-full flex flex-col gap-3 items-center"
+>
+  <app-loading></app-loading>
+
+  <div class="w-full flex justify-between max-w-4xl 2xl:max-w-none">
+    <button
+      title="Add project"
+      class="rounded-full basis-10 bg-blue-500 hover:bg-blue-800 px-1 py-1"
+    >
+      <img class="w-8 h-8" src="../../../assets/add.png" alt="Add" />
+    </button>
+
+    <!-- Select menu -->
+    <select
+      *ngIf="data.departments as departments"
+      id="department-selections"
+      (change)="onSelectDepartment($event)"
+      class="overflow-y-auto bg-gray-50 border basis-60 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+    >
+      <option value="0" selected>All Departments</option>
+      <option
+        *ngFor="let department of departments"
+        value="{{ department.id }}"
+      >
+        {{ department.departmentName }}
+      </option>
+    </select>
+  </div>
+
+  <div *ngIf="data.projectList as projectList" class="w-full max-w-4xl">
     <div
-      class="w-full overflow-x-scroll md:overflow-auto max-w-7xl 2xl:max-w-none mt-2"
+      class="w-full overflow-x-scroll md:overflow-auto max-w-7xl 2xl:max-w-none rounded-md"
     >
       <table
         class="table-auto overflow-scroll md:overflow-auto w-full text-left font-inter border"
       >
         <thead class="rounded-lg text-base text-white font-semibold w-full">
-          <tr class="bg-[#222E3A]/[6%]">
+          <tr class="bg-blue-500">
             <th
-              class="py-3 px-3 text-[#212B36] sm:text-base font-bold whitespace-nowrap"
+              class="py-3 px-3 text-white sm:text-base font-bold whitespace-nowrap"
             >
-              ID
+              No.
             </th>
             <th
-              class="py-3 px-3 text-[#212B36] sm:text-base font-bold whitespace-nowrap"
+              class="py-3 px-3 text-whitesm:text-base font-bold whitespace-nowrap"
             >
-              Category
+              Full name
             </th>
             <th
-              class="py-3 px-3 justify-center gap-1 text-[#212B36] sm:text-base font-bold whitespace-nowrap"
+              class="py-3 px-3 text-white sm:text-base font-bold whitespace-nowrap"
             >
-              Company
+              Area
             </th>
             <th
-              class="py-3 px-3 text-[#212B36] sm:text-base font-bold whitespace-nowrap"
+              class="py-3 px-3 text-white sm:text-base font-bold whitespace-nowrap"
             >
-              Product
+              Department
             </th>
             <th
-              class="py-3 px-3 text-[#212B36] sm:text-base font-bold whitespace-nowrap"
+              class="py-3 px-3 text-white sm:text-base font-bold whitespace-nowrap"
             >
-              Description
-            </th>
-            <th
-              class="flex items-center py-3 px-3 text-[#212B36] sm:text-base font-bold whitespace-nowrap gap-1"
-            >
-              Price
+              Action
             </th>
           </tr>
         </thead>
-        <tbody>
-          <tr class="bg-[#222E3A]/[6%]">
+        <tbody *ngFor="let project of projectList.projects; index as i">
+          <tr class="{{ i % 2 === 0 ? 'bg-white' : 'bg-blue-100' }}">
             <td
-              class="py-2 px-3 font-normal text-base border-t-2 whitespace-nowrap border-black"
+              class="py-2 px-3 font-normal text-base whitespace-nowrap {{
+                i === 0
+                  ? 'border-t-2 border-black'
+                  : i === projectList.projects.length
+                  ? 'border-y'
+                  : 'border-t'
+              }}"
             >
-              id
+              {{ i + 1 }}
             </td>
             <td
-              class="py-2 px-3 font-normal text-base border-t-2 whitespace-nowrap border-black"
+              class="py-2 px-3 font-normal text-base whitespace-nowrap {{
+                i === 0
+                  ? 'border-t-2 border-black'
+                  : i === projectList.projects.length
+                  ? 'border-y'
+                  : 'border-t'
+              }}"
             >
-              <a class="text-blue-500 underline cursor-pointer">category</a>
+              <a
+                routerLink="/home/project/{{ project.id }}"
+                class="text-blue-500 hover:text-blue-800 cursor-pointer"
+                >{{ project.projectName }}</a
+              >
             </td>
             <td
-              class="py-2 px-3 font-normal text-base border-t-2 whitespace-nowrap border-black"
+              class="py-2 px-3 font-normal text-base whitespace-nowrap {{
+                i === 0
+                  ? 'border-t-2 border-black'
+                  : i === projectList.projects.length
+                  ? 'border-y'
+                  : 'border-t'
+              }}"
             >
-              company
+              {{ project.area }}
             </td>
             <td
-              class="py-2 px-3 font-normal text-base border-t-2 whitespace-nowrap border-black"
+              class="py-2 px-3 font-normal text-base whitespace-nowrap {{
+                i === 0
+                  ? 'border-t-2 border-black'
+                  : i === projectList.projects.length
+                  ? 'border-y'
+                  : 'border-t'
+              }}"
             >
-              product
+              {{ project.department.departmentName }}
             </td>
             <td
-              class="py-2 px-3 font-normal text-base border-t-2 whitespace-nowrap border-black"
+              class="py-2 px-3 font-normal text-base whitespace-nowrap {{
+                i === 0
+                  ? 'border-t-2 border-black'
+                  : i === projectList.projects.length
+                  ? 'border-y'
+                  : 'border-t'
+              }}"
             >
-              description
-            </td>
-            <td
-              class="py-2 px-3 font-normal text-base border-t-2 whitespace-nowrap border-black"
-            >
-              price
+              <span class="flex gap-2">
+                <img
+                  class="cursor-pointer w-5 h-5"
+                  src="../../../assets/pen.png"
+                  alt="Edit"
+                />
+                <img
+                  class="cursor-pointer w-5 h-5"
+                  src="../../../assets/delete.png"
+                  alt="Delete"
+                />
+              </span>
             </td>
           </tr>
         </tbody>
@@ -79,27 +147,47 @@
     <div
       class="w-full flex justify-center sm:justify-between flex-col sm:flex-row gap-5 mt-1.5 px-1 items-center"
     >
-      <div class="text-lg">Showing 1 to 10 of 100 entries</div>
+      <div class="text-lg">
+        Showing {{ showInfo(projectList).from }} to
+        {{ showInfo(projectList).to }}
+        of {{ projectList.totalCount }} entries
+      </div>
       <div class="flex">
         <ul
-          class="flex justify-center items-center gap-x-[10px] z-30"
+          class="flex justify-center items-center gap-x-[10px]"
           role="navigation"
           aria-label="Pagination"
         >
           <li
-            class="flex items-center justify-center w-[36px] rounded-[6px] h-[36px] border-[1px] border-solid border-[#E4E4EB] cursor-pointer"
+            class="flex hover:bg-blue-800 make-filter items-center justify-center w-[36px] rounded-[6px] h-[36px] border-[1px] border-solid border-[#E4E4EB] {{
+              disablePrev()
+                ? 'bg-[#cccccc] pointer-events-none'
+                : 'cursor-pointer'
+            }}"
+            (click)="onPrev()"
           >
             <img
               src="https://www.tailwindtap.com/assets/travelagency-admin/leftarrow.svg"
             />
           </li>
           <li
-            class="flex items-center justify-center w-[36px] rounded-[6px] h-[34px] border-solid border-[1px] bg-[#FFFFFF] cursor-pointer border-[#E4E4EB]"
+            *ngFor="let page of numberOfPagination"
+            class="flex hover:bg-blue-800 hover:text-white items-center justify-center w-[36px] rounded-[6px] h-[34px] border-solid border-[1px] bg-[#FFFFFF] cursor-pointer {{
+              page === currentPage
+                ? 'text-blue-600  border-sky-500'
+                : 'border-[#E4E4EB]'
+            }}"
+            (click)="onSelectPage(page)"
           >
-            1
+            {{ page }}
           </li>
           <li
-            class="flex items-center justify-center w-[36px] rounded-[6px] h-[36px] border-[1px] border-solid border-[#E4E4EB] cursor-pointer"
+            class="flex make-filter hover:bg-blue-800 items-center justify-center w-[36px] rounded-[6px] h-[36px] border-[1px] border-solid border-[#E4E4EB] {{
+              disableNext(projectList)
+                ? 'bg-[#cccccc] pointer-events-none'
+                : 'cursor-pointer'
+            }}"
+            (click)="onNext(projectList)"
           >
             <img
               src="https://www.tailwindtap.com/assets/travelagency-admin/rightarrow.svg"

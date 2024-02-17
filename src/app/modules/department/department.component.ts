@@ -120,7 +120,11 @@ export class DepartmentComponent implements OnInit {
   }
 
   showInfo(departmentList: DepartmentList) {
-    const from = this.pageSize * (this.currentPage - 1) + 1;
+    let from = this.pageSize * (this.currentPage - 1) + 1;
+
+    if(departmentList.totalCount === 0) {
+      from = 0;
+    }
 
     let to =
       departmentList.totalCount < this.pageSize

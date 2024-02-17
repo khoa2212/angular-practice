@@ -17,6 +17,16 @@ export const EMPLOYEE = {
 };
 
 
+export const PROJECT = {
+  FIND_ALL: 'projects/all',
+  FIND_WITH_PAGINATION: 'projects',
+  FIND_BY_ID: (id: number) => `projects/${id}`,
+  ADD: 'projects/add',
+  UPDATE: 'projects/update',
+  DELETE: 'projects/delete',
+}
+
+
 export const NUMBER_OF_PAGINATION = [1, 2, 3];
 
 export const DEFAULT_PAGE_SIZE = 10;

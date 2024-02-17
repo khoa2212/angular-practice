@@ -2,21 +2,17 @@ import { Department } from "./department.model";
 import { Gender } from "./gender.enum";
 import { Status } from "./status.enum";
 
-export interface Employee {
+export interface Project {
     id: number;
-    firstName: string;
-    lastName: string;
-    middleName: string;
-    salary: number
-    dateOfBirth: Date;
-    gender: Gender;
+    projectName: string;
+    area: string;
     status: Status
     department: Department;
     departmentId?: number;
 }
 
-export interface EmployeeList {
-    employees: Employee[];
+export interface ProjectList {
+    projects: Project[];
     totalCount: number;
     lastPage: number;
 }

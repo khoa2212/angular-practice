@@ -195,7 +195,11 @@ export class EmployeeComponent implements OnInit {
   }
 
   showInfo(employeeList: EmployeeList) {
-    const from = this.pageSize * (this.currentPage - 1) + 1;
+    let from = this.pageSize * (this.currentPage - 1) + 1;
+
+    if(employeeList.totalCount === 0) {
+      from = 0;
+    }
 
     let to =
       employeeList.totalCount < this.pageSize

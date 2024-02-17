@@ -9,3 +9,7 @@ export {
 export { Gender as Gender } from './gender.enum';
 export { Status as Status } from './status.enum';
 export { DeleteSuccess as DeleteSuccess } from './delete-success.model';
+export {
+  Project as Project,
+  ProjectList as ProjectList,
+} from './project.model';
