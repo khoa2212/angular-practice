@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Department, EmployeeList } from 'app/model';
+import { Department, DepartmentList, EmployeeList } from 'app/model';
 import { DepartmentClient } from 'app/client';
 
 @Injectable({
@@ -13,5 +13,21 @@ export class DepartmentService {
     const departments = this.departmentClient.findAll$();
 
     return departments;
+  }
+
+  findDepartments$(
+    pageNumber: number,
+    pageSize: number,
+  ): Observable<DepartmentList> {
+    const departments = this.departmentClient.findDepartments$(
+      pageNumber,
+      pageSize,
+    );
+
+    return departments;
+  }
+
+  findById$(id: number): Observable<Department> {
+    return this.departmentClient.findById$(id);
   }
 }

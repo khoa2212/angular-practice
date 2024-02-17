@@ -34,4 +34,8 @@ export class EmployeeService {
   delete$(id: number): Observable<DeleteSuccess> {
     return this.employeeClient.delete$(id);
   }
+
+  findById$(id: number): Observable<Employee> {
+    return this.employeeClient.findById$(id);
+  }
  }

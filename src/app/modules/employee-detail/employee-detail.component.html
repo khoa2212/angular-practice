@@ -1,6 +1,139 @@
-<div class="w-full flex justify-center py-3">
-  <div id="employee-details" class="w-4/5 flex flex-col gap-2 items-center">
-    <p class="font-bold text-lg">Employee's details</p>
-    <div class="w-full py-2 shadow-md rounded-md"></div>
+<div
+  *ngIf="{
+    employee: employee$ | async,
+    departments: departmentList$ | async
+  } as data"
+  class="w-full flex flex-col items-center gap-2 py-3"
+>
+  <app-loading></app-loading>
+  
+  <div
+    *ngIf="data.employee as employee"
+    id="employee-details"
+    class="w-4/5 py-2 border rounded-md flex flex-col gap-2 items-center"
+  >
+    <div class="w-full relative">
+      <p class="ml-2 font-bold text-lg">Employee's details</p>
+      <button
+        class="border flex items-center gap-2 hover:bg-slate-100 rounded-md p-2 absolute top-0 right-0 mr-2"
+      >
+        Edit
+        <img class="w-5 h-5" src="../../../assets/edit.png" alt="Edit" />
+      </button>
+    </div>
+    <form class="w-full py-2 grid grid-cols-2 mt-2">
+      <div class="col-span-1 px-2 flex flex-col gap-3">
+        <span class="flex flex-wrap gap-2 items-center w-full">
+          <label for="firstName" class="font-bold basis-1/4"
+            >First name:
+          </label>
+          <input
+            type="text"
+            id="firstName"
+            class="bg-gray-200 border flex-1 border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            [disabled]="true"
+            value="{{ employee.firstName }}"
+          />
+        </span>
+        <span class="flex flex-wrap gap-2 items-center">
+          <label for="middleName" class="font-bold basis-1/4"
+            >Middle name:
+          </label>
+          <input
+            type="text"
+            id="middleName"
+            class="bg-gray-200 flex-1 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            [disabled]="true"
+            value="{{ employee.middleName }}"
+          />
+        </span>
+        <span class="flex flex-wrap gap-2 items-center">
+          <label for="salary" class="font-bold basis-1/4">Salary: </label>
+          <input
+            type="number"
+            id="salary"
+            class="bg-gray-200 flex-1 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            [disabled]="true"
+            value="{{ employee.salary }}"
+          />
+        </span>
+        <span class="flex flex-wrap gap-2 items-center">
+          <label for="gender" class="font-bold basis-1/4">Gender: </label>
+          <span
+            class="p-2 flex-1 flex gap-10 bg-gray-200 border border-gray-300 text-md rounded-lg"
+          >
+            <span class="flex gap-2 items-center">
+              <input
+                name="gender"
+                value="FEMALE"
+                type="radio"
+                checked="{{ employee.gender === 'FEMALE' }}"
+                [disabled]="true"
+              />
+              <label for="female">Female</label>
+            </span>
+            <span class="flex gap-2 items-center">
+              <input
+                name="gender"
+                value="MALE"
+                type="radio"
+                checked="{{ employee.gender === 'MALE' }}"
+                [disabled]="true"
+              />
+              <label for="Male">Male</label>
+            </span>
+          </span>
+        </span>
+      </div>
+
+      <!-- col-2 -->
+      <div class="col-span-1 px-2 flex flex-col gap-3">
+        <span class="flex flex-wrap gap-2 items-center w-full">
+          <label for="lastName" class="font-bold basis-1/4">Last name: </label>
+          <input
+            type="text"
+            id="lastName"
+            class="bg-gray-200 flex-1 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            [disabled]="true"
+            value="{{ employee.lastName }}"
+          />
+        </span>
+        <span class="flex flex-wrap gap-2 items-center">
+          <label for="dateOfBirth" class="font-bold basis-1/4"
+            >Date of birth:
+          </label>
+          <input
+            type="date"
+            id="dateOfBirth"
+            class="bg-gray-200 border flex-1 border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            value="{{ employee.dateOfBirth }}"
+            [disabled]="true"
+          />
+        </span>
+        <span
+          *ngIf="data.departments as departments"
+          class="flex flex-wrap gap-2 items-center"
+        >
+          <label for="department" class="font-bold basis-1/4"
+            >Department:
+          </label>
+          <select
+            id="department-selections"
+            class="bg-gray-200 border border-gray-300 flex-1 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            [disabled]="true"
+          >
+            <option
+              *ngFor="let department of departments"
+              value="{{ department.id }}"
+              selected="{{
+                department.id === employee.department.id ? 'selected' : ''
+              }}"
+            >
+              {{ department.departmentName }}
+            </option>
+          </select>
+        </span>
+      </div>
+    </form>
   </div>
 </div>

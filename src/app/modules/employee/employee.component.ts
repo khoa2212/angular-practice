@@ -13,7 +13,7 @@ import {
 import { DepartmentService, EmployeeService, LoaderService } from 'app/service';
 import { Subject, startWith, switchMap } from 'rxjs';
 import { EmployeeModalComponent } from './employee-modal/employee-modal.component';
-import { Employee } from 'app/model';
+import { Employee, EmployeeList } from 'app/model';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -53,18 +53,11 @@ export class EmployeeComponent implements OnInit {
   constructor(
     private employeeService: EmployeeService,
     private departmentService: DepartmentService,
-    private toastrService: ToastrService,
-    public loaderService: LoaderService
+    private toastrService: ToastrService
   ) {}
 
   ngOnInit(): void {
-    this.employeeList$.subscribe((value) => {
-      if (this.numberOfPagination.length > value.lastPage) {
-        const page =
-          value.lastPage % this.pageSize ? value.lastPage - 1 : value.lastPage;
-        this.numberOfPagination = Array.from({ length: page }, (_, i) => i + 1);
-      }
-    });
+    this.chooseNumberOfPagination();
   }
 
   chooseNumberOfPagination(): void {
@@ -138,7 +131,12 @@ export class EmployeeComponent implements OnInit {
     this.currentPage = page;
   }
 
-  onNext(): void {
+  onNext(employeeList: EmployeeList): void {
+    
+    if(this.disableNext(employeeList)) {
+      return;
+    }
+    
     const page = this.currentPage + 1;
     this.employeeList$ = this.#employeeRefetch$.pipe(
       startWith(true),
@@ -155,6 +153,11 @@ export class EmployeeComponent implements OnInit {
   }
 
   onPrev(): void {
+
+    if(this.disablePrev()) {
+      return;
+    } 
+
     const page = this.currentPage - 1;
     this.employeeList$ = this.#employeeRefetch$.pipe(
       startWith(true),
@@ -168,6 +171,42 @@ export class EmployeeComponent implements OnInit {
     );
 
     this.currentPage = page;
+  }
+
+  disablePrev(): boolean {
+    if (this.currentPage === 1) {
+      return true;
+    }
+
+    return false;
+  }
+
+  disableNext(employeeList: EmployeeList): boolean {
+    const compareValue =
+    employeeList.totalCount % this.pageSize === 0
+        ? employeeList.lastPage - 1
+        : employeeList.lastPage;
+
+    if (this.currentPage === compareValue || employeeList.lastPage === 1) {
+      return true;
+    }
+
+    return false;
+  }
+
+  showInfo(employeeList: EmployeeList) {
+    const from = this.pageSize * (this.currentPage - 1) + 1;
+
+    let to =
+      employeeList.totalCount < this.pageSize
+        ? employeeList.totalCount
+        : this.pageSize * this.currentPage;
+
+    if (to > employeeList.totalCount) {
+      to = employeeList.totalCount;
+    }
+
+    return { from, to };
   }
 
   onShowModal(): void {

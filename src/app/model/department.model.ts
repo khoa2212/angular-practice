@@ -1,8 +1,14 @@
-import { Status } from "./status.enum";
+import { Status } from './status.enum';
 
 export interface Department {
-    id: number;
-    departmentName: String;
-    startDate: Date;
-    status: Status;
+  id: number;
+  departmentName: String;
+  startDate: Date;
+  status: Status;
+}
+
+export interface DepartmentList {
+  departments: Department[];
+  totalCount: number;
+  lastPage: number;
 }

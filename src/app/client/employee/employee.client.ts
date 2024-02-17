@@ -52,4 +52,9 @@ export class EmployeeClient {
 
     return data;
   }
+
+  findById$(id: number): Observable<Employee> {
+    const data = this.httpClient.get<Employee>(`${ENVIRONMENT.BASE_URL}/${EMPLOYEE.FIND_BY_ID(id)}`)
+    return data;
+  }
 }
