@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Employee } from 'app/model';
+import { EMPLOYEE_MAX_SALARY } from 'app/constants';
+import { Employee, Gender } from 'app/model';
 import { DepartmentService, EmployeeService, LoaderService } from 'app/service';
+import {
+  noWhitespaceValidator,
+  selectBoxRequiredValidator,
+  specialCharacterValidator,
+} from 'app/utils/validators';
+import { ToastrService } from 'ngx-toastr';
 import { Observable, Subject, startWith, switchMap } from 'rxjs';
 
 @Component({
@@ -23,17 +31,175 @@ export class EmployeeDetailComponent implements OnInit {
   employee$: Observable<Employee> = this.#employeeRefetch$.pipe(
     startWith(true),
     switchMap(() => this.employeeService.findById$(this.employeeId))
-  )
+  );
+
+  isEdit = false;
+  isLoading = false;
+
+  editEmployeeForm = this.formBuilder.group({
+    firstName: [
+      '',
+      [
+        Validators.required,
+        noWhitespaceValidator(),
+        specialCharacterValidator(),
+      ],
+    ],
+    lastName: [
+      '',
+      [
+        Validators.required,
+        noWhitespaceValidator(),
+        specialCharacterValidator(),
+      ],
+    ],
+    middleName: ['', [noWhitespaceValidator(), specialCharacterValidator()]],
+    dateOfBirth: ['', [Validators.required]],
+    salary: [0, [Validators.max(EMPLOYEE_MAX_SALARY)]],
+    department: [0, [selectBoxRequiredValidator()]],
+    gender: [Gender.FEMALE, [Validators.required]],
+  });
+
+  validateMessages = {
+    firstName: [
+      {
+        type: 'required',
+        message: 'First name is required',
+      },
+      {
+        type: 'whiteSpaceOnly',
+        message: 'Invalid first name',
+      },
+      {
+        type: 'hasSpecialCharacter',
+        message: 'Invalid first name',
+      },
+    ],
+    lastName: [
+      {
+        type: 'required',
+        message: 'Last name is required',
+      },
+      {
+        type: 'whiteSpaceOnly',
+        message: 'Invalid last name',
+      },
+      {
+        type: 'hasSpecialCharacter',
+        message: 'Invalid last name',
+      },
+    ],
+    middleName: [
+      {
+        type: 'whiteSpaceOnly',
+        message: 'Invalid middle name',
+      },
+      {
+        type: 'hasSpecialCharacter',
+        message: 'Invalid middle name',
+      },
+    ],
+    dateOfBirth: [
+      {
+        type: 'required',
+        message: 'Date of birth is required',
+      },
+    ],
+    department: [
+      {
+        type: 'requiredSelection',
+        message: 'Department is required',
+      },
+    ],
+    salary: [
+      {
+        type: 'max',
+        message: 'Max salary is 1000000',
+      },
+    ],
+    gender: [
+      {
+        type: 'required',
+        message: 'Gender is required',
+      },
+    ],
+  };
 
   constructor(
     private departmentService: DepartmentService,
     private employeeService: EmployeeService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    private toastrService: ToastrService
   ) {}
 
   ngOnInit(): void {
+    this.markAllDisable(true);
+
     this.route.paramMap.subscribe((params: ParamMap) => {
-      this.employeeId = +(params.get('id') ?? "1");
+      this.employeeId = +(params.get('id') ?? '1');
+    });
+
+    this.employeeService.findById$(this.employeeId).subscribe({
+      next: (res) => {
+        this.resetForm(res);
+      },
+      error: (err) => {
+        this.toastrService.error(err.error.message);
+      },
+    });
+  }
+
+  onEdit(employee: Employee): void {
+    this.resetForm(employee);
+    this.markAllDisable(false);
+    this.isEdit = true;
+  }
+
+  onCancel(employee: Employee): void {
+    this.resetForm(employee);
+    this.markAllDisable(true);
+    this.isEdit = false;
+  }
+
+  resetForm(employee: Employee): void {
+    this.editEmployeeForm.controls.firstName.setValue(employee.firstName ?? '');
+
+    this.editEmployeeForm.controls.lastName.setValue(employee.lastName ?? '');
+    this.editEmployeeForm.controls.middleName.setValue(
+      employee.middleName ?? ''
+    );
+    this.editEmployeeForm.controls.dateOfBirth.setValue(
+      employee.dateOfBirth.toString() ?? ''
+    );
+    this.editEmployeeForm.controls.gender.setValue(
+      employee.gender ?? Gender.FEMALE
+    );
+    this.editEmployeeForm.controls.salary.setValue(employee.salary ?? 0);
+    this.editEmployeeForm.controls.department.setValue(
+      employee.department.id ?? 0
+    );
+  }
+
+  isDirtyOrTouched(fieldName: string): boolean | undefined {
+    const isDirty = this.editEmployeeForm.get(fieldName)?.dirty;
+    const isTouched = this.editEmployeeForm.get(fieldName)?.touched;
+
+    return isDirty || isTouched;
+  }
+
+  markAllDisable(isDisable: boolean) {
+    Object.keys(this.editEmployeeForm.controls).map((key) => {
+      const control =
+        this.editEmployeeForm.controls[
+          key as keyof typeof this.editEmployeeForm.controls
+        ];
+
+      if (isDisable) {
+        control.disable();
+      } else {
+        control.enable();
+      }
     });
   }
 }
