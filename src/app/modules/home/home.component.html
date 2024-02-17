@@ -1,5 +1,13 @@
 <app-header></app-header>
-<div class="w-full pt-14 overflow-y-scroll h-screen">
-  <router-outlet></router-outlet>
-  <div class="w-full h-20"></div>
+<div class="w-full overflow-y-scroll h-screen">
+  <div class="w-full mt-body min-h-full">
+    <router-outlet></router-outlet>
+  </div>
+  <footer class="bg-white w-full flex py-4 border-t-2">
+    <span class="text-sm ml-2 text-gray-500 sm:text-center dark:text-gray-400"
+      >© 2024
+      <a href="/" class="hover:underline">Tuan khoa</a>.
+      All Rights Reserved.
+    </span>
+  </footer>
 </div>

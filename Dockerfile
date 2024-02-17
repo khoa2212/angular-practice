@@ -1,4 +1,6 @@
-FROM node:20.10.0:alpine
+FROM node:20-alpine
+
+RUN npm install -g @angular/cli
 
 WORKDIR /app
 
@@ -7,8 +9,6 @@ COPY package.json /app
 RUN npm install
 
 COPY . /app
-
-RUN npm install -g @angular/cli
 
 EXPOSE 4200
 

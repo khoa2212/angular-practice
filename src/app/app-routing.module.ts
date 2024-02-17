@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {
   DepartmentComponent,
   EmployeeComponent,
+  EmployeeDetailComponent,
   ProjectComponent,
 } from './modules';
 import { NotFoundComponent } from './shared/components';
@@ -26,6 +27,7 @@ const routes: Routes = [
       { path: 'department', component: DepartmentComponent },
       { path: 'employee', component: EmployeeComponent },
       { path: 'project', component: ProjectComponent },
+      { path: 'employee/:id', component: EmployeeDetailComponent },
     ],
   },
   {

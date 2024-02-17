@@ -18,6 +18,7 @@ import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './modules/home/home.component';
 import { EmployeeModalComponent } from './modules/employee/employee-modal/employee-modal.component';
 import { LoadingInterceptor } from './service';
+import { EmployeeDetailComponent } from './modules/employee-detail/employee-detail.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { LoadingInterceptor } from './service';
     ProjectComponent,
     HomeComponent,
     EmployeeModalComponent,
+    EmployeeDetailComponent,
   ],
   imports: [
     BrowserModule,
