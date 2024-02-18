@@ -1,7 +1,11 @@
 .hide-tooltip {
-    display: none;
-  }
-  
-  #input-group:hover > div > span {
-    display: block;
-  }
+  display: none;
+}
+
+#input-group:hover > div > span {
+  display: block;
+}
+
+.make-filter > img{
+  filter: brightness(35);
+}
