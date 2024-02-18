@@ -17,6 +17,7 @@ import {
   EmployeeDetailComponent,
   EmployeeModalComponent,
   HomeComponent,
+  SignupComponent,
 } from './modules';
 import { SharedModule } from './shared/shared.module';
 import { LoadingInterceptor } from './service';
@@ -31,6 +32,7 @@ import { LoadingInterceptor } from './service';
     EmployeeModalComponent,
     EmployeeDetailComponent,
     LoginComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,

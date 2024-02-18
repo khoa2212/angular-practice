@@ -5,3 +5,4 @@ export { EmployeeDetailComponent as EmployeeDetailComponent } from './employee-d
 export { LoginComponent as LoginComponent } from './login/login.component';
 export { HomeComponent as HomeComponent } from './home/home.component';
 export { EmployeeModalComponent as EmployeeModalComponent } from './employee/employee-modal/employee-modal.component';
+export { SignupComponent as SignupComponent } from './signup/signup.component';
