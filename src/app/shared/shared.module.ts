@@ -7,7 +7,8 @@ import {
   HeaderComponent,
   NotFoundComponent,
   LoadingComponent,
-  AssignmentTableComponent
+  AssignmentTableComponent,
+  RelativeTableComponent,
 } from './components';
 
 @NgModule({
@@ -18,7 +19,19 @@ import {
     RouterLinkActive,
     CommonModule,
   ],
-  declarations: [HeaderComponent, NotFoundComponent, LoadingComponent, AssignmentTableComponent],
-  exports: [HeaderComponent, NotFoundComponent, LoadingComponent, AssignmentTableComponent],
+  declarations: [
+    HeaderComponent,
+    NotFoundComponent,
+    LoadingComponent,
+    AssignmentTableComponent,
+    RelativeTableComponent,
+  ],
+  exports: [
+    HeaderComponent,
+    NotFoundComponent,
+    LoadingComponent,
+    AssignmentTableComponent,
+    RelativeTableComponent,
+  ],
 })
 export class SharedModule {}

@@ -1,46 +1,37 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {
-  DEFAULT_EMPLOYEE_FILTER,
-  DEFAULT_PAGE_NUMBER,
-  DEFAULT_PAGE_SIZE,
-  DEFAULT_PROJECT_FILTER,
-  NUMBER_OF_PAGINATION,
-} from 'app/constants';
-import { AssignmentList } from 'app/model';
-import { AssignmentService } from 'app/service';
+import { DEFAULT_EMPLOYEE_FILTER, DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE, NUMBER_OF_PAGINATION } from 'app/constants';
+import { RelativeList } from 'app/model';
+import { RelativeService } from 'app/service';
 import { ToastrService } from 'ngx-toastr';
 import { Subject, startWith, switchMap } from 'rxjs';
 
 @Component({
-  selector: 'app-assignment-table',
-  templateUrl: './assignment-table.component.html',
-  styleUrl: './assignment-table.component.css',
+  selector: 'app-relative-table',
+  templateUrl: './relative-table.component.html',
+  styleUrl: './relative-table.component.css'
 })
-export class AssignmentTableComponent implements OnInit {
-  readonly #assignmentRefetch$ = new Subject<void>();
+export class RelativeTableComponent implements OnInit {
+  readonly #relativeRefetch$ = new Subject<void>();
 
   @Input() employeeId: number = DEFAULT_EMPLOYEE_FILTER;
-
-  @Input() projectId: number = DEFAULT_PROJECT_FILTER;
 
   currentPage: number = DEFAULT_PAGE_NUMBER;
   pageSize: number = DEFAULT_PAGE_SIZE;
   numberOfPagination: number[] = NUMBER_OF_PAGINATION;
 
-  assignmentList$ = this.#assignmentRefetch$.pipe(
+  relativeList$ = this.#relativeRefetch$.pipe(
     startWith(true),
     switchMap(() =>
-      this.assignmentService.findAssignments$(
+      this.relativeService.findRelatives$(
         this.currentPage,
         this.pageSize,
         this.employeeId,
-        this.projectId
       )
     )
   );
 
   constructor(
-    private assignmentService: AssignmentService,
+    private relativeService: RelativeService,
     private toastrService: ToastrService
   ) {}
 
@@ -49,7 +40,7 @@ export class AssignmentTableComponent implements OnInit {
   }
 
   chooseNumberOfPagination(): void {
-    this.assignmentList$.subscribe((value) => {
+    this.relativeList$.subscribe((value) => {
       if (NUMBER_OF_PAGINATION.length >= value.lastPage) {
         const page =
           value.totalCount % this.pageSize === 0
@@ -63,14 +54,13 @@ export class AssignmentTableComponent implements OnInit {
   }
 
   onSelectPage(page: number): void {
-    this.assignmentList$ = this.#assignmentRefetch$.pipe(
+    this.relativeList$ = this.#relativeRefetch$.pipe(
       startWith(true),
       switchMap(() =>
-        this.assignmentService.findAssignments$(
+        this.relativeService.findRelatives$(
           page,
           this.pageSize,
           this.employeeId,
-          this.projectId
         )
       )
     );
@@ -78,20 +68,19 @@ export class AssignmentTableComponent implements OnInit {
     this.currentPage = page;
   }
 
-  onNext(assignmentList: AssignmentList): void {
-    if (this.disableNext(assignmentList)) {
+  onNext(relativeList: RelativeList): void {
+    if (this.disableNext(relativeList)) {
       return;
     }
 
     const page = this.currentPage + 1;
-    this.assignmentList$ = this.#assignmentRefetch$.pipe(
+    this.relativeList$ = this.#relativeRefetch$.pipe(
       startWith(true),
       switchMap(() =>
-        this.assignmentService.findAssignments$(
+        this.relativeService.findRelatives$(
           page,
           this.pageSize,
           this.employeeId,
-          this.projectId
         )
       )
     );
@@ -105,14 +94,13 @@ export class AssignmentTableComponent implements OnInit {
     }
 
     const page = this.currentPage - 1;
-    this.assignmentList$ = this.#assignmentRefetch$.pipe(
+    this.relativeList$ = this.#relativeRefetch$.pipe(
       startWith(true),
       switchMap(() =>
-        this.assignmentService.findAssignments$(
+        this.relativeService.findRelatives$(
           page,
           this.pageSize,
           this.employeeId,
-          this.projectId
         )
       )
     );
@@ -128,33 +116,33 @@ export class AssignmentTableComponent implements OnInit {
     return false;
   }
 
-  disableNext(assignmentList: AssignmentList): boolean {
+  disableNext(relativeList: RelativeList): boolean {
     const compareValue =
-      assignmentList.totalCount % this.pageSize === 0
-        ? assignmentList.lastPage - 1
-        : assignmentList.lastPage;
+      relativeList.totalCount % this.pageSize === 0
+        ? relativeList.lastPage - 1
+        : relativeList.lastPage;
 
-    if (this.currentPage === compareValue || assignmentList.lastPage === 1) {
+    if (this.currentPage === compareValue || relativeList.lastPage === 1) {
       return true;
     }
 
     return false;
   }
 
-  showInfo(assignmentList: AssignmentList) {
+  showInfo(relativeList: RelativeList) {
     let from = this.pageSize * (this.currentPage - 1) + 1;
 
-    if (assignmentList.totalCount === 0) {
+    if (relativeList.totalCount === 0) {
       from = 0;
     }
 
     let to =
-      assignmentList.totalCount < this.pageSize
-        ? assignmentList.totalCount
+      relativeList.totalCount < this.pageSize
+        ? relativeList.totalCount
         : this.pageSize * this.currentPage;
 
-    if (to > assignmentList.totalCount) {
-      to = assignmentList.totalCount;
+    if (to > relativeList.totalCount) {
+      to = relativeList.totalCount;
     }
 
     return { from, to };

@@ -337,13 +337,24 @@
     class="w-4/5 py-2 border rounded-md flex flex-col gap-2 items-center mt-4"
   >
     <div class="w-full">
-      <p class="ml-2 font-bold text-lg">Employee's assignment</p>
+      <p class="ml-2 font-bold text-lg">Employee's assignments</p>
     </div>
     <div class="w-full px-2">
       <app-assignment-table
         [projectId]="0"
         [employeeId]="employeeId"
       ></app-assignment-table>
+    </div>
+  </div>
+
+  <div
+    class="w-4/5 py-2 border rounded-md flex flex-col gap-2 items-center mt-4"
+  >
+    <div class="w-full">
+      <p class="ml-2 font-bold text-lg">Employee's relatives</p>
+    </div>
+    <div class="w-full px-2">
+      <app-relative-table [employeeId]="employeeId"></app-relative-table>
     </div>
   </div>
 </div>

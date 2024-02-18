@@ -17,3 +17,7 @@ export {
   Assignment as Assignment,
   AssignmentList as AssignmentList,
 } from './assignment.model';
+export {
+  Relative as Relative,
+  RelativeList as RelativeList,
+} from './relative.model';

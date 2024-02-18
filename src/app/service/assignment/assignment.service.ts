@@ -9,7 +9,7 @@ import { AssignmentClient, DepartmentClient } from 'app/client';
 export class AssignmentService {
   constructor(private assignmentClient: AssignmentClient) {}
 
-  findAssignment$(
+  findAssignments$(
     pageNumber: number,
     pageSize: number,
     employeeId: number,

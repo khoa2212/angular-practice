@@ -23,11 +23,15 @@ export const PROJECT = {
   ADD: 'projects/add',
   UPDATE: 'projects/update',
   DELETE: 'projects/delete',
-}
+};
 
 export const ASSIGNMENT = {
-  FIND_WITH_PAGINATION: 'assignments'
-}
+  FIND_WITH_PAGINATION: 'assignments',
+};
+
+export const RELATIVE = {
+  FIND_WITH_PAGINATION: (id: number) => `relatives/employee/${id}`,
+};
 
 export const NUMBER_OF_PAGINATION = [1, 2, 3];
 
@@ -42,4 +46,3 @@ export const DEFAULT_PROJECT_FILTER = 0;
 export const DEFAULT_EMPLOYEE_FILTER = 0;
 
 export const EMPLOYEE_MAX_SALARY = 100000;
-

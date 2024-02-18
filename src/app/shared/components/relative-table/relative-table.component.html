@@ -1,21 +1,19 @@
 <div
-  *ngIf="{ departmentList: departmentList$ | async } as data"
-  class="min-h-screen h-full flex flex-col gap-3 items-center"
+  *ngIf="{ relativeList: relativeList$ | async } as data"
+  class="flex w-full flex-col gap-3 items-center"
 >
-  <app-loading></app-loading>
-
-  <div class="w-full flex justify-between max-w-4xl 2xl:max-w-none">
+  <div class="w-full flex justify-between">
     <button
-      title="Add department"
+      title="Add relative"
       class="rounded-full basis-10 bg-blue-500 hover:bg-blue-800 px-1 py-1"
     >
       <img class="w-8 h-8" src="../../../assets/add.png" alt="Add" />
     </button>
   </div>
 
-  <div *ngIf="data.departmentList as departmentList" class="w-full max-w-4xl">
+  <div *ngIf="data.relativeList as relativeList" class="w-full">
     <div
-      class="w-full overflow-x-scroll md:overflow-auto max-w-7xl 2xl:max-w-none rounded-md"
+      class="w-full overflow-x-scroll md:overflow-auto rounded-md"
     >
       <table
         class="table-auto overflow-scroll md:overflow-auto w-full text-left font-inter border"
@@ -30,12 +28,27 @@
             <th
               class="py-3 px-3 text-whitesm:text-base font-bold whitespace-nowrap"
             >
-              Department's name
+              Full name
+            </th>
+            <th
+              class="py-3 px-3 text-whitesm:text-base font-bold whitespace-nowrap"
+            >
+              Gender
+            </th>
+            <th
+              class="py-3 px-3 text-whitesm:text-base font-bold whitespace-nowrap"
+            >
+              Phone number
+            </th>
+            <th
+              class="py-3 px-3 text-whitesm:text-base font-bold whitespace-nowrap"
+            >
+              Relationship
             </th>
             <th
               class="py-3 px-3 text-white sm:text-base font-bold whitespace-nowrap"
             >
-              Start date
+              Employee
             </th>
             <th
               class="py-3 px-3 text-white sm:text-base font-bold whitespace-nowrap"
@@ -45,14 +58,14 @@
           </tr>
         </thead>
         <tbody
-          *ngFor="let department of departmentList.departments; index as i"
+          *ngFor="let relative of relativeList.relatives; index as i"
         >
           <tr class="{{ i % 2 === 0 ? 'bg-white' : 'bg-blue-100' }}">
             <td
               class="py-2 px-3 font-normal text-base whitespace-nowrap {{
                 i === 0
                   ? 'border-t-2 border-black'
-                  : i === departmentList.departments.length
+                  : i === relativeList.relatives.length
                   ? 'border-y'
                   : 'border-t'
               }}"
@@ -63,33 +76,74 @@
               class="py-2 px-3 font-normal text-base whitespace-nowrap {{
                 i === 0
                   ? 'border-t-2 border-black'
-                  : i === departmentList.departments.length
+                  : i === relativeList.relatives.length
                   ? 'border-y'
                   : 'border-t'
               }}"
             >
               <a
-                routerLink="/home/department/{{ department.id }}"
+                routerLink="/home/relative/{{ relative.id }}"
                 class="text-blue-500 hover:text-blue-800 cursor-pointer"
-                >{{ department.departmentName }}</a
+                >{{ relative.fullName }}</a
               >
             </td>
             <td
               class="py-2 px-3 font-normal text-base whitespace-nowrap {{
                 i === 0
                   ? 'border-t-2 border-black'
-                  : i === departmentList.departments.length
+                  : i === relativeList.relatives.length
                   ? 'border-y'
                   : 'border-t'
               }}"
             >
-              {{ department.startDate }}
+              {{ relative.gender }}
             </td>
             <td
               class="py-2 px-3 font-normal text-base whitespace-nowrap {{
                 i === 0
                   ? 'border-t-2 border-black'
-                  : i === departmentList.departments.length
+                  : i === relativeList.relatives.length
+                  ? 'border-y'
+                  : 'border-t'
+              }}"
+            >
+              {{ relative.phoneNumber }}
+            </td>
+            <td
+              class="py-2 px-3 font-normal text-base whitespace-nowrap {{
+                i === 0
+                  ? 'border-t-2 border-black'
+                  : i === relativeList.relatives.length
+                  ? 'border-y'
+                  : 'border-t'
+              }}"
+            >
+              {{ relative.relationship }}
+            </td>
+            <td
+              *ngIf="relative.employee as employee"
+              class="py-2 px-3 font-normal text-base whitespace-nowrap {{
+                i === 0
+                  ? 'border-t-2 border-black'
+                  : i === relativeList.relatives.length
+                  ? 'border-y'
+                  : 'border-t'
+              }}"
+            >
+              {{
+                employee.firstName +
+                  " " +
+                  (employee.middleName === null
+                    ? ""
+                    : employee.middleName + " ") +
+                  employee.lastName
+              }}
+            </td>
+            <td
+              class="py-2 px-3 font-normal text-base whitespace-nowrap {{
+                i === 0
+                  ? 'border-t-2 border-black'
+                  : i === relativeList.relatives.length
                   ? 'border-y'
                   : 'border-t'
               }}"
@@ -115,9 +169,9 @@
       class="w-full flex justify-center sm:justify-between flex-col sm:flex-row gap-5 mt-1.5 px-1 items-center"
     >
       <div class="text-lg">
-        Showing {{ showInfo(departmentList).from }} to
-        {{ showInfo(departmentList).to }}
-        of {{ departmentList.totalCount }} entries
+        Showing {{ showInfo(relativeList).from }} to
+        {{ showInfo(relativeList).to }}
+        of {{ relativeList.totalCount }} entries
       </div>
       <div class="flex">
         <ul
@@ -151,11 +205,11 @@
           </li>
           <li
             class="flex make-filter hover:bg-blue-800 items-center justify-center w-[36px] rounded-[6px] h-[36px] border-[1px] border-solid border-[#E4E4EB] {{
-              disableNext(departmentList)
+              disableNext(relativeList)
                 ? 'bg-[#cccccc] pointer-events-none'
                 : 'cursor-pointer'
             }}"
-            (click)="onNext(departmentList)"
+            (click)="onNext(relativeList)"
           >
             <img
               src="https://www.tailwindtap.com/assets/travelagency-admin/rightarrow.svg"
