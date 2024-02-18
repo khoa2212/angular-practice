@@ -10,6 +10,7 @@
   <form
     *ngIf="data.employee as employee"
     [formGroup]="editEmployeeForm"
+    (ngSubmit)="onSubmit(employee)"
     id="employee-details"
     class="w-4/5 py-2 border rounded-md flex flex-col gap-2 items-center"
   >
@@ -68,7 +69,10 @@
     </div>
     <div class="w-full py-2 grid grid-cols-2 mt-2">
       <div class="col-span-1 px-2 flex flex-col gap-3">
-        <span class="flex flex-wrap gap-2 items-center w-full">
+        <span
+          id="input-group"
+          class="flex flex-wrap gap-2 items-center w-full relative"
+        >
           <label for="firstName" class="font-bold basis-1/4"
             >First name:
           </label>
@@ -76,12 +80,33 @@
             type="text"
             id="firstName"
             formControlName="firstName"
-            class="{{
-              isEdit ? 'bg-gray-50' : 'bg-gray-200'
+            class="{{ isEdit ? 'bg-gray-50' : 'bg-gray-200' }} {{
+              editEmployeeForm.get('firstName')?.errors &&
+              isDirtyOrTouched('firstName')
+                ? 'border-red-500 outline-red-500'
+                : 'border-gray-300'
             }} border flex-1 border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
+
+          <div
+            *ngFor="let validation of validateMessages.firstName"
+            class="z-10 absolute top-2 right-2 w-1/3"
+          >
+            <span
+              *ngIf="
+                isDirtyOrTouched('firstName') &&
+                editEmployeeForm.get('firstName')?.hasError(validation.type)
+              "
+              class="hide-tooltip border py-1 border-red-500 bg-gray-200 rounded-lg text-center font-bold text-xs text-red-500"
+            >
+              {{ validation.message }}
+            </span>
+          </div>
         </span>
-        <span class="flex flex-wrap gap-2 items-center">
+        <span
+          id="input-group"
+          class="flex flex-wrap gap-2 items-center relative"
+        >
           <label for="middleName" class="font-bold basis-1/4"
             >Middle name:
           </label>
@@ -89,27 +114,74 @@
             type="text"
             id="middleName"
             formControlName="middleName"
-            class="{{
-              isEdit ? 'bg-gray-50' : 'bg-gray-200'
+            class="{{ isEdit ? 'bg-gray-50' : 'bg-gray-200' }} {{
+              editEmployeeForm.get('middleName')?.errors &&
+              isDirtyOrTouched('middleName')
+                ? 'border-red-500 outline-red-500'
+                : 'border-gray-300'
             }} flex-1 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
+
+          <div
+            *ngFor="let validation of validateMessages.middleName"
+            class="z-10 absolute top-2 right-2 w-1/3"
+          >
+            <span
+              *ngIf="
+                isDirtyOrTouched('middleName') &&
+                editEmployeeForm.get('middleName')?.hasError(validation.type)
+              "
+              class="hide-tooltip border py-1 border-red-500 bg-gray-200 rounded-lg text-center font-bold text-xs text-red-500"
+            >
+              {{ validation.message }}
+            </span>
+          </div>
         </span>
-        <span class="flex flex-wrap gap-2 items-center">
+        <span
+          id="input-group"
+          class="flex flex-wrap gap-2 items-center relative"
+        >
           <label for="salary" class="font-bold basis-1/4">Salary: </label>
           <input
             type="number"
             id="salary"
             formControlName="salary"
-            class="{{
-              isEdit ? 'bg-gray-50' : 'bg-gray-200'
+            class="{{ isEdit ? 'bg-gray-50' : 'bg-gray-200' }} {{
+              editEmployeeForm.get('salary')?.errors &&
+              isDirtyOrTouched('salary')
+                ? 'border-red-500 outline-red-500'
+                : 'border-gray-300'
             }} flex-1 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
+
+          <div
+            *ngFor="let validation of validateMessages.salary"
+            class="z-10 absolute top-2 right-2 w-1/3"
+          >
+            <span
+              *ngIf="
+                isDirtyOrTouched('salary') &&
+                editEmployeeForm.get('salary')?.hasError(validation.type)
+              "
+              class="hide-tooltip border py-1 border-red-500 bg-gray-200 rounded-lg text-center font-bold text-xs text-red-500"
+            >
+              {{ validation.message }}
+            </span>
+          </div>
         </span>
-        <span class="flex flex-wrap gap-2 items-center">
+        <span
+          id="input-group"
+          class="flex flex-wrap gap-2 items-center relative"
+        >
           <label for="gender" class="font-bold basis-1/4">Gender: </label>
           <span
             class="{{
               isEdit ? 'bg-gray-50' : 'bg-gray-200'
+            }} {{
+              editEmployeeForm.get('gender')?.errors &&
+              isDirtyOrTouched('gender')
+                ? 'border-red-500 outline-red-500'
+                : 'border-gray-300'
             }} p-2 flex-1 flex gap-10 border border-gray-300 text-md rounded-lg"
           >
             <span class="flex gap-2 items-center">
@@ -131,12 +203,30 @@
               <label for="Male">Male</label>
             </span>
           </span>
+
+          <div
+            *ngFor="let validation of validateMessages.gender"
+            class="z-10 absolute top-2 right-2 w-1/3"
+          >
+            <span
+              *ngIf="
+                isDirtyOrTouched('gender') &&
+                editEmployeeForm.get('gender')?.hasError(validation.type)
+              "
+              class="hide-tooltip border py-1 border-red-500 bg-gray-200 rounded-lg text-center font-bold text-xs text-red-500"
+            >
+              {{ validation.message }}
+            </span>
+          </div>
         </span>
       </div>
 
       <!-- col-2 -->
       <div class="col-span-1 px-2 flex flex-col gap-3">
-        <span class="flex flex-wrap gap-2 items-center w-full">
+        <span
+          id="input-group"
+          class="flex flex-wrap gap-2 items-center relative"
+        >
           <label for="lastName" class="font-bold basis-1/4">Last name: </label>
           <input
             type="text"
@@ -144,10 +234,33 @@
             formControlName="lastName"
             class="{{
               isEdit ? 'bg-gray-50' : 'bg-gray-200'
+            }} {{
+              editEmployeeForm.get('lastName')?.errors &&
+              isDirtyOrTouched('lastName')
+                ? 'border-red-500 outline-red-500'
+                : 'border-gray-300'
             }} flex-1 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
+
+          <div
+            *ngFor="let validation of validateMessages.lastName"
+            class="z-10 absolute top-2 right-2 w-1/3"
+          >
+            <span
+              *ngIf="
+                isDirtyOrTouched('lastName') &&
+                editEmployeeForm.get('lastName')?.hasError(validation.type)
+              "
+              class="hide-tooltip border py-1 border-red-500 bg-gray-200 rounded-lg text-center font-bold text-xs text-red-500"
+            >
+              {{ validation.message }}
+            </span>
+          </div>
         </span>
-        <span class="flex flex-wrap gap-2 items-center">
+        <span
+          id="input-group"
+          class="flex flex-wrap gap-2 items-center relative"
+        >
           <label for="dateOfBirth" class="font-bold basis-1/4"
             >Date of birth:
           </label>
@@ -157,12 +270,33 @@
             formControlName="dateOfBirth"
             class="{{
               isEdit ? 'bg-gray-50' : 'bg-gray-200'
-            }} border flex-1 border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            }} {{
+              editEmployeeForm.get('dateOfBirth')?.errors &&
+              isDirtyOrTouched('dateOfBirth')
+                ? 'border-red-500 outline-red-500'
+                : 'border-gray-300'
+            }} flex-1 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
+
+          <div
+            *ngFor="let validation of validateMessages.dateOfBirth"
+            class="z-10 absolute top-2 right-2 w-1/3"
+          >
+            <span
+              *ngIf="
+                isDirtyOrTouched('dateOfBirth') &&
+                editEmployeeForm.get('dateOfBirth')?.hasError(validation.type)
+              "
+              class="hide-tooltip border py-1 border-red-500 bg-gray-200 rounded-lg text-center font-bold text-xs text-red-500"
+            >
+              {{ validation.message }}
+            </span>
+          </div>
         </span>
         <span
           *ngIf="data.departments as departments"
-          class="flex flex-wrap gap-2 items-center"
+          id="input-group"
+          class="flex flex-wrap gap-2 items-center relative"
         >
           <label for="department" class="font-bold basis-1/4"
             >Department:
@@ -172,8 +306,14 @@
             formControlName="department"
             class="{{
               isEdit ? 'bg-gray-50' : 'bg-gray-200'
-            }} border border-gray-300 flex-1 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            }} {{
+              editEmployeeForm.get('department')?.errors &&
+              isDirtyOrTouched('department')
+                ? 'border-red-500 outline-red-500'
+                : 'border-gray-300'
+            }} border border-gray-300 flex-1 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2 py-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           >
+            <option value="0">Choose a department</option>
             <option
               *ngFor="let department of departments"
               value="{{ department.id }}"
@@ -181,6 +321,21 @@
               {{ department.departmentName }}
             </option>
           </select>
+
+          <div
+            *ngFor="let validation of validateMessages.department"
+            class="z-10 absolute top-2 right-2 w-1/3"
+          >
+            <span
+              *ngIf="
+                isDirtyOrTouched('department') &&
+                editEmployeeForm.get('department')?.hasError(validation.type)
+              "
+              class="hide-tooltip border py-1 border-red-500 bg-gray-200 rounded-lg text-center font-bold text-xs text-red-500"
+            >
+              {{ validation.message }}
+            </span>
+          </div>
         </span>
       </div>
     </div>

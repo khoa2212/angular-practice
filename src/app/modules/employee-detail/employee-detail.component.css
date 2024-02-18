@@ -1,0 +1,7 @@
+.hide-tooltip {
+    display: none;
+  }
+  
+  #input-group:hover > div > span {
+    display: block;
+  }

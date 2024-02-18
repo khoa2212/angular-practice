@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { EMPLOYEE_MAX_SALARY } from 'app/constants';
+import { EMPLOYEE_MAX_SALARY, MESSAGE } from 'app/constants';
 import { Employee, Gender } from 'app/model';
 import { DepartmentService, EmployeeService, LoaderService } from 'app/service';
 import {
@@ -160,6 +160,42 @@ export class EmployeeDetailComponent implements OnInit {
     this.resetForm(employee);
     this.markAllDisable(true);
     this.isEdit = false;
+  }
+
+  onSubmit(employee: Employee): void {
+    const data = this.editEmployeeForm.getRawValue();
+
+    const updatedEmployee: Omit<Employee, 'department' | 'status'> = {
+      id: employee.id,
+      firstName: data.firstName?.trim() ?? '',
+      lastName: data.lastName?.trim() ?? '',
+      middleName: data.middleName?.trim() ?? '',
+      dateOfBirth: new Date(data.dateOfBirth ?? '1800-01-01'),
+      gender: data.gender ?? Gender.FEMALE,
+      salary: data.salary ?? 0,
+      departmentId: data.department ?? 1,
+    };
+
+    this.employeeService.update$(updatedEmployee).subscribe({
+      next: (res) => {
+        this.toastrService.success(MESSAGE.UPDATE_EMPLOYEE_SUCCESS);
+
+        this.employee$ = this.#employeeRefetch$.pipe(
+          startWith(true),
+          switchMap(() => this.employeeService.findById$(this.employeeId))
+        );
+
+        this.isEdit = false;
+        this.markAllDisable(true);
+      },
+      error: (err) => {
+        if (err.error?.validationErrors) {
+          this.toastrService.error(err.error.validationErrors[0]);
+        } else {
+          this.toastrService.error(err.error.message);
+        }
+      },
+    });
   }
 
   resetForm(employee: Employee): void {
