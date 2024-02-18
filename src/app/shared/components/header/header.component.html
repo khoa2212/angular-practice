@@ -40,24 +40,21 @@
     <div class="hidden lg:flex lg:gap-x-12">
       <a
         routerLink="/home/department"
-        routerLinkActive="text-blue-500"
-        [routerLinkActiveOptions]="{exact: true}"
-        class="text-sm font-semibold leading-6 text-gray-900 hover:text-blue-500"
+        [routerLinkActive]="'active-link'"
+        class="highlight text-sm font-semibold leading-6 text-gray-900 hover:text-blue-500"
       >
         Department
       </a>
       <a
         routerLink="/home/employee"
-        routerLinkActive="text-blue-500"
-        [routerLinkActiveOptions]="{exact: true}"
-        class="text-sm font-semibold leading-6 text-gray-900 hover:text-blue-500 active:text-blue-500"
+        [routerLinkActive]="'active-link'"
+        class="highlight text-sm font-semibold leading-6 text-gray-900 hover:text-blue-500 active:text-blue-500"
         >Employee</a
       >
       <a
         routerLink="/home/project"
-        routerLinkActive="text-blue-500"
-        [routerLinkActiveOptions]="{exact: true}"
-        class="text-sm font-semibold leading-6 text-gray-900 hover:text-blue-500"
+        [routerLinkActive]="'active-link'"
+        class="highlight text-sm font-semibold leading-6 text-gray-900 hover:text-blue-500"
         >Project</a
       >
     </div>
@@ -122,30 +119,33 @@
           <div class="space-y-2 py-6">
             <a
               routerLink="/home/department"
-              class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+              [routerLinkActive]="'active-link'"
+              class="active-link highlight hover:text-blue-500 -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
             >
               Department
             </a>
             <a
               routerLink="/home/employee"
-              class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+              [routerLinkActive]="'active-link'"
+              class="highlight hover:text-blue-500 -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
               >Employee</a
             >
             <a
-              routerLink="/home/employee"
-              class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+              routerLink="/home/project"
+              [routerLinkActive]="'active-link'"
+              class="highlight hover:text-blue-500 -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
               >Project</a
             >
           </div>
           <div class="py-6">
             <a
               routerLink="/login"
-              class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+              class="highlight hover:text-blue-500 -mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
               >Login</a
             >
             <a
               routerLink="/signup"
-              class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+              class="highlight hover:text-blue-500 -mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
               >Signup</a
             >
           </div>
