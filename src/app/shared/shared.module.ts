@@ -10,6 +10,7 @@ import {
   AssignmentTableComponent,
   RelativeTableComponent,
   FooterComponent,
+  ToggleComponent,
 } from './components';
 
 @NgModule({
@@ -27,6 +28,7 @@ import {
     AssignmentTableComponent,
     RelativeTableComponent,
     FooterComponent,
+    ToggleComponent,
   ],
   exports: [
     HeaderComponent,
@@ -35,6 +37,7 @@ import {
     AssignmentTableComponent,
     RelativeTableComponent,
     FooterComponent,
+    ToggleComponent,
   ],
 })
 export class SharedModule {}
