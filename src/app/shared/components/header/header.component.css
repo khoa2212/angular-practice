@@ -31,4 +31,8 @@
     color: #225bb8;
 }
 
+.line {
+    border-top: 2px solid #cdc6c6 !important;
+}
+
 
