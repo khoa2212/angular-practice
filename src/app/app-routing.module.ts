@@ -4,6 +4,7 @@ import {
   DepartmentComponent,
   EmployeeComponent,
   EmployeeDetailComponent,
+  LoginComponent,
   ProjectComponent,
 } from './modules';
 import { NotFoundComponent } from './shared/components';
@@ -29,6 +30,10 @@ const routes: Routes = [
       { path: 'project', component: ProjectComponent },
       { path: 'employee/:id', component: EmployeeDetailComponent },
     ],
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
   },
   {
     path: '**',
