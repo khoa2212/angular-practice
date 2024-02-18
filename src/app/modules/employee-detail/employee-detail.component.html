@@ -15,11 +15,11 @@
     class="w-4/5 py-2 border rounded-md flex flex-col gap-2 items-center"
   >
     <div class="w-full relative">
-      <p class="ml-2 font-bold text-lg">Employee's details</p>
+      <p class="ml-2 font-bold text-lg dark:text-white">Employee's details</p>
       <button
         *ngIf="!isEdit"
         type="button"
-        class="border flex items-center gap-2 hover:bg-slate-100 rounded-md p-2 absolute top-0 right-0 mr-2"
+        class="border flex items-center gap-2 hover:bg-slate-100 rounded-md p-2 absolute top-0 right-0 mr-2 dark:text-white dark:bg-slate-600 dark:hover:bg-slate-800"
         (click)="onEdit(employee)"
       >
         Edit
@@ -73,7 +73,7 @@
           id="input-group"
           class="flex flex-wrap gap-2 items-center w-full relative"
         >
-          <label for="firstName" class="font-bold basis-1/4"
+          <label for="firstName" class="font-bold basis-1/4 dark:text-white"
             >First name:
           </label>
           <input
@@ -107,7 +107,7 @@
           id="input-group"
           class="flex flex-wrap gap-2 items-center relative"
         >
-          <label for="middleName" class="font-bold basis-1/4"
+          <label for="middleName" class="font-bold basis-1/4 dark:text-white"
             >Middle name:
           </label>
           <input
@@ -141,7 +141,7 @@
           id="input-group"
           class="flex flex-wrap gap-2 items-center relative"
         >
-          <label for="salary" class="font-bold basis-1/4">Salary: </label>
+          <label for="salary" class="font-bold basis-1/4 dark:text-white">Salary: </label>
           <input
             type="number"
             id="salary"
@@ -173,14 +173,14 @@
           id="input-group"
           class="flex flex-wrap gap-2 items-center relative"
         >
-          <label for="gender" class="font-bold basis-1/4">Gender: </label>
+          <label for="gender" class="font-bold basis-1/4 dark:text-white">Gender: </label>
           <span
             class="{{ isEdit ? 'bg-gray-50' : 'bg-gray-200' }} {{
               editEmployeeForm.get('gender')?.errors &&
               isDirtyOrTouched('gender')
                 ? 'border-red-500 outline-red-500'
                 : 'border-gray-300'
-            }} p-2 flex-1 flex gap-10 border border-gray-300 text-md rounded-lg"
+            }} p-2 flex-1 flex gap-10 border border-gray-300 text-md rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           >
             <span class="flex gap-2 items-center">
               <input
@@ -225,7 +225,7 @@
           id="input-group"
           class="flex flex-wrap gap-2 items-center relative"
         >
-          <label for="lastName" class="font-bold basis-1/4">Last name: </label>
+          <label for="lastName" class="font-bold basis-1/4 dark:text-white">Last name: </label>
           <input
             type="text"
             id="lastName"
@@ -257,7 +257,7 @@
           id="input-group"
           class="flex flex-wrap gap-2 items-center relative"
         >
-          <label for="dateOfBirth" class="font-bold basis-1/4"
+          <label for="dateOfBirth" class="font-bold basis-1/4 dark:text-white"
             >Date of birth:
           </label>
           <input
@@ -292,7 +292,7 @@
           id="input-group"
           class="flex flex-wrap gap-2 items-center relative"
         >
-          <label for="department" class="font-bold basis-1/4"
+          <label for="department" class="font-bold basis-1/4 dark:text-white"
             >Department:
           </label>
           <select
@@ -337,7 +337,7 @@
     class="w-4/5 py-2 border rounded-md flex flex-col gap-2 items-center mt-4"
   >
     <div class="w-full">
-      <p class="ml-2 font-bold text-lg">Employee's assignments</p>
+      <p class="ml-2 font-bold text-lg dark:text-white">Employee's assignments</p>
     </div>
     <div class="w-full px-2">
       <app-assignment-table
@@ -351,7 +351,7 @@
     class="w-4/5 py-2 border rounded-md flex flex-col gap-2 items-center mt-4"
   >
     <div class="w-full">
-      <p class="ml-2 font-bold text-lg">Employee's relatives</p>
+      <p class="ml-2 font-bold text-lg dark:text-white">Employee's relatives</p>
     </div>
     <div class="w-full px-2">
       <app-relative-table [employeeId]="employeeId"></app-relative-table>

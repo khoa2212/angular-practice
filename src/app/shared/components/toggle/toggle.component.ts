@@ -8,6 +8,8 @@ import { Component, HostBinding, OnInit } from '@angular/core';
 export class ToggleComponent implements OnInit {
   constructor() {}
 
+  class: string = '';
+
   isDark: boolean = false;
 
   onChange(event: any) {

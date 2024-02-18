@@ -12,6 +12,12 @@
   --white-3: #ddd;
 
   --font-size-1: 1.15rem;
+
+  --body-color: #fff;
+}
+
+:root[class="dark"] {
+  --body-color: rgb(17 24 39);
 }
 
 body {
@@ -19,5 +25,6 @@ body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   overflow: hidden;
+  background-color: var(--body-color);
 }
 
