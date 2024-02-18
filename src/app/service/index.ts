@@ -3,3 +3,4 @@ export { DepartmentService as DepartmentService } from './department/department.
 export { LoaderService as LoaderService } from './loader/loader.service';
 export { LoadingInterceptor as LoadingInterceptor } from './loader/loader.interceptor';
 export { ProjectService as ProjectService } from './project/project.service';
+export { AssignmentService as AssignmentService } from './assignment/assignment.service';

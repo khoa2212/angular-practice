@@ -175,9 +175,7 @@
         >
           <label for="gender" class="font-bold basis-1/4">Gender: </label>
           <span
-            class="{{
-              isEdit ? 'bg-gray-50' : 'bg-gray-200'
-            }} {{
+            class="{{ isEdit ? 'bg-gray-50' : 'bg-gray-200' }} {{
               editEmployeeForm.get('gender')?.errors &&
               isDirtyOrTouched('gender')
                 ? 'border-red-500 outline-red-500'
@@ -232,9 +230,7 @@
             type="text"
             id="lastName"
             formControlName="lastName"
-            class="{{
-              isEdit ? 'bg-gray-50' : 'bg-gray-200'
-            }} {{
+            class="{{ isEdit ? 'bg-gray-50' : 'bg-gray-200' }} {{
               editEmployeeForm.get('lastName')?.errors &&
               isDirtyOrTouched('lastName')
                 ? 'border-red-500 outline-red-500'
@@ -268,9 +264,7 @@
             type="date"
             id="dateOfBirth"
             formControlName="dateOfBirth"
-            class="{{
-              isEdit ? 'bg-gray-50' : 'bg-gray-200'
-            }} {{
+            class="{{ isEdit ? 'bg-gray-50' : 'bg-gray-200' }} {{
               editEmployeeForm.get('dateOfBirth')?.errors &&
               isDirtyOrTouched('dateOfBirth')
                 ? 'border-red-500 outline-red-500'
@@ -304,9 +298,7 @@
           <select
             id="department-selections"
             formControlName="department"
-            class="{{
-              isEdit ? 'bg-gray-50' : 'bg-gray-200'
-            }} {{
+            class="{{ isEdit ? 'bg-gray-50' : 'bg-gray-200' }} {{
               editEmployeeForm.get('department')?.errors &&
               isDirtyOrTouched('department')
                 ? 'border-red-500 outline-red-500'
@@ -340,4 +332,18 @@
       </div>
     </div>
   </form>
+
+  <div
+    class="w-4/5 py-2 border rounded-md flex flex-col gap-2 items-center mt-4"
+  >
+    <div class="w-full">
+      <p class="ml-2 font-bold text-lg">Employee's assignment</p>
+    </div>
+    <div class="w-full px-2">
+      <app-assignment-table
+        [projectId]="0"
+        [employeeId]="employeeId"
+      ></app-assignment-table>
+    </div>
+  </div>
 </div>

@@ -16,7 +16,6 @@ export const EMPLOYEE = {
   DELETE: 'employees/delete',
 };
 
-
 export const PROJECT = {
   FIND_ALL: 'projects/all',
   FIND_WITH_PAGINATION: 'projects',
@@ -26,6 +25,9 @@ export const PROJECT = {
   DELETE: 'projects/delete',
 }
 
+export const ASSIGNMENT = {
+  FIND_WITH_PAGINATION: 'assignments'
+}
 
 export const NUMBER_OF_PAGINATION = [1, 2, 3];
 
@@ -34,6 +36,10 @@ export const DEFAULT_PAGE_SIZE = 10;
 export const DEFAULT_PAGE_NUMBER = 1;
 
 export const DEFAULT_DEPARTMENT_FILTER = 0; // not filter by department id will find all
+
+export const DEFAULT_PROJECT_FILTER = 0;
+
+export const DEFAULT_EMPLOYEE_FILTER = 0;
 
 export const EMPLOYEE_MAX_SALARY = 100000;
 

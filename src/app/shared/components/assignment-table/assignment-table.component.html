@@ -1,0 +1,174 @@
+<div
+  *ngIf="{ assignmentList: assignmentList$ | async } as data"
+  class="flex w-full flex-col gap-3 items-center"
+>
+  <div class="w-full flex justify-between">
+    <button
+      title="Add assignment"
+      class="rounded-full basis-10 bg-blue-500 hover:bg-blue-800 px-1 py-1"
+    >
+      <img class="w-8 h-8" src="../../../assets/add.png" alt="Add" />
+    </button>
+  </div>
+
+  <div *ngIf="data.assignmentList as assignmentList" class="w-full">
+    <div
+      class="w-full overflow-x-scroll md:overflow-auto rounded-md"
+    >
+      <table
+        class="table-auto overflow-scroll md:overflow-auto w-full text-left font-inter border"
+      >
+        <thead class="rounded-lg text-base text-white font-semibold w-full">
+          <tr class="bg-blue-500">
+            <th
+              class="py-3 px-3 text-white sm:text-base font-bold whitespace-nowrap"
+            >
+              No.
+            </th>
+            <th
+              class="py-3 px-3 text-whitesm:text-base font-bold whitespace-nowrap"
+            >
+              Project
+            </th>
+            <th
+              class="py-3 px-3 text-white sm:text-base font-bold whitespace-nowrap"
+            >
+              Employee
+            </th>
+            <th
+              class="py-3 px-3 text-white sm:text-base font-bold whitespace-nowrap"
+            >
+              Action
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          *ngFor="let assignment of assignmentList.assignments; index as i"
+        >
+          <tr class="{{ i % 2 === 0 ? 'bg-white' : 'bg-blue-100' }}">
+            <td
+              class="py-2 px-3 font-normal text-base whitespace-nowrap {{
+                i === 0
+                  ? 'border-t-2 border-black'
+                  : i === assignmentList.assignments.length
+                  ? 'border-y'
+                  : 'border-t'
+              }}"
+            >
+              {{ i + 1 }}
+            </td>
+            <td
+              class="py-2 px-3 font-normal text-base whitespace-nowrap {{
+                i === 0
+                  ? 'border-t-2 border-black'
+                  : i === assignmentList.assignments.length
+                  ? 'border-y'
+                  : 'border-t'
+              }}"
+            >
+              <a
+                routerLink="/home/assignment/{{ assignment.id }}"
+                class="text-blue-500 hover:text-blue-800 cursor-pointer"
+                >{{ assignment.project.projectName }}</a
+              >
+            </td>
+            <td
+              *ngIf="assignment.employee as employee"
+              class="py-2 px-3 font-normal text-base whitespace-nowrap {{
+                i === 0
+                  ? 'border-t-2 border-black'
+                  : i === assignmentList.assignments.length
+                  ? 'border-y'
+                  : 'border-t'
+              }}"
+            >
+              {{
+                employee.firstName +
+                  " " +
+                  (employee.middleName === null
+                    ? ""
+                    : employee.middleName + " ") +
+                  employee.lastName
+              }}
+            </td>
+            <td
+              class="py-2 px-3 font-normal text-base whitespace-nowrap {{
+                i === 0
+                  ? 'border-t-2 border-black'
+                  : i === assignmentList.assignments.length
+                  ? 'border-y'
+                  : 'border-t'
+              }}"
+            >
+              <span class="flex gap-2">
+                <img
+                  class="cursor-pointer w-5 h-5"
+                  src="../../../assets/pen.png"
+                  alt="Edit"
+                />
+                <img
+                  class="cursor-pointer w-5 h-5"
+                  src="../../../assets/delete.png"
+                  alt="Delete"
+                />
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div
+      class="w-full flex justify-center sm:justify-between flex-col sm:flex-row gap-5 mt-1.5 px-1 items-center"
+    >
+      <div class="text-lg">
+        Showing {{ showInfo(assignmentList).from }} to
+        {{ showInfo(assignmentList).to }}
+        of {{ assignmentList.totalCount }} entries
+      </div>
+      <div class="flex">
+        <ul
+          class="flex justify-center items-center gap-x-[10px]"
+          role="navigation"
+          aria-label="Pagination"
+        >
+          <li
+            class="flex hover:bg-blue-800 make-filter items-center justify-center w-[36px] rounded-[6px] 
+            h-[36px] border-[1px] border-solid border-[#E4E4EB] {{
+              disablePrev()
+                ? 'bg-[#cccccc] pointer-events-none'
+                : 'cursor-pointer'
+            }}"
+            (click)="onPrev()"
+          >
+            <img
+              src="https://www.tailwindtap.com/assets/travelagency-admin/leftarrow.svg"
+            />
+          </li>
+          <li
+            *ngFor="let page of numberOfPagination"
+            class="flex hover:bg-blue-800 hover:text-white items-center justify-center w-[36px] rounded-[6px] h-[34px] border-solid border-[1px] bg-[#FFFFFF] cursor-pointer {{
+              page === currentPage
+                ? 'text-blue-600  border-sky-500'
+                : 'border-[#E4E4EB]'
+            }}"
+            (click)="onSelectPage(page)"
+          >
+            {{ page }}
+          </li>
+          <li
+            class="flex make-filter hover:bg-blue-800 items-center justify-center w-[36px] rounded-[6px] h-[36px] border-[1px] border-solid border-[#E4E4EB] {{
+              disableNext(assignmentList)
+                ? 'bg-[#cccccc] pointer-events-none'
+                : 'cursor-pointer'
+            }}"
+            (click)="onNext(assignmentList)"
+          >
+            <img
+              src="https://www.tailwindtap.com/assets/travelagency-admin/rightarrow.svg"
+            />
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

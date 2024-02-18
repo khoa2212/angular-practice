@@ -13,3 +13,7 @@ export {
   Project as Project,
   ProjectList as ProjectList,
 } from './project.model';
+export {
+  Assignment as Assignment,
+  AssignmentList as AssignmentList,
+} from './assignment.model';
