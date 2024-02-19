@@ -19,7 +19,7 @@
       <button
         *ngIf="!isEdit"
         type="button"
-        class="border flex items-center gap-2 hover:bg-slate-100 rounded-md p-2 absolute top-0 right-0 mr-2 dark:text-white dark:bg-slate-600 dark:hover:bg-slate-800"
+        class="border flex items-center gap-2 hover:bg-slate-100 rounded-md p-2 absolute top-0 right-0 mr-2 dark:text-white dark:bg-gray-800 dark:hover:bg-gray-700 dark:border-gray-700"
         (click)="onEdit(employee)"
       >
         Edit
@@ -141,7 +141,9 @@
           id="input-group"
           class="flex flex-wrap gap-2 items-center relative"
         >
-          <label for="salary" class="font-bold basis-1/4 dark:text-white">Salary: </label>
+          <label for="salary" class="font-bold basis-1/4 dark:text-white"
+            >Salary:
+          </label>
           <input
             type="number"
             id="salary"
@@ -173,7 +175,9 @@
           id="input-group"
           class="flex flex-wrap gap-2 items-center relative"
         >
-          <label for="gender" class="font-bold basis-1/4 dark:text-white">Gender: </label>
+          <label for="gender" class="font-bold basis-1/4 dark:text-white"
+            >Gender:
+          </label>
           <span
             class="{{ isEdit ? 'bg-gray-50' : 'bg-gray-200' }} {{
               editEmployeeForm.get('gender')?.errors &&
@@ -225,7 +229,9 @@
           id="input-group"
           class="flex flex-wrap gap-2 items-center relative"
         >
-          <label for="lastName" class="font-bold basis-1/4 dark:text-white">Last name: </label>
+          <label for="lastName" class="font-bold basis-1/4 dark:text-white"
+            >Last name:
+          </label>
           <input
             type="text"
             id="lastName"
@@ -337,7 +343,9 @@
     class="w-4/5 py-2 border rounded-md flex flex-col gap-2 items-center mt-4 dark:border-gray-700"
   >
     <div class="w-full">
-      <p class="ml-2 font-bold text-lg dark:text-white">Employee's assignments</p>
+      <p class="ml-2 font-bold text-lg dark:text-white">
+        Employee's assignments
+      </p>
     </div>
     <div class="w-full px-2">
       <app-assignment-table
