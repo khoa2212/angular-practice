@@ -10,7 +10,7 @@
   <div class="w-full flex justify-between max-w-4xl 2xl:max-w-none">
     <button
       title="Add employee"
-      class="rounded-full basis-10 bg-blue-500 hover:bg-blue-800 px-1 py-1"
+      class="rounded-full basis-10 bg-blue-500 hover:bg-blue-800 px-1 py-1 dark:bg-blue-900 dark:hover:bg-blue-950"
       (click)="onShowModal()"
     >
       <img class="w-8 h-8" src="../../../assets/add.png" alt="Add" />
@@ -41,7 +41,7 @@
         class="table-auto overflow-scroll md:overflow-auto w-full text-left font-inter border"
       >
         <thead class="rounded-lg text-base text-white font-semibold w-full">
-          <tr class="bg-blue-500">
+          <tr class="bg-blue-500 dark:bg-blue-900">
             <th
               class="py-3 px-3 text-white sm:text-base font-bold whitespace-nowrap"
             >
@@ -80,7 +80,7 @@
           </tr>
         </thead>
         <tbody *ngFor="let employee of employeeList.employees; index as i">
-          <tr class="{{ i % 2 === 0 ? 'bg-white' : 'bg-blue-100' }}">
+          <tr class="{{ i % 2 === 0 ? 'bg-white dark:bg-slate-300' : 'bg-blue-100 dark:bg-sky-600' }}">
             <td
               class="py-2 px-3 font-normal text-base whitespace-nowrap {{
                 i === 0
@@ -103,7 +103,7 @@
             >
               <a
                 routerLink="/home/employee/{{ employee.id }}"
-                class="text-blue-500 hover:text-blue-800 cursor-pointer"
+                class="text-blue-500 hover:text-blue-800 dark:text-blue-900 dark:hover:text-black cursor-pointer"
                 >{{
                   employee.firstName +
                     " " +
