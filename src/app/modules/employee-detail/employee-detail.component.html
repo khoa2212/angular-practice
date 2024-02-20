@@ -12,14 +12,14 @@
     [formGroup]="editEmployeeForm"
     (ngSubmit)="onSubmit(employee)"
     id="employee-details"
-    class="w-4/5 py-2 border rounded-md flex flex-col gap-2 items-center dark:border-gray-700"
+    class="w-full md:w-4/5 py-2 border rounded-md flex flex-col gap-2 items-center dark:border-gray-700"
   >
     <div class="w-full relative">
       <p class="ml-2 font-bold text-lg dark:text-white">Employee's details</p>
       <button
         *ngIf="!isEdit"
         type="button"
-        class="border flex items-center gap-2 hover:bg-slate-100 rounded-md p-2 absolute top-0 right-0 mr-2 dark:text-white dark:bg-gray-800 dark:hover:bg-gray-700 dark:border-gray-700"
+        class="text-sm md:text-base border flex items-center gap-2 hover:bg-slate-100 rounded-md p-2 absolute top-0 right-0 mr-2 dark:text-white dark:bg-gray-800 dark:hover:bg-gray-700 dark:border-gray-700"
         (click)="onEdit(employee)"
       >
         Edit
@@ -34,7 +34,7 @@
             editEmployeeForm.invalid
               ? 'bg-blue-200 pointer-events-none'
               : 'bg-blue-500 hover:bg-blue-800'
-          }} p-2 text-white rounded-lg inline-flex gap-2 items-center text-center"
+          }} text-sm md:text-base p-2 text-white rounded-lg inline-flex gap-2 items-center text-center"
         >
           <div *ngIf="isLoading" role="status">
             <svg
@@ -60,20 +60,22 @@
         <button
           data-modal-hide="popup-modal"
           type="button"
-          class="p-2 ms-3 text-gray-900 focus:outline-none bg-gray-200 rounded-lg border border-gray-200 hover:bg-gray-300 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+          class="text-sm md:text-base p-2 ms-3 text-gray-900 focus:outline-none bg-gray-200 rounded-lg border border-gray-200 hover:bg-gray-300 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
           (click)="onCancel(employee)"
         >
           Cancel
         </button>
       </div>
     </div>
-    <div class="w-full py-2 grid grid-cols-2 mt-2">
-      <div class="col-span-1 px-2 flex flex-col gap-3">
+    <div class="w-full py-2 grid grid-cols-2 gap-1 md:gap-0 mt-2">
+      <div class="col-span-1 pl-2 md:pr-2 flex flex-col gap-3">
         <span
           id="input-group"
           class="flex flex-wrap gap-2 items-center w-full relative"
         >
-          <label for="firstName" class="font-bold basis-1/4 dark:text-white"
+          <label
+            for="firstName"
+            class="text-sm md:text-base font-bold md:basis-1/4 dark:text-white"
             >First name:
           </label>
           <input
@@ -85,7 +87,7 @@
               isDirtyOrTouched('firstName')
                 ? 'border-red-500 outline-red-500 dark:border-red-500'
                 : 'border-gray-300'
-            }} border flex-1 border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            }} border w-full md:flex-1 text-sm md:text-base border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
 
           <div
@@ -107,7 +109,7 @@
           id="input-group"
           class="flex flex-wrap gap-2 items-center relative"
         >
-          <label for="middleName" class="font-bold basis-1/4 dark:text-white"
+          <label for="middleName" class="text-sm md:text-base font-bold md:basis-1/4 dark:text-white"
             >Middle name:
           </label>
           <input
@@ -119,7 +121,7 @@
               isDirtyOrTouched('middleName')
                 ? 'border-red-500 outline-red-500 dark:border-red-500'
                 : 'border-gray-300'
-            }} flex-1 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            }} text-sm md:text-base w-full md:flex-1 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
 
           <div
@@ -141,7 +143,7 @@
           id="input-group"
           class="flex flex-wrap gap-2 items-center relative"
         >
-          <label for="salary" class="font-bold basis-1/4 dark:text-white"
+          <label for="salary" class="text-sm md:text-base font-bold md:basis-1/4 dark:text-white"
             >Salary:
           </label>
           <input
@@ -153,7 +155,7 @@
               isDirtyOrTouched('salary')
                 ? 'border-red-500 outline-red-500 dark:border-red-500'
                 : 'border-gray-300'
-            }} flex-1 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            }} text-sm md:text-base w-full md:flex-1 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
 
           <div
@@ -175,7 +177,7 @@
           id="input-group"
           class="flex flex-wrap gap-2 items-center relative"
         >
-          <label for="gender" class="font-bold basis-1/4 dark:text-white"
+          <label for="gender" class="text-sm md:text-base font-bold md:basis-1/4 dark:text-white"
             >Gender:
           </label>
           <span
@@ -184,7 +186,7 @@
               isDirtyOrTouched('gender')
                 ? 'border-red-500 outline-red-500 dark:border-red-500'
                 : 'border-gray-300'
-            }} p-2 flex-1 flex gap-10 border border-gray-300 text-md rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            }} p-2 text-sm md:text-base w-full md:flex-1 flex flex-wrap gap-2 md:gap-10 border border-gray-300 text-md rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           >
             <span class="flex gap-2 items-center">
               <input
@@ -224,12 +226,12 @@
       </div>
 
       <!-- col-2 -->
-      <div class="col-span-1 px-2 flex flex-col gap-3">
+      <div class="col-span-1 pr-2 md:pl-2 flex flex-col gap-3">
         <span
           id="input-group"
           class="flex flex-wrap gap-2 items-center relative"
         >
-          <label for="lastName" class="font-bold basis-1/4 dark:text-white"
+          <label for="lastName" class="text-sm md:text-base font-bold md:basis-1/4 dark:text-white"
             >Last name:
           </label>
           <input
@@ -241,7 +243,7 @@
               isDirtyOrTouched('lastName')
                 ? 'border-red-500 outline-red-500 dark:border-red-500'
                 : 'border-gray-300'
-            }} flex-1 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            }} text-sm md:text-base w-full md:flex-1 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
 
           <div
@@ -263,7 +265,9 @@
           id="input-group"
           class="flex flex-wrap gap-2 items-center relative"
         >
-          <label for="dateOfBirth" class="font-bold basis-1/4 dark:text-white"
+          <label
+            for="dateOfBirth"
+            class="font-bold md:basis-1/4 dark:text-white text-sm md:text-base"
             >Date of birth:
           </label>
           <input
@@ -275,7 +279,7 @@
               isDirtyOrTouched('dateOfBirth')
                 ? 'border-red-500 outline-red-500 dark:border-red-500'
                 : 'border-gray-300'
-            }} flex-1 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            }} text-sm md:text-base w-full md:flex-1 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
 
           <div
@@ -298,7 +302,7 @@
           id="input-group"
           class="flex flex-wrap gap-2 items-center relative"
         >
-          <label for="department" class="font-bold basis-1/4 dark:text-white"
+          <label for="department" class="text-sm md:text-base font-bold md:basis-1/4 dark:text-white"
             >Department:
           </label>
           <select
@@ -309,7 +313,7 @@
               isDirtyOrTouched('department')
                 ? 'border-red-500 outline-red-500 dark:border-red-500'
                 : 'border-gray-300'
-            }} border border-gray-300 flex-1 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2 py-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            }} text-sm md:text-base w-full md:flex-1 border border-gray-300  text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2 py-2 md:py-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           >
             <option value="0">Choose a department</option>
             <option
@@ -340,7 +344,7 @@
   </form>
 
   <div
-    class="w-4/5 py-2 border rounded-md flex flex-col gap-2 items-center mt-4 dark:border-gray-700"
+    class="w-full md:w-4/5 py-2 border rounded-md flex flex-col gap-2 items-center mt-4 dark:border-gray-700"
   >
     <div class="w-full">
       <p class="ml-2 font-bold text-lg dark:text-white">
@@ -356,7 +360,7 @@
   </div>
 
   <div
-    class="w-4/5 py-2 border rounded-md flex flex-col gap-2 items-center mt-4 dark:border-gray-700"
+    class="w-full md:w-4/5 py-2 border rounded-md flex flex-col gap-2 items-center mt-4 dark:border-gray-700"
   >
     <div class="w-full">
       <p class="ml-2 font-bold text-lg dark:text-white">Employee's relatives</p>
