@@ -1,7 +1,7 @@
-<div class="min-h-screen flex flex-grow items-center justify-center bg-gray-50">
-  <div class="rounded-lg bg-white p-8 text-center shadow-xl">
+<div class="min-h-screen flex flex-grow items-center justify-center bg-white dark:bg-gray-900">
+  <div class="rounded-lg bg-white p-8 text-center shadow-xl dark:bg-slate-900 dark:border-gray-700 dark:text-white">
     <h1 class="mb-4 text-4xl font-bold">404</h1>
-    <p class="text-gray-600">
+    <p class="text-gray-600 dark:text-slate-400">
       Oops! The page you are looking for could not be found.
     </p>
     <a
@@ -10,5 +10,6 @@
     >
       Go back to Home
     </a>
+    <app-toggle [class]="'hidden'"></app-toggle>
   </div>
 </div>
