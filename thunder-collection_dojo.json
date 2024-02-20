@@ -1,0 +1,514 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "dojo",
+    "dateExported": "2024-02-20T15:13:57.062Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "57074187-9c68-4612-94f4-ddc65209b6a0",
+            "name": "deparment",
+            "containerId": "",
+            "created": "2024-02-03T12:19:36.619Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "78a37141-e91d-473b-947e-5d8480f37878",
+            "name": "employee",
+            "containerId": "",
+            "created": "2024-02-03T12:20:59.600Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "68e0eba2-f2d1-4381-ad92-084e8ce84bdb",
+            "name": "department location",
+            "containerId": "",
+            "created": "2024-02-11T16:14:50.408Z",
+            "sortNum": 30000
+        },
+        {
+            "_id": "617d30c7-32eb-4bd5-860a-dc4930d544a2",
+            "name": "relative",
+            "containerId": "",
+            "created": "2024-02-12T05:07:52.568Z",
+            "sortNum": 40000
+        },
+        {
+            "_id": "ebd3e4af-bee2-409e-83c2-2e2062aa0f5f",
+            "name": "project",
+            "containerId": "",
+            "created": "2024-02-12T06:22:00.570Z",
+            "sortNum": 50000
+        },
+        {
+            "_id": "4028427f-bb58-44de-96fd-2a63dfed5bc1",
+            "name": "assigment",
+            "containerId": "",
+            "created": "2024-02-12T07:17:13.606Z",
+            "sortNum": 60000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "bd8d1c72-9d81-4f74-a106-32ff9d530e64",
+            "colId": "718c04c5-578f-4ab3-b72a-c4cce2e1c89e",
+            "containerId": "57074187-9c68-4612-94f4-ddc65209b6a0",
+            "name": "find departments",
+            "url": "departments?pageNumber=3&pageSize=10",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-02-03T12:19:17.128Z",
+            "modified": "2024-02-11T15:17:20.863Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "pageNumber",
+                    "value": "3",
+                    "isPath": false
+                },
+                {
+                    "name": "pageSize",
+                    "value": "10",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "c6cf6eb1-d421-47ed-b5cc-22a249a11c20",
+            "colId": "718c04c5-578f-4ab3-b72a-c4cce2e1c89e",
+            "containerId": "57074187-9c68-4612-94f4-ddc65209b6a0",
+            "name": "add department",
+            "url": "departments/add",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-02-03T12:19:48.396Z",
+            "modified": "2024-02-18T05:52:43.869Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"departmentName\": \"department 10\",\n  \"startDate\": \"2022-03-02\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "8ce4c7b1-84d0-45ce-a46d-725d09e3279a",
+            "colId": "718c04c5-578f-4ab3-b72a-c4cce2e1c89e",
+            "containerId": "78a37141-e91d-473b-947e-5d8480f37878",
+            "name": "get employee",
+            "url": "employees?departmentId=0&pageNumber=1&pageSize=10",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-02-03T12:21:08.749Z",
+            "modified": "2024-02-16T15:26:18.734Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "departmentId",
+                    "value": "0",
+                    "isPath": false
+                },
+                {
+                    "name": "pageNumber",
+                    "value": "1",
+                    "isPath": false
+                },
+                {
+                    "name": "pageSize",
+                    "value": "10",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "bddd5b31-1ee1-42e6-aa2e-9d8432e5558f",
+            "colId": "718c04c5-578f-4ab3-b72a-c4cce2e1c89e",
+            "containerId": "57074187-9c68-4612-94f4-ddc65209b6a0",
+            "name": "update department",
+            "url": "departments/update",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2024-02-11T15:30:07.371Z",
+            "modified": "2024-02-18T06:10:40.920Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"id\": 25,\n  \"departmentName\": \"department 5\",\n  \"startDate\": \"2024-01-22\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "d7bed20c-41a8-441f-88a9-edcaf7235e81",
+            "colId": "718c04c5-578f-4ab3-b72a-c4cce2e1c89e",
+            "containerId": "57074187-9c68-4612-94f4-ddc65209b6a0",
+            "name": "delete deparment",
+            "url": "departments/delete",
+            "method": "DELETE",
+            "sortNum": 50000,
+            "created": "2024-02-11T15:59:28.253Z",
+            "modified": "2024-02-13T03:43:20.587Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"id\": 21\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "7bab881d-f921-437a-8456-6fcd332d554f",
+            "colId": "718c04c5-578f-4ab3-b72a-c4cce2e1c89e",
+            "containerId": "57074187-9c68-4612-94f4-ddc65209b6a0",
+            "name": "find deparment by id",
+            "url": "departments/22",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2024-02-11T16:13:47.851Z",
+            "modified": "2024-02-11T17:43:21.369Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "37a3d8d7-5c3a-48d7-b417-20e2b9f87cbb",
+            "colId": "718c04c5-578f-4ab3-b72a-c4cce2e1c89e",
+            "containerId": "68e0eba2-f2d1-4381-ad92-084e8ce84bdb",
+            "name": "find deparment location by department id",
+            "url": "department-locations/department/5",
+            "method": "GET",
+            "sortNum": 80000,
+            "created": "2024-02-11T16:15:09.784Z",
+            "modified": "2024-02-11T16:54:40.732Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "3021e092-acdb-4972-b670-cad9144004cb",
+            "colId": "718c04c5-578f-4ab3-b72a-c4cce2e1c89e",
+            "containerId": "68e0eba2-f2d1-4381-ad92-084e8ce84bdb",
+            "name": "add department location",
+            "url": "department-locations/add",
+            "method": "POST",
+            "sortNum": 90000,
+            "created": "2024-02-11T16:15:21.357Z",
+            "modified": "2024-02-11T19:59:09.641Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"location\": \"location 23\",\n  \"departmentId\": 21\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "5c39e6f1-4def-43ec-b00c-69208951064a",
+            "colId": "718c04c5-578f-4ab3-b72a-c4cce2e1c89e",
+            "containerId": "68e0eba2-f2d1-4381-ad92-084e8ce84bdb",
+            "name": "update department location",
+            "url": "department-locations/update",
+            "method": "PUT",
+            "sortNum": 100000,
+            "created": "2024-02-11T16:15:37.283Z",
+            "modified": "2024-02-11T20:05:12.847Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"id\": 21,\n  \"location\": \"location 51\",\n  \"departmentId\": 22\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "222c99ea-4520-4998-bae6-8110778ecfc2",
+            "colId": "718c04c5-578f-4ab3-b72a-c4cce2e1c89e",
+            "containerId": "68e0eba2-f2d1-4381-ad92-084e8ce84bdb",
+            "name": "delete department location",
+            "url": "department-locations/delete",
+            "method": "DELETE",
+            "sortNum": 110000,
+            "created": "2024-02-11T16:16:53.176Z",
+            "modified": "2024-02-11T20:14:35.578Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"id\": 22\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "97a18c21-3a1e-428a-9acb-9d559915c2ed",
+            "colId": "718c04c5-578f-4ab3-b72a-c4cce2e1c89e",
+            "containerId": "78a37141-e91d-473b-947e-5d8480f37878",
+            "name": "add employee",
+            "url": "employees/add",
+            "method": "POST",
+            "sortNum": 120000,
+            "created": "2024-02-12T03:18:59.434Z",
+            "modified": "2024-02-12T03:29:36.507Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"firstName\": \"A\",\n  \"lastName\": \"Nguyen\",\n  \"gender\": \"MALE\",\n  \"middleName\": \"Van\",\n  \"salary\": 10000,\n  \"dateOfBirth\": \"2023-10-11\",\n  \"departmentId\": 21\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "3842c4d6-dd29-4812-acf7-e32abbd126dd",
+            "colId": "718c04c5-578f-4ab3-b72a-c4cce2e1c89e",
+            "containerId": "78a37141-e91d-473b-947e-5d8480f37878",
+            "name": "update employee",
+            "url": "employees/update",
+            "method": "PUT",
+            "sortNum": 130000,
+            "created": "2024-02-12T04:08:14.676Z",
+            "modified": "2024-02-12T04:12:43.069Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"id\": 102,\n  \"firstName\": \"A\",\n  \"lastName\": \"Tran\",\n  \"gender\": \"FEMALE\",\n  \"middleName\": \"Van\",\n  \"salary\": 10000,\n  \"dateOfBirth\": \"2023-10-11\",\n  \"departmentId\": 22\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "cc72071f-0554-4cb2-a7e1-f382ebfb218d",
+            "colId": "718c04c5-578f-4ab3-b72a-c4cce2e1c89e",
+            "containerId": "78a37141-e91d-473b-947e-5d8480f37878",
+            "name": "delete employee",
+            "url": "employees/delete",
+            "method": "DELETE",
+            "sortNum": 140000,
+            "created": "2024-02-12T04:21:38.935Z",
+            "modified": "2024-02-12T04:22:16.360Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"id\": 102\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "a845364e-b783-49d5-b766-d77db196d21c",
+            "colId": "718c04c5-578f-4ab3-b72a-c4cce2e1c89e",
+            "containerId": "78a37141-e91d-473b-947e-5d8480f37878",
+            "name": "find by id",
+            "url": "employees/1",
+            "method": "GET",
+            "sortNum": 150000,
+            "created": "2024-02-12T04:56:17.705Z",
+            "modified": "2024-02-12T04:56:32.453Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "f7d0c694-571f-4724-9a60-81757cb5700b",
+            "colId": "718c04c5-578f-4ab3-b72a-c4cce2e1c89e",
+            "containerId": "617d30c7-32eb-4bd5-860a-dc4930d544a2",
+            "name": "find relatives by employee id",
+            "url": "relatives/employee/1?pageNumber=1&pageSize=10",
+            "method": "GET",
+            "sortNum": 160000,
+            "created": "2024-02-12T05:08:12.855Z",
+            "modified": "2024-02-12T05:10:41.058Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "pageNumber",
+                    "value": "1",
+                    "isPath": false
+                },
+                {
+                    "name": "pageSize",
+                    "value": "10",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "29d00982-8610-4366-a2c4-1fcdc0e6ae3f",
+            "colId": "718c04c5-578f-4ab3-b72a-c4cce2e1c89e",
+            "containerId": "57074187-9c68-4612-94f4-ddc65209b6a0",
+            "name": "find all",
+            "url": "departments/all",
+            "method": "GET",
+            "sortNum": 170000,
+            "created": "2024-02-12T05:15:10.563Z",
+            "modified": "2024-02-12T05:15:23.086Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "0df8185b-48e3-425f-b394-700c0c5f4eb1",
+            "colId": "718c04c5-578f-4ab3-b72a-c4cce2e1c89e",
+            "containerId": "ebd3e4af-bee2-409e-83c2-2e2062aa0f5f",
+            "name": "find all",
+            "url": "projects/all",
+            "method": "GET",
+            "sortNum": 190000,
+            "created": "2024-02-12T06:22:11.455Z",
+            "modified": "2024-02-12T06:22:47.476Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "2437b51e-3b91-4fa9-93cf-951e47a379fc",
+            "colId": "718c04c5-578f-4ab3-b72a-c4cce2e1c89e",
+            "containerId": "ebd3e4af-bee2-409e-83c2-2e2062aa0f5f",
+            "name": "find projects",
+            "url": "projects?departmentId=3&pageNumber=1&pageSize=10",
+            "method": "GET",
+            "sortNum": 200000,
+            "created": "2024-02-12T06:22:19.925Z",
+            "modified": "2024-02-12T06:26:06.521Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "departmentId",
+                    "value": "3",
+                    "isPath": false
+                },
+                {
+                    "name": "pageNumber",
+                    "value": "1",
+                    "isPath": false
+                },
+                {
+                    "name": "pageSize",
+                    "value": "10",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "584b4f95-2300-4ca2-a646-9feb4c8bae42",
+            "colId": "718c04c5-578f-4ab3-b72a-c4cce2e1c89e",
+            "containerId": "ebd3e4af-bee2-409e-83c2-2e2062aa0f5f",
+            "name": "find by id",
+            "url": "projects/100",
+            "method": "GET",
+            "sortNum": 210000,
+            "created": "2024-02-12T06:22:26.090Z",
+            "modified": "2024-02-12T06:28:35.449Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "2ec13fab-a454-4b43-90e5-f5bbd0adea4e",
+            "colId": "718c04c5-578f-4ab3-b72a-c4cce2e1c89e",
+            "containerId": "4028427f-bb58-44de-96fd-2a63dfed5bc1",
+            "name": "find assignments",
+            "url": "assignments?projectId=0&employeeId=47&pageNumber=1&pageSize=10",
+            "method": "GET",
+            "sortNum": 220000,
+            "created": "2024-02-12T07:17:24.435Z",
+            "modified": "2024-02-12T07:40:04.384Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "projectId",
+                    "value": "0",
+                    "isPath": false
+                },
+                {
+                    "name": "employeeId",
+                    "value": "47",
+                    "isPath": false
+                },
+                {
+                    "name": "pageNumber",
+                    "value": "1",
+                    "isPath": false
+                },
+                {
+                    "name": "pageSize",
+                    "value": "10",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "5cb2d3d4-545d-494a-a8a2-aafdd3637046",
+            "colId": "718c04c5-578f-4ab3-b72a-c4cce2e1c89e",
+            "containerId": "4028427f-bb58-44de-96fd-2a63dfed5bc1",
+            "name": "add assigment",
+            "url": "assignments/add",
+            "method": "POST",
+            "sortNum": 230000,
+            "created": "2024-02-12T08:10:43.798Z",
+            "modified": "2024-02-12T08:25:02.718Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"employeeId\": 26,\n  \"projectId\": 5,\n  \"numberOfHour\": 10\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "528ef106-cb74-439f-bbcc-0b230bbcd482",
+            "colId": "718c04c5-578f-4ab3-b72a-c4cce2e1c89e",
+            "containerId": "4028427f-bb58-44de-96fd-2a63dfed5bc1",
+            "name": "update assignment",
+            "url": "assignments/update",
+            "method": "PUT",
+            "sortNum": 240000,
+            "created": "2024-02-12T08:23:50.209Z",
+            "modified": "2024-02-12T08:34:34.309Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"id\": 52,\n  \"employeeId\": 26,\n  \"projectId\": 6,\n  \"numberOfHour\": 100\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "9e271006-6c35-4117-8717-d8b0c79351f9",
+            "colId": "718c04c5-578f-4ab3-b72a-c4cce2e1c89e",
+            "containerId": "4028427f-bb58-44de-96fd-2a63dfed5bc1",
+            "name": "delete assignment",
+            "url": "assignments/delete",
+            "method": "DELETE",
+            "sortNum": 250000,
+            "created": "2024-02-12T08:39:04.856Z",
+            "modified": "2024-02-12T08:40:20.149Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"id\": 52\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ],
+    "settings": {
+        "options": {
+            "baseUrl": "http://localhost:8080/dojo/api/"
+        }
+    }
+}

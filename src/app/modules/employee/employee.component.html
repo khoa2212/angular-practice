@@ -214,10 +214,10 @@
           </li>
           <li
             *ngFor="let page of numberOfPagination"
-            class="flex hover:bg-blue-800 hover:text-white items-center justify-center w-[36px] rounded-[6px] h-[34px] border-solid border-[1px] cursor-pointer dark:text-white dark:border-gray-700 {{
+            class="flex hover:bg-blue-800 hover:text-white dark:hover:text-white items-center justify-center w-[36px] rounded-[6px] h-[34px] border-solid border-[1px] cursor-pointer {{
               page === currentPage
-                ? 'text-blue-600  border-sky-500 dark:text-blue-600  dark:border-blue-600'
-                : 'border-[#E4E4EB]'
+                ? 'text-blue-600  border-sky-500 dark:text-blue-700 dark:border-blue-800'
+                : 'border-[#E4E4EB] dark:text-white dark:border-gray-700'
             }}"
             (click)="onSelectPage(page)"
           >
