@@ -46,3 +46,5 @@ export const DEFAULT_PROJECT_FILTER = 0;
 export const DEFAULT_EMPLOYEE_FILTER = 0;
 
 export const EMPLOYEE_MAX_SALARY = 100000;
+
+export const DEFAULT_SEARCH = "";

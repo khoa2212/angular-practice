@@ -14,11 +14,12 @@ export class EmployeeClient {
   findEmployees$(
     pageNumber: number,
     pageSize: number,
-    departmentId: number
+    departmentId: number,
+    employeeFullName: string
   ): Observable<EmployeeList> {
     const employees = this.httpClient.get<EmployeeList>(
       `${ENVIRONMENT.BASE_URL}/${EMPLOYEE.FIND_WITH_PAGINATION}`,
-      { params: { pageNumber, pageSize, departmentId } }
+      { params: { pageNumber, pageSize, departmentId, name: employeeFullName } }
     );
 
     return employees;
@@ -54,7 +55,9 @@ export class EmployeeClient {
   }
 
   findById$(id: number): Observable<Employee> {
-    const data = this.httpClient.get<Employee>(`${ENVIRONMENT.BASE_URL}/${EMPLOYEE.FIND_BY_ID(id)}`)
+    const data = this.httpClient.get<Employee>(
+      `${ENVIRONMENT.BASE_URL}/${EMPLOYEE.FIND_BY_ID(id)}`
+    );
     return data;
   }
 }

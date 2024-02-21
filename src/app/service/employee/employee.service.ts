@@ -12,12 +12,14 @@ export class EmployeeService {
   findEmployees$(
     pageNumber: number,
     pageSize: number,
-    departmentId: number
+    departmentId: number,
+    employeeFullName: string,
   ): Observable<EmployeeList> {
     const employees = this.employeeClient.findEmployees$(
       pageNumber,
       pageSize,
-      departmentId
+      departmentId,
+      employeeFullName,
     );
 
     return employees;

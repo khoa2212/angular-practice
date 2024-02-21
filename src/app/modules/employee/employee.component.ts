@@ -8,10 +8,20 @@ import {
 import { DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE, MESSAGE } from 'app/constants';
 import {
   DEFAULT_DEPARTMENT_FILTER,
+  DEFAULT_SEARCH,
   NUMBER_OF_PAGINATION,
 } from 'app/constants/constants';
 import { DepartmentService, EmployeeService, LoaderService } from 'app/service';
-import { Subject, startWith, switchMap } from 'rxjs';
+import {
+  Subject,
+  startWith,
+  switchMap,
+  debounceTime,
+  takeUntil,
+  distinct,
+  Observable,
+  distinctUntilChanged,
+} from 'rxjs';
 import { EmployeeModalComponent } from './employee-modal/employee-modal.component';
 import { Employee, EmployeeList } from 'app/model';
 import { ToastrService } from 'ngx-toastr';
@@ -32,6 +42,8 @@ export class EmployeeComponent implements OnInit {
 
   departmentId: number = DEFAULT_DEPARTMENT_FILTER;
 
+  employeeFullName = DEFAULT_SEARCH;
+
   @ViewChild('modal', { static: false }) modal!: EmployeeModalComponent;
 
   employeeList$ = this.#employeeRefetch$.pipe(
@@ -40,7 +52,8 @@ export class EmployeeComponent implements OnInit {
       this.employeeService.findEmployees$(
         this.currentPage,
         this.pageSize,
-        this.departmentId
+        this.departmentId,
+        this.employeeFullName
       )
     )
   );
@@ -61,6 +74,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   chooseNumberOfPagination(): void {
+    console.log(this.employeeList$);
     this.employeeList$.subscribe((value) => {
       if (NUMBER_OF_PAGINATION.length > value.lastPage) {
         const page =
@@ -81,7 +95,8 @@ export class EmployeeComponent implements OnInit {
         this.employeeService.findEmployees$(
           DEFAULT_PAGE_NUMBER,
           DEFAULT_PAGE_SIZE,
-          DEFAULT_DEPARTMENT_FILTER
+          DEFAULT_DEPARTMENT_FILTER,
+          DEFAULT_SEARCH
         )
       )
     );
@@ -108,7 +123,8 @@ export class EmployeeComponent implements OnInit {
         this.employeeService.findEmployees$(
           this.currentPage,
           this.pageSize,
-          this.departmentId
+          this.departmentId,
+          this.employeeFullName
         )
       )
     );
@@ -123,7 +139,8 @@ export class EmployeeComponent implements OnInit {
         this.employeeService.findEmployees$(
           page,
           this.pageSize,
-          this.departmentId
+          this.departmentId,
+          this.employeeFullName
         )
       )
     );
@@ -132,11 +149,10 @@ export class EmployeeComponent implements OnInit {
   }
 
   onNext(employeeList: EmployeeList): void {
-    
-    if(this.disableNext(employeeList)) {
+    if (this.disableNext(employeeList)) {
       return;
     }
-    
+
     const page = this.currentPage + 1;
     this.employeeList$ = this.#employeeRefetch$.pipe(
       startWith(true),
@@ -144,7 +160,8 @@ export class EmployeeComponent implements OnInit {
         this.employeeService.findEmployees$(
           page,
           this.pageSize,
-          this.departmentId
+          this.departmentId,
+          this.employeeFullName
         )
       )
     );
@@ -153,10 +170,9 @@ export class EmployeeComponent implements OnInit {
   }
 
   onPrev(): void {
-
-    if(this.disablePrev()) {
+    if (this.disablePrev()) {
       return;
-    } 
+    }
 
     const page = this.currentPage - 1;
     this.employeeList$ = this.#employeeRefetch$.pipe(
@@ -165,7 +181,8 @@ export class EmployeeComponent implements OnInit {
         this.employeeService.findEmployees$(
           page,
           this.pageSize,
-          this.departmentId
+          this.departmentId,
+          this.employeeFullName
         )
       )
     );
@@ -183,7 +200,7 @@ export class EmployeeComponent implements OnInit {
 
   disableNext(employeeList: EmployeeList): boolean {
     const compareValue =
-    employeeList.totalCount % this.pageSize === 0
+      employeeList.totalCount % this.pageSize === 0
         ? employeeList.lastPage - 1
         : employeeList.lastPage;
 
@@ -197,7 +214,7 @@ export class EmployeeComponent implements OnInit {
   showInfo(employeeList: EmployeeList) {
     let from = this.pageSize * (this.currentPage - 1) + 1;
 
-    if(employeeList.totalCount === 0) {
+    if (employeeList.totalCount === 0) {
       from = 0;
     }
 
@@ -274,5 +291,26 @@ export class EmployeeComponent implements OnInit {
     });
 
     this.refreshPage();
+  }
+
+  timeoutId: any = 0;
+
+  onSearch(event: any) {
+    this.employeeFullName = event;
+
+    clearTimeout(this.timeoutId);
+    this.timeoutId = setTimeout(() => {
+      this.employeeList$ = this.#employeeRefetch$.pipe(
+        startWith(true),
+        switchMap(() =>
+          this.employeeService.findEmployees$(
+            this.currentPage,
+            this.pageSize,
+            this.departmentId,
+            this.employeeFullName
+          )
+        )
+      );
+    }, 1000)
   }
 }
