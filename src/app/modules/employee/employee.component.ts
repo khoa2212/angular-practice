@@ -74,7 +74,6 @@ export class EmployeeComponent implements OnInit {
   }
 
   chooseNumberOfPagination(): void {
-    console.log(this.employeeList$);
     this.employeeList$.subscribe((value) => {
       if (NUMBER_OF_PAGINATION.length > value.lastPage) {
         const page =
