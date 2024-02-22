@@ -310,6 +310,8 @@ export class EmployeeComponent implements OnInit {
           )
         )
       );
+
+      this.chooseNumberOfPagination();
     }, 1000)
   }
 }
