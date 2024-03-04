@@ -62,7 +62,9 @@ export class LoginComponent {
 
   constructor(private formBuilder: FormBuilder) {}
 
-  onSubmit() {}
+  onSubmit() {
+
+  }
 
   isDirtyOrTouched(fieldName: string): boolean | undefined {
     const isDirty = this.loginForm.get(fieldName)?.dirty;

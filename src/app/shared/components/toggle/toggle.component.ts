@@ -6,7 +6,7 @@ import { Component, HostBinding, OnInit } from '@angular/core';
   styleUrl: './toggle.component.css',
 })
 export class ToggleComponent implements OnInit {
-  constructor() {}
+  constructor(private storage: Storage) {}
 
   class: string = '';
 
@@ -14,18 +14,18 @@ export class ToggleComponent implements OnInit {
 
   onChange(event: any) {
     if (event.target.checked) {
-      localStorage.setItem('theme', 'light');
+      this.storage.setItem('theme', 'light');
       this.isDark = false;
       document.documentElement.classList.remove('dark');
     } else {
-      localStorage.setItem('theme', 'dark');
+      this.storage.setItem('theme', 'dark');
       this.isDark = true;
       document.documentElement.classList.add('dark');
     }
   }
 
   ngOnInit(): void {
-    this.isDark = (localStorage.getItem('theme') ?? 'light') === 'dark';
+    this.isDark = (this.storage.getItem('theme') ?? 'light') === 'dark';
 
     if(this.isDark) {
       document.documentElement.classList.add('dark');

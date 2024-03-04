@@ -24,3 +24,15 @@ export {
 
 export { Role as Role } from './role.enum';
 export { TokenType as TokenType } from './token-type.enum';
+
+export { User as User } from './user.model';
+
+export {
+  LoginRequestDTO as LoginRequestDTO,
+  LoginResponseDTO as LoginResponseDTO,
+  SignupRequestDTO as SignupRequestDTO,
+  SignupResponseDTO as SignupResponseDTO,
+  VerifyRequestDTO as VerifyRequestDTO,
+  RenewAccessTokenRequestDTO as RenewAccessTokenRequestDTO,
+  RenewAccessTokenResponseDTO as RenewAccessTokenResponseDTO,
+} from './auth.model';

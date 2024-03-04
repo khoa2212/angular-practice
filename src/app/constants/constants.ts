@@ -33,6 +33,13 @@ export const RELATIVE = {
   FIND_WITH_PAGINATION: (id: number) => `relatives/employee/${id}`,
 };
 
+export const AUTH = {
+  LOGIN: 'auth/login',
+  SIGNUP: 'auth/signup',
+  VERIFY: 'auth/verify',
+  RENEW: 'auth/renew',
+};
+
 export const NUMBER_OF_PAGINATION = [1, 2, 3];
 
 export const DEFAULT_PAGE_SIZE = 10;
@@ -47,4 +54,4 @@ export const DEFAULT_EMPLOYEE_FILTER = 0;
 
 export const EMPLOYEE_MAX_SALARY = 100000;
 
-export const DEFAULT_SEARCH = "";
+export const DEFAULT_SEARCH = '';

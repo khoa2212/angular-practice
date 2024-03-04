@@ -5,3 +5,5 @@ export { LoadingInterceptor as LoadingInterceptor } from './loader/loader.interc
 export { ProjectService as ProjectService } from './project/project.service';
 export { AssignmentService as AssignmentService } from './assignment/assignment.service';
 export { RelativeService as RelativeService } from './relative/relative.service';
+export { TokenService as TokenService } from './token/token.service';
+export { AuthService as AuthService } from './auth/auth.service';
