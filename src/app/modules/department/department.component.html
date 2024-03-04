@@ -4,12 +4,12 @@
 >
   <app-loading></app-loading>
 
-  <div class="w-full flex justify-between max-w-4xl">
+  <div class="w-full flex justify-between max-w-4xl" *ngIf="!isLoading()">
     <button
       title="Add department"
-      class="rounded-full basis-10 bg-blue-500 hover:bg-blue-800 px-1 py-1 dark:bg-blue-900 dark:hover:bg-blue-950"
+      class="rounded-full bg-blue-500 hover:bg-blue-800 px-1 py-1 dark:bg-blue-900 dark:hover:bg-blue-950"
     >
-      <img class="w-8 h-8" src="../../../assets/add.png" alt="Add" />
+      <img class="w-7 h-7" src="../../../assets/add.png" alt="Add" />
     </button>
   </div>
 

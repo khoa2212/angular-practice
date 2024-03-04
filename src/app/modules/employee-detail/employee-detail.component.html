@@ -32,7 +32,7 @@
           [disabled]="editEmployeeForm.invalid"
           class="{{
             editEmployeeForm.invalid
-              ? 'bg-blue-200 pointer-events-none'
+              ? 'bg-blue-200 cursor-not-allowed'
               : 'bg-blue-500 hover:bg-blue-800'
           }} text-sm md:text-base p-2 text-white rounded-lg inline-flex gap-2 items-center text-center"
         >
@@ -99,7 +99,7 @@
                 isDirtyOrTouched('firstName') &&
                 editEmployeeForm.get('firstName')?.hasError(validation.type)
               "
-              class="hide-tooltip border py-1 border-red-500 bg-gray-200 rounded-lg text-center font-bold text-xs text-red-500"
+              class="hide-tooltip border py-1 border-red-500 bg-red-50 rounded-lg text-center font-bold text-xs text-red-500"
             >
               {{ validation.message }}
             </span>
@@ -133,7 +133,7 @@
                 isDirtyOrTouched('middleName') &&
                 editEmployeeForm.get('middleName')?.hasError(validation.type)
               "
-              class="hide-tooltip border py-1 border-red-500 bg-gray-200 rounded-lg text-center font-bold text-xs text-red-500"
+              class="hide-tooltip border py-1 border-red-500 bg-red-50 rounded-lg text-center font-bold text-xs text-red-500"
             >
               {{ validation.message }}
             </span>
@@ -167,7 +167,7 @@
                 isDirtyOrTouched('salary') &&
                 editEmployeeForm.get('salary')?.hasError(validation.type)
               "
-              class="hide-tooltip border py-1 border-red-500 bg-gray-200 rounded-lg text-center font-bold text-xs text-red-500"
+              class="hide-tooltip border py-1 border-red-500 bg-red-50 rounded-lg text-center font-bold text-xs text-red-500"
             >
               {{ validation.message }}
             </span>
@@ -217,7 +217,7 @@
                 isDirtyOrTouched('gender') &&
                 editEmployeeForm.get('gender')?.hasError(validation.type)
               "
-              class="hide-tooltip border py-1 border-red-500 bg-gray-200 rounded-lg text-center font-bold text-xs text-red-500"
+              class="hide-tooltip border py-1 border-red-500 bg-red-50 rounded-lg text-center font-bold text-xs text-red-500"
             >
               {{ validation.message }}
             </span>
@@ -255,7 +255,7 @@
                 isDirtyOrTouched('lastName') &&
                 editEmployeeForm.get('lastName')?.hasError(validation.type)
               "
-              class="hide-tooltip border py-1 border-red-500 bg-gray-200 rounded-lg text-center font-bold text-xs text-red-500"
+              class="hide-tooltip border py-1 border-red-500 bg-red-50 rounded-lg text-center font-bold text-xs text-red-500"
             >
               {{ validation.message }}
             </span>
@@ -291,7 +291,7 @@
                 isDirtyOrTouched('dateOfBirth') &&
                 editEmployeeForm.get('dateOfBirth')?.hasError(validation.type)
               "
-              class="hide-tooltip border py-1 border-red-500 bg-gray-200 rounded-lg text-center font-bold text-xs text-red-500"
+              class="hide-tooltip border py-1 border-red-500 bg-red-50 rounded-lg text-center font-bold text-xs text-red-500"
             >
               {{ validation.message }}
             </span>
@@ -333,7 +333,7 @@
                 isDirtyOrTouched('department') &&
                 editEmployeeForm.get('department')?.hasError(validation.type)
               "
-              class="hide-tooltip border py-1 border-red-500 bg-gray-200 rounded-lg text-center font-bold text-xs text-red-500"
+              class="hide-tooltip border py-1 border-red-500 bg-red-50 rounded-lg text-center font-bold text-xs text-red-500"
             >
               {{ validation.message }}
             </span>

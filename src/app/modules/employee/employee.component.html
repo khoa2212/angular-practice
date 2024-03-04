@@ -9,18 +9,19 @@
 
   <div
     class="w-full flex flex-col md:items-center md:flex-row max-w-4xl gap-1"
+    *ngIf="!isLoading()"
   >
-    <div class="flex gap-2 flex-1 max-h-11">
+    <div class="flex gap-1 flex-1 max-h-11">
       <button
         title="Add employee"
         class="rounded-full bg-blue-500 hover:bg-blue-800 px-1 py-1 dark:bg-blue-900 dark:hover:bg-blue-950"
         (click)="onShowModal()"
       >
-        <img class="w-8 h-8" src="../../../assets/add.png" alt="Add" />
+        <img class="w-7 h-7" src="../../../assets/add.png" alt="Add" />
       </button>
 
       <!-- Searchbox -->
-      <div class="relative w-full max-h-11 flex items-center">
+      <div class="relative w-[95%] max-h-11 flex items-center">
         <input
           type="search"
           id="default-search"

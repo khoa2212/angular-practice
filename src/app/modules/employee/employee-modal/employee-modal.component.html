@@ -63,7 +63,7 @@
                     isDirtyOrTouched('firstName') &&
                     addEmployeeForm.get('firstName')?.hasError(validation.type)
                   "
-                  class="hide-tooltip absolute top-0 left-[27%] z-10 border py-1 border-red-500 bg-gray-200 rounded-lg w-3/4 text-center font-bold text-xs text-red-500"
+                  class="hide-tooltip absolute top-0 left-[27%] z-10 border py-1 border-red-500 bg-red-50 rounded-lg w-3/4 text-center font-bold text-xs text-red-500"
                 >
                   {{ validation.message }}
                 </span>
@@ -97,7 +97,7 @@
                     isDirtyOrTouched('middleName') &&
                     addEmployeeForm.get('middleName')?.hasError(validation.type)
                   "
-                  class="hide-tooltip absolute top-0 left-[27%] z-10 border py-1 border-red-500 bg-gray-200 rounded-lg w-3/4 text-center font-bold text-xs text-red-500"
+                  class="hide-tooltip absolute top-0 left-[27%] z-10 border py-1 border-red-500 bg-red-50 rounded-lg w-3/4 text-center font-bold text-xs text-red-500"
                 >
                   {{ validation.message }}
                 </span>
@@ -133,7 +133,7 @@
                     isDirtyOrTouched('salary') &&
                     addEmployeeForm.get('salary')?.hasError(validation.type)
                   "
-                  class="hide-tooltip absolute top-0 left-[27%] z-10 border py-1 border-red-500 bg-gray-200 rounded-lg w-3/4 text-center font-bold text-xs text-red-500"
+                  class="hide-tooltip absolute top-0 left-[27%] z-10 border py-1 border-red-500 bg-red-50 rounded-lg w-3/4 text-center font-bold text-xs text-red-500"
                 >
                   {{ validation.message }}
                 </span>
@@ -198,7 +198,7 @@
                     isDirtyOrTouched('lastName') &&
                     addEmployeeForm.get('lastName')?.hasError(validation.type)
                   "
-                  class="hide-tooltip absolute top-0 left-[27%] z-10 border py-1 border-red-500 bg-gray-200 rounded-lg w-3/4 text-center font-bold text-xs text-red-500"
+                  class="hide-tooltip absolute top-0 left-[27%] z-10 border py-1 border-red-500 bg-red-50 rounded-lg w-3/4 text-center font-bold text-xs text-red-500"
                 >
                   {{ validation.message }}
                 </span>
@@ -233,7 +233,7 @@
                       .get('dateOfBirth')
                       ?.hasError(validation.type)
                   "
-                  class="hide-tooltip absolute top-0 left-[27%] z-10 border py-1 border-red-500 bg-gray-200 rounded-lg w-3/4 text-center font-bold text-xs text-red-500"
+                  class="hide-tooltip absolute top-0 left-[27%] z-10 border py-1 border-red-500 bg-red-50 rounded-lg w-3/4 text-center font-bold text-xs text-red-500"
                 >
                   {{ validation.message }}
                 </span>
@@ -273,7 +273,7 @@
                     isDirtyOrTouched('department') &&
                     addEmployeeForm.get('department')?.hasError(validation.type)
                   "
-                  class="hide-tooltip absolute top-0 left-[27%] z-10 border py-1 border-red-500 bg-gray-200 rounded-lg w-3/4 text-center font-bold text-xs text-red-500"
+                  class="hide-tooltip absolute top-0 left-[27%] z-10 border py-1 border-red-500 bg-red-50 rounded-lg w-3/4 text-center font-bold text-xs text-red-500"
                 >
                   {{ validation.message }}
                 </span>
@@ -288,7 +288,7 @@
             type="submit"
             [disabled]="addEmployeeForm.invalid"
             class="{{
-              addEmployeeForm.invalid ? 'bg-blue-200 pointer-events-none' : 'bg-blue-500 hover:bg-blue-800'
+              addEmployeeForm.invalid ? 'bg-blue-200 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-800'
             }} text-white font-medium rounded-lg text-sm inline-flex gap-2 items-center px-5 py-2.5 text-center"
           >
             <div *ngIf="isLoading" role="status">

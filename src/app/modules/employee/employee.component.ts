@@ -66,7 +66,8 @@ export class EmployeeComponent implements OnInit {
   constructor(
     private employeeService: EmployeeService,
     private departmentService: DepartmentService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private loadingService: LoaderService
   ) {}
 
   ngOnInit(): void {
@@ -313,5 +314,9 @@ export class EmployeeComponent implements OnInit {
 
       this.chooseNumberOfPagination();
     }, 1000)
+  }
+
+  isLoading(): boolean {
+    return this.loadingService.getLoading();
   }
 }

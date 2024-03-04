@@ -53,6 +53,10 @@ import { LoadingInterceptor } from './service';
       useClass: LoadingInterceptor,
       multi: true,
     },
+    {
+      provide: Storage,
+      useValue: localStorage,
+    }
   ],
   bootstrap: [AppComponent],
 })

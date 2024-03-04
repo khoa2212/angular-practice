@@ -21,3 +21,6 @@ export {
   Relative as Relative,
   RelativeList as RelativeList,
 } from './relative.model';
+
+export { Role as Role } from './role.enum';
+export { TokenType as TokenType } from './token-type.enum';
