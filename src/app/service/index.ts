@@ -7,3 +7,5 @@ export { AssignmentService as AssignmentService } from './assignment/assignment.
 export { RelativeService as RelativeService } from './relative/relative.service';
 export { TokenService as TokenService } from './token/token.service';
 export { AuthService as AuthService } from './auth/auth.service';
+export { authGuard as authGuard } from './auth/auth.guard';
+export { AuthInterceptorService as AuthInterceptorService } from './auth/auth-interceptor.service';

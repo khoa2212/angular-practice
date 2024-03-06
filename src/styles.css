@@ -28,3 +28,6 @@ body {
   background-color: var(--body-color);
 }
 
+.toast-top-right.toast-container {
+  margin-top: 60px;
+}

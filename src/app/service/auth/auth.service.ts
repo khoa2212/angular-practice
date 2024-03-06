@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import {
   LoginRequestDTO,
   LoginResponseDTO,
@@ -59,7 +59,7 @@ export class AuthService {
   }
 
   autoLogin(): void {
-    const token = this.tokenService.getToken(TokenType.ACCESS_TOKEN);
+    const token = this.tokenService.getToken(TokenType.REFRESH_TOKEN);
 
     if (token === null) {
       return;
@@ -86,5 +86,14 @@ export class AuthService {
     this.tokenService.removeToken(TokenType.ACCESS_TOKEN);
     this.tokenService.removeToken(TokenType.REFRESH_TOKEN);
     this.router.navigateByUrl('/');
+  }
+
+  canActivate(): boolean {
+    if (this.getCurrentUser()) {
+      return true;
+    }
+
+    this.router.navigateByUrl('/forbidden');
+    return false;
   }
 }

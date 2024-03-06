@@ -14,12 +14,25 @@ export interface LoginResponseDTO {
   refreshToken: string;
 }
 
-export interface SignupRequestDTO {}
+export interface SignupRequestDTO {
+  displayName: string;
+  email: string;
+  password: string;
+  confirmedPassword: string;
+}
 
-export interface SignupResponseDTO {}
+export interface SignupResponseDTO {
+  verifiedToken: string;
+}
 
-export interface VerifyRequestDTO {}
+export interface VerifyRequestDTO {
+  verifiedToken: string;
+}
 
-export interface RenewAccessTokenRequestDTO {}
+export interface RenewAccessTokenRequestDTO {
+  refreshToken: string;
+}
 
-export interface RenewAccessTokenResponseDTO {}
+export interface RenewAccessTokenResponseDTO {
+  accessToken: string;
+}

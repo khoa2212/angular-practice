@@ -20,7 +20,7 @@ import {
   SignupComponent,
 } from './modules';
 import { SharedModule } from './shared/shared.module';
-import { LoadingInterceptor } from './service';
+import { AuthInterceptorService, LoadingInterceptor } from './service';
 
 @NgModule({
   declarations: [
@@ -54,9 +54,14 @@ import { LoadingInterceptor } from './service';
       multi: true,
     },
     {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
+    {
       provide: Storage,
       useValue: localStorage,
-    }
+    },
   ],
   bootstrap: [AppComponent],
 })

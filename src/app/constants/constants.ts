@@ -37,7 +37,7 @@ export const AUTH = {
   LOGIN: 'auth/login',
   SIGNUP: 'auth/signup',
   VERIFY: 'auth/verify',
-  RENEW: 'auth/renew',
+  RENEW: 'auth/renew-token',
 };
 
 export const NUMBER_OF_PAGINATION = [1, 2, 3];

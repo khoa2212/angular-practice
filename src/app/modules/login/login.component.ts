@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MESSAGE } from 'app/constants';
+import { LoginRequestDTO, TokenType, User } from 'app/model';
+import { AuthService, TokenService } from 'app/service';
 import { noWhitespaceValidator } from 'app/utils/validators';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -60,10 +65,41 @@ export class LoginComponent {
     ],
   };
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private tokenService: TokenService,
+    private toastrService: ToastrService,
+    private router: Router
+  ) {}
 
   onSubmit() {
+    const value = this.loginForm.getRawValue();
 
+    const data: LoginRequestDTO = {
+      email: value.email ?? '',
+      password: value.password ?? '',
+    };
+
+    this.authService.login$(data).subscribe({
+      next: (res) => {
+        this.toastrService.success(MESSAGE.LOGIN_SUCCESS);
+        this.tokenService.setToken(TokenType.ACCESS_TOKEN, res.accessToken);
+        this.tokenService.setToken(TokenType.REFRESH_TOKEN, res.refreshToken);
+
+        const user: User = { ...res };
+
+        this.authService.setCurrentUser(user);
+        this.router.navigateByUrl('/');
+      },
+      error: (err) => {
+        if (err.error?.validationErrors) {
+          this.toastrService.error(err.error.validationErrors[0]);
+        } else {
+          this.toastrService.error(err.error.message);
+        }
+      },
+    });
   }
 
   isDirtyOrTouched(fieldName: string): boolean | undefined {

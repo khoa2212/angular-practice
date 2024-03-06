@@ -8,8 +8,9 @@ import {
   ProjectComponent,
   SignupComponent,
 } from './modules';
-import { NotFoundComponent } from './shared/components';
+import { ForbiddenComponent, NotFoundComponent } from './shared/components';
 import { HomeComponent } from './modules/home/home.component';
+import { authGuard } from './service';
 
 const routes: Routes = [
   {
@@ -27,9 +28,13 @@ const routes: Routes = [
         pathMatch: 'full',
       },
       { path: 'department', component: DepartmentComponent },
-      { path: 'employee', component: EmployeeComponent },
+      { path: 'employee', component: EmployeeComponent, canMatch: [authGuard] },
       { path: 'project', component: ProjectComponent },
-      { path: 'employee/:id', component: EmployeeDetailComponent },
+      {
+        path: 'employee/:id',
+        component: EmployeeDetailComponent,
+        canMatch: [authGuard],
+      },
     ],
   },
   {
@@ -39,6 +44,10 @@ const routes: Routes = [
   {
     path: 'signup',
     component: SignupComponent,
+  },
+  {
+    path: 'forbidden',
+    component: ForbiddenComponent,
   },
   {
     path: '**',

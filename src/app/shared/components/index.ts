@@ -5,3 +5,4 @@ export { AssignmentTableComponent as AssignmentTableComponent } from './assignme
 export { RelativeTableComponent as RelativeTableComponent } from './relative-table/relative-table.component';
 export { FooterComponent as FooterComponent } from './footer/footer.component';
 export { ToggleComponent as ToggleComponent } from './toggle/toggle.component';
+export { ForbiddenComponent as ForbiddenComponent } from './forbidden/forbidden.component';

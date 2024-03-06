@@ -43,7 +43,7 @@ export class AuthClient {
   renew$(
     requestDTO: RenewAccessTokenRequestDTO
   ): Observable<RenewAccessTokenResponseDTO> {
-    return this.httpClient.post(
+    return this.httpClient.post<RenewAccessTokenResponseDTO>(
       `${ENVIRONMENT.BASE_URL}/${AUTH.RENEW}`,
       requestDTO
     );

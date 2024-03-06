@@ -11,6 +11,7 @@ import {
   RelativeTableComponent,
   FooterComponent,
   ToggleComponent,
+  ForbiddenComponent
 } from './components';
 
 @NgModule({
@@ -29,6 +30,7 @@ import {
     RelativeTableComponent,
     FooterComponent,
     ToggleComponent,
+    ForbiddenComponent
   ],
   exports: [
     HeaderComponent,
@@ -38,6 +40,7 @@ import {
     RelativeTableComponent,
     FooterComponent,
     ToggleComponent,
+    ForbiddenComponent
   ],
 })
 export class SharedModule {}
