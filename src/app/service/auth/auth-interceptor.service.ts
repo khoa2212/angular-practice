@@ -18,6 +18,8 @@ import {
 } from 'rxjs';
 import { TokenService } from '../token/token.service';
 import { TokenType } from 'app/model';
+import { ENVIRONMENT } from 'environment/environment';
+import { AUTH } from 'app/constants';
 
 @Injectable()
 export class AuthInterceptorService implements HttpInterceptor {
@@ -47,7 +49,8 @@ export class AuthInterceptorService implements HttpInterceptor {
 
     return next.handle(request).pipe(
       catchError((error) => {
-        if (error instanceof HttpErrorResponse && error.status === 401) {
+        if (error instanceof HttpErrorResponse && error.status === 401
+          && request.url !== `${ENVIRONMENT.BASE_URL}/${AUTH.RENEW}`) {
           return this.handle401Error(request, next);
         }
 
@@ -75,7 +78,6 @@ export class AuthInterceptorService implements HttpInterceptor {
           }),
           catchError((err) => {
             this.isRefreshing = false;
-
             this.authService.logout();
             return throwError(err);
           })
