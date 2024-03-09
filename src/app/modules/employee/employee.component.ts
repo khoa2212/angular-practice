@@ -23,7 +23,7 @@ import {
   distinctUntilChanged,
 } from 'rxjs';
 import { EmployeeModalComponent } from './employee-modal/employee-modal.component';
-import { Employee, EmployeeList } from 'app/model';
+import { Department, Employee, EmployeeList } from 'app/model';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -41,8 +41,11 @@ export class EmployeeComponent implements OnInit {
   numberOfPagination: number[] = NUMBER_OF_PAGINATION;
 
   departmentId: number = DEFAULT_DEPARTMENT_FILTER;
+  departmentArrIndex: number = -1;
+  isShowDropDown: boolean = false;
 
   employeeFullName = DEFAULT_SEARCH;
+
 
   @ViewChild('modal', { static: false }) modal!: EmployeeModalComponent;
 
@@ -110,13 +113,12 @@ export class EmployeeComponent implements OnInit {
     this.chooseNumberOfPagination();
   }
 
-  onSelectDepartment(event: any): void {
+  onSelectDepartment(id: number, index: number): void {
+    
     this.currentPage = 1;
 
-    this.departmentId =
-      event.target.value === 0
-        ? DEFAULT_DEPARTMENT_FILTER
-        : +event.target.value;
+    this.departmentId = id;
+    this.departmentArrIndex = index;
 
     this.employeeList$ = this.#employeeRefetch$.pipe(
       startWith(true),
@@ -130,7 +132,20 @@ export class EmployeeComponent implements OnInit {
       )
     );
 
+    this.isShowDropDown = false;
     this.chooseNumberOfPagination();
+  }
+
+  onShowDepartmentName(departments: Department[]): string {
+    if(this.departmentId === 0 || this.departmentArrIndex === -1) {
+      return "All departments"
+    }
+
+    return departments[this.departmentArrIndex].departmentName;
+  }
+
+  onShowDropDown() {
+    this.isShowDropDown = !this.isShowDropDown;
   }
 
   onSelectPage(page: number): void {

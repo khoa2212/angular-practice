@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE, NUMBER_OF_PAGINATION } from 'app/constants';
 import { DEFAULT_DEPARTMENT_FILTER } from 'app/constants/constants';
-import { ProjectList } from 'app/model';
+import { Department, ProjectList } from 'app/model';
 import { AuthService, DepartmentService, LoaderService, ProjectService } from 'app/service';
 import { ToastrService } from 'ngx-toastr';
 import { Subject, startWith, switchMap } from 'rxjs';
@@ -22,6 +22,8 @@ export class ProjectComponent implements OnInit {
   numberOfPagination: number[] = NUMBER_OF_PAGINATION;
 
   departmentId: number = DEFAULT_DEPARTMENT_FILTER;
+  departmentArrIndex: number = -1;
+  isShowDropDown: boolean = false;
 
   projectList$ = this.#projectRefetch$.pipe(
     startWith(true),
@@ -65,13 +67,11 @@ export class ProjectComponent implements OnInit {
     });
   }
 
-  onSelectDepartment(event: any): void {
+  onSelectDepartment(id: number, index: number): void {
     this.currentPage = 1;
 
-    this.departmentId =
-      event.target.value === 0
-        ? DEFAULT_DEPARTMENT_FILTER
-        : +event.target.value;
+    this.departmentId = id
+    this.departmentArrIndex = index;
 
     this.projectList$ = this.#projectRefetch$.pipe(
       startWith(true),
@@ -84,7 +84,20 @@ export class ProjectComponent implements OnInit {
       )
     );
 
+    this.isShowDropDown = false;
     this.chooseNumberOfPagination();
+  }
+
+  onShowDepartmentName(departments: Department[]): string {
+    if(this.departmentId === 0 || this.departmentArrIndex === -1) {
+      return "All departments"
+    }
+
+    return departments[this.departmentArrIndex].departmentName;
+  }
+
+  onShowDropDown() {
+    this.isShowDropDown = !this.isShowDropDown;
   }
 
   onSelectPage(page: number): void {
