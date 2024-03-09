@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Project, ProjectList } from 'app/model';
+import { Project, ProjectList, ProjectWithEmployeeList } from 'app/model';
 import { ProjectClient } from 'app/client';
 
 @Injectable({
@@ -17,7 +17,7 @@ export class ProjectService {
   findProjects$(
     pageNumber: number,
     pageSize: number,
-    departmentId: number,
+    departmentId: number
   ): Observable<ProjectList> {
     const projects = this.projectClient.findProjects$(
       pageNumber,
@@ -30,5 +30,23 @@ export class ProjectService {
 
   findById$(id: number): Observable<Project> {
     return this.projectClient.findById$(id);
+  }
+
+  findProjectsWithEmployeesSalariesHours$(
+    pageNumber: number,
+    pageSize: number,
+    numberOfEmployees: number,
+    totalHours: number,
+    totalSalaries: number
+  ): Observable<ProjectWithEmployeeList> {
+    const projects = this.projectClient.findProjectsWithEmployeesSalariesHours$(
+      pageNumber,
+      pageSize,
+      numberOfEmployees,
+      totalHours,
+      totalSalaries
+    );
+
+    return projects;
   }
 }

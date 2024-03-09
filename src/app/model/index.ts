@@ -36,3 +36,8 @@ export {
   RenewAccessTokenRequestDTO as RenewAccessTokenRequestDTO,
   RenewAccessTokenResponseDTO as RenewAccessTokenResponseDTO,
 } from './auth.model';
+
+export {
+  ProjectWithEmployee as ProjectWithEmployee,
+  ProjectWithEmployeeList as ProjectWithEmployeeList,
+} from './project-with-employees.model';

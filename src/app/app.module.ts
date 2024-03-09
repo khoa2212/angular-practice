@@ -18,6 +18,8 @@ import {
   EmployeeModalComponent,
   HomeComponent,
   SignupComponent,
+  ReportComponent,
+  ProjectWithEmployeeReportComponent
 } from './modules';
 import { SharedModule } from './shared/shared.module';
 import { AuthInterceptorService, LoadingInterceptor } from './service';
@@ -33,6 +35,8 @@ import { AuthInterceptorService, LoadingInterceptor } from './service';
     EmployeeDetailComponent,
     LoginComponent,
     SignupComponent,
+    ReportComponent,
+    ProjectWithEmployeeReportComponent,
   ],
   imports: [
     BrowserModule,

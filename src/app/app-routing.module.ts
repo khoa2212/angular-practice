@@ -6,6 +6,7 @@ import {
   EmployeeDetailComponent,
   LoginComponent,
   ProjectComponent,
+  ReportComponent,
   SignupComponent,
 } from './modules';
 import { ForbiddenComponent, NotFoundComponent } from './shared/components';
@@ -31,6 +32,14 @@ const routes: Routes = [
       { path: 'department', component: DepartmentComponent },
       { path: 'employee', component: EmployeeComponent },
       { path: 'project', component: ProjectComponent },
+      {
+        path: 'report',
+        component: ReportComponent,
+        canMatch: [authGuard, roleGuard],
+        data: {
+          expectedRoles: ['ADMIN', 'USER']
+        }
+      },
       {
         path: 'employee/:id',
         component: EmployeeDetailComponent,

@@ -23,6 +23,7 @@ export const PROJECT = {
   ADD: 'projects/add',
   UPDATE: 'projects/update',
   DELETE: 'projects/delete',
+  WITH_EMPLOYEE: 'projects/reports/salaries'
 };
 
 export const ASSIGNMENT = {
