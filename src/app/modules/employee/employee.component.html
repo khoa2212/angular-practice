@@ -13,6 +13,7 @@
   >
     <div class="flex gap-1 flex-1 max-h-11">
       <button
+        *ngIf="authService.hasRole(['ADMIN', 'USER'])"
         title="Add employee"
         class="rounded-full bg-blue-500 hover:bg-blue-800 px-1 py-1 dark:bg-blue-900 dark:hover:bg-blue-950"
         (click)="onShowModal()"
@@ -21,7 +22,7 @@
       </button>
 
       <!-- Searchbox -->
-      <div class="relative w-[95%] max-h-11 flex items-center">
+      <div class="relative w-full max-h-11 flex items-center">
         <input
           type="search"
           id="default-search"
@@ -110,6 +111,7 @@
               Department
             </th>
             <th
+              *ngIf="authService.hasRole(['ADMIN', 'USER'])"
               class="py-3 px-3 text-white sm:text-base font-bold whitespace-nowrap"
             >
               Action
@@ -202,6 +204,7 @@
               {{ employee.department.departmentName }}
             </td>
             <td
+              *ngIf="authService.hasRole(['ADMIN', 'USER'])"
               class="py-2 px-3 font-normal text-base whitespace-nowrap {{
                 i === 0
                   ? 'border-t-2 border-black'
@@ -218,6 +221,7 @@
                   (click)="onSelectEmployee(employee)"
                 />
                 <img
+                  *ngIf="authService.hasRole(['ADMIN'])"
                   class="cursor-pointer w-5 h-5"
                   src="../../../assets/delete.png"
                   alt="Delete"

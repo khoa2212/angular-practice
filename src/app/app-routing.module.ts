@@ -10,7 +10,8 @@ import {
 } from './modules';
 import { ForbiddenComponent, NotFoundComponent } from './shared/components';
 import { HomeComponent } from './modules/home/home.component';
-import { authGuard } from './service';
+import { authGuard, roleGuard } from './service';
+import { Role } from './model';
 
 const routes: Routes = [
   {

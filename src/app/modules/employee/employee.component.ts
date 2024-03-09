@@ -11,7 +11,7 @@ import {
   DEFAULT_SEARCH,
   NUMBER_OF_PAGINATION,
 } from 'app/constants/constants';
-import { DepartmentService, EmployeeService, LoaderService } from 'app/service';
+import { AuthService, DepartmentService, EmployeeService, LoaderService } from 'app/service';
 import {
   Subject,
   startWith,
@@ -67,7 +67,8 @@ export class EmployeeComponent implements OnInit {
     private employeeService: EmployeeService,
     private departmentService: DepartmentService,
     private toastrService: ToastrService,
-    private loadingService: LoaderService
+    private loadingService: LoaderService,
+    public authService: AuthService,
   ) {}
 
   ngOnInit(): void {

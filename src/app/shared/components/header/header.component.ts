@@ -16,7 +16,7 @@ export class HeaderComponent {
     .getCurrentUser$()
     .pipe(map((user) => user));
 
-  constructor(private authService: AuthService) {}
+  constructor(public authService: AuthService) {}
 
   onToggle(): void {
     this.isToggle = !this.isToggle;

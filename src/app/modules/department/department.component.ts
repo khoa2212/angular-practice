@@ -5,7 +5,7 @@ import {
   NUMBER_OF_PAGINATION,
 } from 'app/constants';
 import { DepartmentList } from 'app/model';
-import { DepartmentService, LoaderService } from 'app/service';
+import { AuthService, DepartmentService, LoaderService } from 'app/service';
 import { ToastrService } from 'ngx-toastr';
 import { Subject, startWith, switchMap } from 'rxjs';
 
@@ -32,7 +32,8 @@ export class DepartmentComponent implements OnInit {
   constructor(
     private departmentService: DepartmentService,
     private toastrService: ToastrService,
-    private loadingService: LoaderService
+    private loadingService: LoaderService,
+    public authService: AuthService,
   ) {}
 
   ngOnInit(): void {

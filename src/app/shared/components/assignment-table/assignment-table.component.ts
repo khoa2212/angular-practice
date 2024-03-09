@@ -7,7 +7,7 @@ import {
   NUMBER_OF_PAGINATION,
 } from 'app/constants';
 import { AssignmentList } from 'app/model';
-import { AssignmentService } from 'app/service';
+import { AssignmentService, AuthService } from 'app/service';
 import { ToastrService } from 'ngx-toastr';
 import { Subject, startWith, switchMap } from 'rxjs';
 
@@ -41,7 +41,8 @@ export class AssignmentTableComponent implements OnInit {
 
   constructor(
     private assignmentService: AssignmentService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    public authService: AuthService,
   ) {}
 
   ngOnInit(): void {

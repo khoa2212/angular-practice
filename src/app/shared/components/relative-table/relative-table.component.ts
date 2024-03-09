@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DEFAULT_EMPLOYEE_FILTER, DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE, NUMBER_OF_PAGINATION } from 'app/constants';
 import { RelativeList } from 'app/model';
-import { RelativeService } from 'app/service';
+import { AuthService, RelativeService } from 'app/service';
 import { ToastrService } from 'ngx-toastr';
 import { Subject, startWith, switchMap } from 'rxjs';
 
@@ -32,7 +32,8 @@ export class RelativeTableComponent implements OnInit {
 
   constructor(
     private relativeService: RelativeService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    public authService: AuthService,
   ) {}
 
   ngOnInit(): void {

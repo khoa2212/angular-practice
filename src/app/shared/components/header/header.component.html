@@ -60,6 +60,21 @@
         class="highlight text-sm font-semibold leading-6 text-gray-900 hover:text-blue-500 dark:hover:text-blue-500 dark:text-white"
         >Project</a
       >
+
+      <a
+        *ngIf="authService.hasRole(['ADMIN', 'USER'])"
+        routerLink="/home/report"
+        [routerLinkActive]="'active-link'"
+        class="highlight text-sm font-semibold leading-6 text-gray-900 hover:text-blue-500 dark:hover:text-blue-500 dark:text-white"
+        >Report</a
+      >
+      <a
+        *ngIf="authService.hasRole(['ADMIN'])"
+        routerLink="/home/user"
+        [routerLinkActive]="'active-link'"
+        class="highlight text-sm font-semibold leading-6 text-gray-900 hover:text-blue-500 dark:hover:text-blue-500 dark:text-white"
+        >User</a
+      >
     </div>
     <div class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end gap-3">
       <app-toggle></app-toggle>
@@ -172,6 +187,20 @@
               [routerLinkActive]="'active-link'"
               class="highlight hover:text-blue-500 dark:text-white dark:hover:text-blue-500 -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900"
               >Project</a
+            >
+            <a
+              *ngIf="authService.hasRole(['ADMIN', 'USER'])"
+              routerLink="/home/report"
+              [routerLinkActive]="'active-link'"
+              class="highlight hover:text-blue-500 dark:text-white dark:hover:text-blue-500 -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900"
+              >Report</a
+            >
+            <a
+            *ngIf="authService.hasRole(['ADMIN'])"
+              routerLink="/home/user"
+              [routerLinkActive]="'active-link'"
+              class="highlight hover:text-blue-500 dark:text-white dark:hover:text-blue-500 -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900"
+              >User</a
             >
           </div>
           <div class="py-6 line">

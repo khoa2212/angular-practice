@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE, NUMBER_OF_PAGINATION } from 'app/constants';
 import { DEFAULT_DEPARTMENT_FILTER } from 'app/constants/constants';
 import { ProjectList } from 'app/model';
-import { DepartmentService, LoaderService, ProjectService } from 'app/service';
+import { AuthService, DepartmentService, LoaderService, ProjectService } from 'app/service';
 import { ToastrService } from 'ngx-toastr';
 import { Subject, startWith, switchMap } from 'rxjs';
 
@@ -44,6 +44,7 @@ export class ProjectComponent implements OnInit {
     private departmentService: DepartmentService,
     private toastrService: ToastrService,
     private loadingService: LoaderService,
+    public authService: AuthService,
   ) {}
 
   ngOnInit(): void {

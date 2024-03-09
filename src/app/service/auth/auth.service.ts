@@ -12,7 +12,7 @@ import {
   VerifyRequestDTO,
 } from 'app/model';
 import { AuthClient } from 'app/client';
-import { Router } from '@angular/router';
+import { Data, Router } from '@angular/router';
 import { TokenService } from '../token/token.service';
 
 @Injectable({
@@ -94,6 +94,27 @@ export class AuthService {
     }
 
     this.router.navigateByUrl('/forbidden');
+    return false;
+  }
+
+  hasRole(expectedRoles: any): boolean {
+    if (!expectedRoles) {
+      return true;
+    }
+
+    const user = this.getCurrentUser();
+
+    if (!user) {
+      return false;
+    }
+
+    const isMatch =
+      Object.values(expectedRoles).findIndex((role) => role === user.role) > -1;
+
+    if (isMatch) {
+      return true;
+    }
+
     return false;
   }
 }

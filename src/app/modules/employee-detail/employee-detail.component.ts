@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { EMPLOYEE_MAX_SALARY, MESSAGE } from 'app/constants';
 import { Employee, Gender } from 'app/model';
-import { DepartmentService, EmployeeService, LoaderService } from 'app/service';
+import { AuthService, DepartmentService, EmployeeService, LoaderService } from 'app/service';
 import {
   noWhitespaceValidator,
   selectBoxRequiredValidator,
@@ -130,7 +130,8 @@ export class EmployeeDetailComponent implements OnInit {
     private employeeService: EmployeeService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    public authService: AuthService,
   ) {}
 
   ngOnInit(): void {

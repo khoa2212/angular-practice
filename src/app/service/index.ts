@@ -9,3 +9,4 @@ export { TokenService as TokenService } from './token/token.service';
 export { AuthService as AuthService } from './auth/auth.service';
 export { authGuard as authGuard } from './auth/auth.guard';
 export { AuthInterceptorService as AuthInterceptorService } from './auth/auth-interceptor.service';
+export { roleGuard as roleGuard } from './auth/role.guard';
