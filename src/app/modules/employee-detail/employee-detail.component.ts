@@ -2,8 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { EMPLOYEE_MAX_SALARY, MESSAGE } from 'app/constants';
-import { Employee, Gender } from 'app/model';
-import { AuthService, DepartmentService, EmployeeService, LoaderService } from 'app/service';
+import { Department, Employee, Gender } from 'app/model';
+import {
+  AuthService,
+  DepartmentService,
+  EmployeeService,
+  LoaderService,
+} from 'app/service';
 import {
   noWhitespaceValidator,
   selectBoxRequiredValidator,
@@ -35,6 +40,10 @@ export class EmployeeDetailComponent implements OnInit {
 
   isEdit = false;
   isLoading = false;
+
+  departmentId: number = 0;
+  isShowDropDown: boolean = false;
+  isDisableDropdown: boolean = true;
 
   editEmployeeForm = this.formBuilder.group({
     firstName: [
@@ -131,7 +140,7 @@ export class EmployeeDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private toastrService: ToastrService,
-    public authService: AuthService,
+    public authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -216,6 +225,8 @@ export class EmployeeDetailComponent implements OnInit {
     this.editEmployeeForm.controls.department.setValue(
       employee.department.id ?? 0
     );
+
+    this.departmentId = employee.department.id ?? 0;
   }
 
   isDirtyOrTouched(fieldName: string): boolean | undefined {
@@ -233,10 +244,42 @@ export class EmployeeDetailComponent implements OnInit {
         ];
 
       if (isDisable) {
+        this.isDisableDropdown = true;
         control.disable();
       } else {
+        this.isDisableDropdown = false;
         control.enable();
       }
     });
+  }
+
+  onSelectDepartment(id: number): void {
+    this.departmentId = id;
+
+    this.editEmployeeForm.controls.department.markAsTouched();
+    this.editEmployeeForm.controls.department.setValue(id);
+    this.isShowDropDown = false;
+  }
+
+  onShowDepartmentName(departments: Department[]): string {
+    if (this.departmentId === 0) {
+      return 'All departments';
+    }
+
+    return (
+      departments.find((department) => department.id === this.departmentId)
+        ?.departmentName ?? ''
+    );
+  }
+
+  onShowDropDown() {
+    this.isShowDropDown = !this.isShowDropDown;
+  }
+
+  onBlurDropDown() {
+    this.editEmployeeForm.controls.department.markAsTouched();
+    setTimeout(() => {
+      this.isShowDropDown = false;
+    }, 200);
   }
 }
