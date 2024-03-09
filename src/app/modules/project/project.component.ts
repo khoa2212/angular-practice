@@ -100,6 +100,12 @@ export class ProjectComponent implements OnInit {
     this.isShowDropDown = !this.isShowDropDown;
   }
 
+  onBlurDropDown() {
+    setTimeout(() => {
+      this.isShowDropDown = false;
+    }, 200)
+  }
+
   onSelectPage(page: number): void {
     this.projectList$ = this.#projectRefetch$.pipe(
       startWith(true),

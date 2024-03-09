@@ -148,6 +148,12 @@ export class EmployeeComponent implements OnInit {
     this.isShowDropDown = !this.isShowDropDown;
   }
 
+  onBlurDropDown() {
+    setTimeout(() => {
+      this.isShowDropDown = false;
+    }, 200)
+  }
+
   onSelectPage(page: number): void {
     this.employeeList$ = this.#employeeRefetch$.pipe(
       startWith(true),

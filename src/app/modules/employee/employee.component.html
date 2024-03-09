@@ -78,6 +78,7 @@
         aria-expanded="true"
         aria-labelledby="listbox-label"
         (click)="onShowDropDown()"
+        (blur)="onBlurDropDown()"
       >
         <span class="flex items-center">
           <span class="block truncate">{{
@@ -111,7 +112,7 @@
         aria-activedescendant="listbox-option-3"
       >
         <li
-          class="text-gray-900 relative cursor-default select-none py-2 pl-3 pr-9"
+          class="text-gray-900 relative cursor-pointer select-none py-2 pl-3 pr-9 hover:bg-slate-200 dark:hover:bg-gray-600"
           id="listbox-option-0"
           role="option"
           (click)="onSelectDepartment(0, -1)"
@@ -139,7 +140,7 @@
         </li>
         <li
           *ngFor="let department of departments; index as i"
-          class="text-gray-900 relative cursor-default select-none py-2 pl-3 pr-9"
+          class="text-gray-900 relative cursor-pointer select-none py-2 pl-3 pr-9 hover:bg-slate-200 dark:hover:bg-gray-600"
           id="listbox-option-0"
           role="option"
           (click)="onSelectDepartment(department.id, i)"

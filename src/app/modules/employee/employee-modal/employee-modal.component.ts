@@ -38,6 +38,10 @@ export class EmployeeModalComponent {
 
   isLoading: boolean = false;
 
+  departmentId: number = 0;
+  departmentArrIndex: number = -1;
+  isShowDropDown: boolean = false;
+
   addEmployeeForm = this.formBuilder.group({
     firstName: [
       '',
@@ -212,5 +216,33 @@ export class EmployeeModalComponent {
     const isTouched = this.addEmployeeForm.get(fieldName)?.touched;
 
     return isDirty || isTouched;
+  }
+
+  onSelectDepartment(id: number, index: number): void {
+    this.departmentId = id;
+    this.departmentArrIndex = index;
+
+    this.addEmployeeForm.controls.department.markAsTouched();
+    this.addEmployeeForm.controls.department.setValue(id);
+    this.isShowDropDown = false;
+  }
+
+  onShowDepartmentName(): string {
+    if (this.departmentId === 0 || this.departmentArrIndex === -1) {
+      return 'All departments';
+    }
+
+    return this.departments?.[this.departmentArrIndex].departmentName ?? '';
+  }
+
+  onShowDropDown() {
+    this.isShowDropDown = !this.isShowDropDown;
+  }
+
+  onBlurDropDown() {
+    this.addEmployeeForm.controls.department.markAsTouched();
+    setTimeout(() => {
+      this.isShowDropDown = false;
+    }, 200)
   }
 }
