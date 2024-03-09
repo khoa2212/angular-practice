@@ -28,12 +28,11 @@ const routes: Routes = [
         pathMatch: 'full',
       },
       { path: 'department', component: DepartmentComponent },
-      { path: 'employee', component: EmployeeComponent, canMatch: [authGuard] },
+      { path: 'employee', component: EmployeeComponent },
       { path: 'project', component: ProjectComponent },
       {
         path: 'employee/:id',
         component: EmployeeDetailComponent,
-        canMatch: [authGuard],
       },
     ],
   },
