@@ -7,7 +7,7 @@
 >
   <app-loading></app-loading>
 
-  <div class="w-full flex justify-between max-w-4xl gap-1" *ngIf="!isLoading()">
+  <div class="w-full flex flex-col md:items-center md:flex-row max-w-4xl gap-1" *ngIf="!isLoading()">
     <div class="flex gap-1 flex-1 max-h-11">
       <button
         *ngIf="authService.hasRole(['ADMIN', 'USER'])"
@@ -63,7 +63,7 @@
         {{ department.departmentName }}
       </option>
     </select> -->
-    <div *ngIf="data.departments as departments" class="relative basis-60">
+    <div *ngIf="data.departments as departments" class="relative md:basis-60">
       <button
         type="button"
         class="relative max-h-11 overflow-y-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
