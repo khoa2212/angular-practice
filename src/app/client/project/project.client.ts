@@ -65,7 +65,8 @@ export class ProjectClient {
   exportExcelProjectsWithEmployeesSalariesHours$(
     numberOfEmployees: number,
     totalHours: number,
-    totalSalaries: number
+    totalSalaries: number,
+    projectIdsParam: string,
   ) {
     const projects = this.httpClient.get(
       `${ENVIRONMENT.BASE_URL}/${PROJECT.EXPORT_EXCEL_WITH_EMPLOYEE}`,
@@ -74,6 +75,7 @@ export class ProjectClient {
           numberOfEmployees,
           totalHours,
           totalSalaries,
+          projectIdsParam,
         },
         responseType: 'blob',
       }

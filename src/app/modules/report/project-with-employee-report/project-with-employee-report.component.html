@@ -6,8 +6,13 @@
     <button
       *ngIf="authService.hasRole(['ADMIN', 'USER'])"
       title="Add project"
-      class="rounded-md text-white bg-blue-500 hover:bg-blue-800 p-2 dark:bg-blue-900 dark:hover:bg-blue-950"
+      class="{{
+        !isSelectedAll && projectIds.length === 0
+          ? 'bg-blue-200 cursor-not-allowed'
+          : 'bg-blue-500 hover:bg-blue-800 dark:bg-blue-900 dark:hover:bg-blue-950'
+      }} rounded-md p-2 text-white"
       (click)="onExportExcel()"
+      [disabled]="!isSelectedAll && projectIds.length === 0"
     >
       Export excel
     </button>
@@ -59,7 +64,10 @@
               <span>Select all</span>
               <input
                 type="checkbox"
-                value=""
+                id="checkbox-0"
+                value="0"
+                (change)="onCheck($event, projectList.projects)"
+                [checked]="(isSelectedAll && !isUnSelectedSome)"
                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
               />
             </th>
@@ -156,7 +164,10 @@
               <span class="flex justify-center">
                 <input
                   type="checkbox"
-                  value=""
+                  id="checkbox-{{ project.id }}"
+                  value="{{ project.id }}"
+                  (change)="onCheck($event, projectList.projects)"
+                  [checked]="(isSelectedAll && !isUnSelectedSome) || isCheck(project.id.toString())"
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
               </span>

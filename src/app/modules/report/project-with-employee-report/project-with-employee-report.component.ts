@@ -4,7 +4,7 @@ import {
   DEFAULT_PAGE_SIZE,
   NUMBER_OF_PAGINATION,
 } from 'app/constants';
-import { ProjectWithEmployeeList } from 'app/model';
+import { ProjectWithEmployee, ProjectWithEmployeeList } from 'app/model';
 import { AuthService, ProjectService } from 'app/service';
 import { ToastrService } from 'ngx-toastr';
 import { Subject, startWith, switchMap } from 'rxjs';
@@ -23,6 +23,11 @@ export class ProjectWithEmployeeReportComponent {
   numberOfEmployees: number = 0;
   totalHours: number = 0;
   totalSalaries: number = 0;
+  projectIdsParam: string = '';
+  projectIds: string[] = [];
+  unSelectedProjectIds: string[] = [];
+  isSelectedAll: boolean = false;
+  isUnSelectedSome: boolean = false;
 
   projectList$ = this.#projectRefetch$.pipe(
     startWith(true),
@@ -76,6 +81,16 @@ export class ProjectWithEmployeeReportComponent {
     );
 
     this.currentPage = page;
+
+    if (this.isSelectedAll || this.isUnSelectedSome) {
+      this.projectList$.subscribe((value) => {
+        value.projects.forEach((project) => {
+          if (!this.unSelectedProjectIds.includes(project.id.toString())) {
+            this.projectIds.push(project.id.toString());
+          }
+        });
+      });
+    }
   }
 
   onNext(projectList: ProjectWithEmployeeList): void {
@@ -98,6 +113,16 @@ export class ProjectWithEmployeeReportComponent {
     );
 
     this.currentPage = page;
+
+    if (this.isSelectedAll || this.isUnSelectedSome) {
+      this.projectList$.subscribe((value) => {
+        value.projects.forEach((project) => {
+          if (!this.unSelectedProjectIds.includes(project.id.toString())) {
+            this.projectIds.push(project.id.toString());
+          }
+        });
+      });
+    }
   }
 
   onPrev(): void {
@@ -120,6 +145,16 @@ export class ProjectWithEmployeeReportComponent {
     );
 
     this.currentPage = page;
+
+    if (this.isSelectedAll || this.isUnSelectedSome) {
+      this.projectList$.subscribe((value) => {
+        value.projects.forEach((project) => {
+          if (!this.unSelectedProjectIds.includes(project.id.toString())) {
+            this.projectIds.push(project.id.toString());
+          }
+        });
+      });
+    }
   }
 
   disablePrev(): boolean {
@@ -163,11 +198,37 @@ export class ProjectWithEmployeeReportComponent {
   }
 
   onExportExcel(): void {
+    const setSelectedIds = new Set(this.projectIds);
+    const setUnSelectedIds = new Set(this.unSelectedProjectIds);
+    const selectedIds = [...setSelectedIds];
+    const unSelectedIds = [...setUnSelectedIds];
+
+    if (this.isSelectedAll) {
+      this.projectIdsParam = 'all';
+    }
+
+    if (this.isUnSelectedSome) {
+      this.projectIdsParam = 'notIn';
+
+      unSelectedIds.forEach((id) => {
+        this.projectIdsParam = this.projectIdsParam + `,${id}`;
+      });
+    }
+
+    if (!this.isSelectedAll && !this.isUnSelectedSome) {
+      this.projectIdsParam = 'in';
+
+      selectedIds.forEach((id) => {
+        this.projectIdsParam = this.projectIdsParam + `,${id}`;
+      });
+    }
+
     this.projectService
       .exportExcelProjectsWithEmployeesSalariesHours$(
         this.numberOfEmployees,
         this.totalHours,
-        this.totalSalaries
+        this.totalSalaries,
+        this.projectIdsParam
       )
       .subscribe({
         next: (response) => {
@@ -178,7 +239,10 @@ export class ProjectWithEmployeeReportComponent {
           downloadLink.href = window.URL.createObjectURL(
             new Blob(binaryData, { type: dataType })
           );
-          downloadLink.setAttribute('download', "projects-with-salaries-report.xlsx");
+          downloadLink.setAttribute(
+            'download',
+            'projects-with-salaries-report.xlsx'
+          );
           document.body.appendChild(downloadLink);
           downloadLink.click();
         },
@@ -186,5 +250,43 @@ export class ProjectWithEmployeeReportComponent {
           this.toastrService.error(err.message);
         },
       });
+
+    this.isSelectedAll = false;
+    this.isUnSelectedSome = false;
+    this.unSelectedProjectIds = [];
+    this.projectIds = [];
+  }
+
+  onCheck(event: any, projects: ProjectWithEmployee[]) {
+    if (event.target.value === '0') {
+      this.isSelectedAll = event.target.checked;
+      this.isUnSelectedSome = false;
+      this.unSelectedProjectIds = [];
+      if (event.target.checked) {
+        projects.forEach((project) => {
+          this.projectIds.push(project.id.toString());
+        });
+      } else {
+        this.projectIds = [];
+      }
+    }
+
+    if (event.target.checked) {
+      this.projectIds.push(event.target.value);
+    } else {
+      if (event.target.value !== '0') {
+        if (this.isSelectedAll) {
+          this.isUnSelectedSome = true;
+          this.unSelectedProjectIds.push(event.target.value);
+        }
+      }
+      this.projectIds = this.projectIds.filter(
+        (item) => item !== event.target.value
+      );
+    }
+  }
+
+  isCheck(id: string): boolean {
+    return this.projectIds.includes(id);
   }
 }
