@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE, NUMBER_OF_PAGINATION } from 'app/constants';
+import {
+  DEFAULT_PAGE_NUMBER,
+  DEFAULT_PAGE_SIZE,
+  NUMBER_OF_PAGINATION,
+} from 'app/constants';
 import { ProjectWithEmployeeList } from 'app/model';
 import { AuthService, ProjectService } from 'app/service';
 import { ToastrService } from 'ngx-toastr';
@@ -8,7 +12,7 @@ import { Subject, startWith, switchMap } from 'rxjs';
 @Component({
   selector: 'app-project-with-employee-report',
   templateUrl: './project-with-employee-report.component.html',
-  styleUrl: './project-with-employee-report.component.css'
+  styleUrl: './project-with-employee-report.component.css',
 })
 export class ProjectWithEmployeeReportComponent {
   readonly #projectRefetch$ = new Subject<void>();
@@ -28,7 +32,7 @@ export class ProjectWithEmployeeReportComponent {
         this.pageSize,
         this.numberOfEmployees,
         this.totalHours,
-        this.totalSalaries,
+        this.totalSalaries
       )
     )
   );
@@ -36,7 +40,7 @@ export class ProjectWithEmployeeReportComponent {
   constructor(
     private projectService: ProjectService,
     private toastrService: ToastrService,
-    public authService: AuthService,
+    public authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -66,7 +70,7 @@ export class ProjectWithEmployeeReportComponent {
           this.pageSize,
           this.numberOfEmployees,
           this.totalHours,
-          this.totalSalaries,
+          this.totalSalaries
         )
       )
     );
@@ -88,7 +92,7 @@ export class ProjectWithEmployeeReportComponent {
           this.pageSize,
           this.numberOfEmployees,
           this.totalHours,
-          this.totalSalaries,
+          this.totalSalaries
         )
       )
     );
@@ -110,7 +114,7 @@ export class ProjectWithEmployeeReportComponent {
           this.pageSize,
           this.numberOfEmployees,
           this.totalHours,
-          this.totalSalaries,
+          this.totalSalaries
         )
       )
     );
@@ -156,5 +160,31 @@ export class ProjectWithEmployeeReportComponent {
     }
 
     return { from, to };
+  }
+
+  onExportExcel(): void {
+    this.projectService
+      .exportExcelProjectsWithEmployeesSalariesHours$(
+        this.numberOfEmployees,
+        this.totalHours,
+        this.totalSalaries
+      )
+      .subscribe({
+        next: (response) => {
+          let dataType = response.type;
+          let binaryData = [];
+          binaryData.push(response);
+          let downloadLink = document.createElement('a');
+          downloadLink.href = window.URL.createObjectURL(
+            new Blob(binaryData, { type: dataType })
+          );
+          downloadLink.setAttribute('download', "projects-with-salaries-report.xlsx");
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+        },
+        error: (err) => {
+          this.toastrService.error(err.message);
+        },
+      });
   }
 }

@@ -61,4 +61,24 @@ export class ProjectClient {
 
     return projects;
   }
+
+  exportExcelProjectsWithEmployeesSalariesHours$(
+    numberOfEmployees: number,
+    totalHours: number,
+    totalSalaries: number
+  ) {
+    const projects = this.httpClient.get(
+      `${ENVIRONMENT.BASE_URL}/${PROJECT.EXPORT_EXCEL_WITH_EMPLOYEE}`,
+      {
+        params: {
+          numberOfEmployees,
+          totalHours,
+          totalSalaries,
+        },
+        responseType: 'blob',
+      }
+    );
+
+    return projects;
+  }
 }

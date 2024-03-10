@@ -49,4 +49,18 @@ export class ProjectService {
 
     return projects;
   }
+
+  exportExcelProjectsWithEmployeesSalariesHours$(
+    numberOfEmployees: number,
+    totalHours: number,
+    totalSalaries: number
+  ) {
+    const projects = this.projectClient.exportExcelProjectsWithEmployeesSalariesHours$(
+      numberOfEmployees,
+      totalHours,
+      totalSalaries
+    );
+
+    return projects;
+  }
 }
