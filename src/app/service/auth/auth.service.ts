@@ -39,7 +39,7 @@ export class AuthService {
     return this.authClient.signup$(requestDTO);
   }
 
-  verify$(requestDTO: VerifyRequestDTO): Observable<any> {
+  verify$(requestDTO: VerifyRequestDTO): Observable<LoginResponseDTO> {
     return this.authClient.verify$(requestDTO);
   }
 

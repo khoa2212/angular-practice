@@ -13,6 +13,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
+  isShowPassword = false;
+
   loginForm = this.formBuilder.group({
     email: [
       '',
@@ -107,5 +109,9 @@ export class LoginComponent {
     const isTouched = this.loginForm.get(fieldName)?.touched;
 
     return isDirty || isTouched;
+  }
+
+  onShowPassword() {
+    this.isShowPassword = !this.isShowPassword;
   }
 }

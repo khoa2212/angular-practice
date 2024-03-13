@@ -33,8 +33,8 @@ export class AuthClient {
     );
   }
 
-  verify$(requestDTO: VerifyRequestDTO): Observable<any> {
-    return this.httpClient.post(
+  verify$(requestDTO: VerifyRequestDTO): Observable<LoginResponseDTO> {
+    return this.httpClient.post<LoginResponseDTO>(
       `${ENVIRONMENT.BASE_URL}/${AUTH.VERIFY}`,
       requestDTO
     );
