@@ -21,6 +21,7 @@ import {
   ReportComponent,
   ProjectWithEmployeeReportComponent,
   ActivateAccountComponent,
+  UserComponent,
 } from './modules';
 import { SharedModule } from './shared/shared.module';
 import { AuthInterceptorService, LoadingInterceptor } from './service';
@@ -39,6 +40,7 @@ import { AuthInterceptorService, LoadingInterceptor } from './service';
     ReportComponent,
     ProjectWithEmployeeReportComponent,
     ActivateAccountComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,

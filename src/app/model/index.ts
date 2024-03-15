@@ -25,7 +25,7 @@ export {
 export { Role as Role } from './role.enum';
 export { TokenType as TokenType } from './token-type.enum';
 
-export { User as User } from './user.model';
+export { User as User, UserList as UserList } from './user.model';
 
 export {
   LoginRequestDTO as LoginRequestDTO,

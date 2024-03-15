@@ -4,3 +4,4 @@ export { ProjectClient as ProjectClient } from './project/project.client';
 export { AssignmentClient as AssignmentClient } from './assignment/assignment.client';
 export { RelativeClient as RelativeClient } from './relative/relative.client';
 export { AuthClient as AuthClient } from './auth/auth.client';
+export { UserClient as UserClient } from './user/user.client';

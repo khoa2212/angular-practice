@@ -12,9 +12,7 @@ export class HeaderComponent {
 
   isShowDropdown = false;
 
-  currentUser$ = this.authService
-    .getCurrentUser$()
-    .pipe(map((user) => user));
+  currentUser$ = this.authService.getCurrentUser$().pipe(map((user) => user));
 
   constructor(public authService: AuthService) {}
 
@@ -24,6 +22,13 @@ export class HeaderComponent {
 
   onLogout(): void {
     this.authService.logout();
+  }
+
+  onBlur(): void {
+    console.log('here')
+    setTimeout(() => {
+      this.isShowDropdown = false;
+    }, 200)
   }
 
   onShowDropDown() {

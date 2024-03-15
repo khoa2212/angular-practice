@@ -9,6 +9,7 @@ import {
   ProjectComponent,
   ReportComponent,
   SignupComponent,
+  UserComponent,
 } from './modules';
 import { HomeComponent } from './modules/home/home.component';
 import { authGuard, roleGuard } from './service';
@@ -43,6 +44,10 @@ const routes: Routes = [
       {
         path: 'employee/:id',
         component: EmployeeDetailComponent,
+      },
+      {
+        path: 'user',
+        component: UserComponent,
       },
     ],
   },

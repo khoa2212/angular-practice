@@ -1,8 +1,15 @@
-import { Role } from "./role.enum";
+import { Role } from './role.enum';
 
 export interface User {
-    email: string;
-    displayName: string;
-    role: Role;
-    avatar?: string;
+  id?: number;
+  email: string;
+  displayName: string;
+  role: Role;
+  avatar?: string;
+}
+
+export interface UserList {
+  users: User[];
+  totalCount: number;
+  lastPage: number;
 }

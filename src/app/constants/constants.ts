@@ -42,6 +42,10 @@ export const AUTH = {
   RENEW: 'auth/renew-token',
 };
 
+export const USER = {
+  FIND_WITH_PAGINATION: 'users',
+};
+
 export const NUMBER_OF_PAGINATION = [1, 2, 3];
 
 export const DEFAULT_PAGE_SIZE = 10;
