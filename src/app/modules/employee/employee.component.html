@@ -33,7 +33,7 @@
         />
         <button
           type="button"
-          class="text-white absolute right-2.5 bottom-1.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 hover:ring-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          class="text-white absolute right-2.5 bottom-1.5 bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700"
         >
           <svg
             class="w-3 h-3 text-white dark:text-white"
@@ -53,23 +53,6 @@
         </button>
       </div>
     </div>
-
-    <!-- Select menu -->
-    <!-- <select
-      *ngIf="data.departments as departments"
-      id="department-selections"
-      (change)="onSelectDepartment($event)"
-      class="max-h-11 overflow-y-auto bg-gray-50 border basis-60 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-    >
-      <option value="0" selected>All Departments</option>
-      <option
-        *ngFor="let department of departments"
-        value="{{ department.id }}"
-      >
-        {{ department.departmentName }}
-      </option>
-    </select> -->
-
     <div *ngIf="data.departments as departments" class="relative md:basis-60">
       <button
         type="button"

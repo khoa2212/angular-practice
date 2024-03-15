@@ -66,11 +66,15 @@
             type="text"
             id="firstName"
             formControlName="firstName"
-            class="{{ isEdit ? 'bg-gray-50' : 'bg-gray-200' }} {{
+            class="{{
+              isEdit
+                ? 'bg-gray-50 dark:bg-gray-700'
+                : 'bg-gray-200 dark:bg-gray-800 cursor-not-allowed'
+            }} {{
               editEmployeeForm.get('firstName')?.errors &&
               isDirtyOrTouched('firstName')
-              ? 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500'
-                    : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                ? 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500'
+                : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500'
             }} outline-none border w-full md:flex-1 text-sm md:text-base border-gray-300 text-gray-900 text-md rounded-lg block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
           />
 
@@ -102,11 +106,15 @@
             type="text"
             id="middleName"
             formControlName="middleName"
-            class="{{ isEdit ? 'bg-gray-50' : 'bg-gray-200' }} {{
+            class="{{
+              isEdit
+                ? 'bg-gray-50 dark:bg-gray-700'
+                : 'bg-gray-200 dark:bg-gray-800 cursor-not-allowed'
+            }} {{
               editEmployeeForm.get('middleName')?.errors &&
               isDirtyOrTouched('middleName')
-              ? 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500'
-                    : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                ? 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500'
+                : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500'
             }} outline-none text-sm md:text-base w-full md:flex-1 border border-gray-300 text-gray-900 text-md rounded-lg block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
           />
 
@@ -138,11 +146,15 @@
             type="number"
             id="salary"
             formControlName="salary"
-            class="{{ isEdit ? 'bg-gray-50' : 'bg-gray-200' }} {{
+            class="{{
+              isEdit
+                ? 'bg-gray-50 dark:bg-gray-700'
+                : 'bg-gray-200 dark:bg-gray-800 cursor-not-allowed'
+            }} {{
               editEmployeeForm.get('salary')?.errors &&
               isDirtyOrTouched('salary')
-              ? 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500'
-                    : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                ? 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500'
+                : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500'
             }} outline-none text-sm md:text-base w-full md:flex-1 border border-gray-300 text-gray-900 text-md rounded-lg block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
           />
 
@@ -171,11 +183,15 @@
             >Gender:
           </label>
           <span
-            class="{{ isEdit ? 'bg-gray-50' : 'bg-gray-200' }} {{
+            class="{{
+              isEdit
+                ? 'bg-gray-50 dark:bg-gray-700'
+                : 'bg-gray-200 dark:bg-gray-800 cursor-not-allowed'
+            }} {{
               editEmployeeForm.get('gender')?.errors &&
               isDirtyOrTouched('gender')
-              ? 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500'
-                    : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                ? 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500'
+                : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500'
             }} outline-none p-2 text-sm md:text-base w-full md:flex-1 flex flex-wrap gap-2 md:gap-10 border border-gray-300 text-md rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
           >
             <span class="flex gap-2 items-center">
@@ -230,11 +246,15 @@
             type="text"
             id="lastName"
             formControlName="lastName"
-            class="{{ isEdit ? 'bg-gray-50' : 'bg-gray-200' }} {{
+            class="{{
+              isEdit
+                ? 'bg-gray-50 dark:bg-gray-700'
+                : 'bg-gray-200 dark:bg-gray-800 cursor-not-allowed'
+            }} {{
               editEmployeeForm.get('lastName')?.errors &&
               isDirtyOrTouched('lastName')
-              ? 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500'
-                    : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                ? 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500'
+                : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500'
             }} outline-none text-sm md:text-base w-full md:flex-1 border border-gray-300 text-gray-900 text-md rounded-lg block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
           />
 
@@ -270,12 +290,14 @@
               type="button"
               name="department"
               class="relative border {{
-                isEdit ? 'bg-gray-50' : 'bg-gray-200'
+                isEdit
+                  ? 'bg-gray-50 dark:bg-gray-700'
+                  : 'bg-gray-200 dark:bg-gray-800 cursor-not-allowed'
               }} {{
                 editEmployeeForm.get('department')?.errors &&
                 isDirtyOrTouched('department')
-                ? 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500'
-                    : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                  ? 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500'
+                  : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500'
               }}  text-gray-900 text-sm md:text-base rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
               aria-haspopup="listbox"
               aria-expanded="true"
@@ -404,11 +426,15 @@
             type="date"
             id="dateOfBirth"
             formControlName="dateOfBirth"
-            class="{{ isEdit ? 'bg-gray-50' : 'bg-gray-200' }} {{
+            class="{{
+              isEdit
+                ? 'bg-gray-50 dark:bg-gray-700'
+                : 'bg-gray-200 dark:bg-gray-800 cursor-not-allowed'
+            }} {{
               editEmployeeForm.get('dateOfBirth')?.errors &&
               isDirtyOrTouched('dateOfBirth')
-              ? 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500'
-                    : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                ? 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500'
+                : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500'
             }} outline-none text-sm md:text-base w-full md:flex-1 border border-gray-300 text-gray-900 text-md rounded-lg block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
           />
 
