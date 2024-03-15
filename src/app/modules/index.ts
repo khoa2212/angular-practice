@@ -8,3 +8,4 @@ export { EmployeeModalComponent as EmployeeModalComponent } from './employee/emp
 export { SignupComponent as SignupComponent } from './signup/signup.component';
 export { ReportComponent as ReportComponent } from './report/report.component';
 export { ProjectWithEmployeeReportComponent as ProjectWithEmployeeReportComponent } from './report/project-with-employee-report/project-with-employee-report.component';
+export { ActivateAccountComponent as ActivateAccountComponent } from './activate-account/activate-account.component';

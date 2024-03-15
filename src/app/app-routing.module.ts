@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {
+  ActivateAccountComponent,
   DepartmentComponent,
   EmployeeComponent,
   EmployeeDetailComponent,
@@ -9,10 +10,9 @@ import {
   ReportComponent,
   SignupComponent,
 } from './modules';
-import { ForbiddenComponent, NotFoundComponent } from './shared/components';
 import { HomeComponent } from './modules/home/home.component';
 import { authGuard, roleGuard } from './service';
-import { Role } from './model';
+import { ForbiddenComponent, NotFoundComponent } from './shared/components';
 
 const routes: Routes = [
   {
@@ -37,8 +37,8 @@ const routes: Routes = [
         component: ReportComponent,
         canMatch: [authGuard, roleGuard],
         data: {
-          expectedRoles: ['ADMIN', 'USER']
-        }
+          expectedRoles: ['ADMIN', 'USER'],
+        },
       },
       {
         path: 'employee/:id',
@@ -57,6 +57,10 @@ const routes: Routes = [
   {
     path: 'forbidden',
     component: ForbiddenComponent,
+  },
+  {
+    path: 'verify',
+    component: ActivateAccountComponent,
   },
   {
     path: '**',

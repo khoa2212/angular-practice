@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { MESSAGE } from 'app/constants';
 import { SignupRequestDTO } from 'app/model';
-import { AuthService, TokenService } from 'app/service';
+import { AuthService } from 'app/service';
 import {
   noWhitespaceValidator,
   passwordsMustMatchValidator,
@@ -115,10 +114,7 @@ export class SignupComponent {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private tokenService: TokenService,
-    private toastrService: ToastrService,
-    private router: Router
-  ) {}
+    private toastrService: ToastrService  ) {}
 
   onSubmit() {
     const formValue = this.signupForm.getRawValue();
@@ -130,7 +126,7 @@ export class SignupComponent {
     };
 
     this.authService.signup$(data).subscribe({
-      next: (res) => {
+      next: () => {
         this.toastrService.success(MESSAGE.PLEASE_VERIFY, '', {
           disableTimeOut: true,
           progressBar: false,
