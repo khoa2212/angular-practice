@@ -50,9 +50,9 @@
                 class="bg-gray-50 border {{
                   addEmployeeForm.get('firstName')?.errors &&
                   isDirtyOrTouched('firstName')
-                    ? 'border-red-500 outline-red-500 dark:border-red-500'
-                    : 'border-gray-300'
-                }}  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    ? 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500'
+                    : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                }} outline-none text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
               />
               <div
                 *ngFor="let validation of validateMessages.firstName"
@@ -82,9 +82,9 @@
                 class="bg-gray-50 border {{
                   addEmployeeForm.get('middleName')?.errors &&
                   isDirtyOrTouched('middleName')
-                    ? 'border-red-500 outline-red-500 dark:border-red-500'
-                    : 'border-gray-300'
-                }}  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    ? 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500'
+                    : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                }} outline-none text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                 placeholder="Middle name"
               />
 
@@ -116,9 +116,9 @@
                 class="bg-gray-50 border {{
                   addEmployeeForm.get('salary')?.errors &&
                   isDirtyOrTouched('salary')
-                    ? 'border-red-500 outline-red-500 dark:border-red-500'
-                    : 'border-gray-300'
-                }}  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    ? 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500'
+                    : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                }} outline-none text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                 placeholder="0"
                 min="0"
                 oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"
@@ -184,9 +184,9 @@
                 class="bg-gray-50 border {{
                   addEmployeeForm.get('lastName')?.errors &&
                   isDirtyOrTouched('lastName')
-                    ? 'border-red-500 outline-red-500 dark:border-red-500'
-                    : 'border-gray-300'
-                }}  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    ? 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500'
+                    : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                }} outline-none text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                 placeholder="Last name"
               />
               <div
@@ -210,29 +210,7 @@
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >Department <span class="text-red-500">*</span></label
               >
-              <!-- <select
-                id="department-selections"
-                formControlName="department"
-                class="bg-gray-50 border {{
-                  addEmployeeForm.get('department')?.errors &&
-                  isDirtyOrTouched('department')
-                    ? 'border-red-500 outline-red-500 dark:border-red-500'
-                    : 'border-gray-300'
-                }}  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              >
-                <option value="0">Choose a department</option>
-                <option
-                  *ngFor="let department of departments"
-                  value="{{ department.id }}"
-                >
-                  {{ department.departmentName }}
-                </option>
-              </select> -->
-              <input
-                type="text"
-                formControlName="department"
-                class="hidden"
-              />
+              <input type="text" formControlName="department" class="hidden" />
               <div class="relative">
                 <button
                   id="department"
@@ -241,9 +219,9 @@
                   class="relative bg-gray-50 border {{
                     addEmployeeForm.get('department')?.errors &&
                     isDirtyOrTouched('department')
-                      ? 'border-red-500 outline-red-500 dark:border-red-500'
-                      : 'border-gray-300'
-                  }}  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      ? 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500'
+                      : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                  }}  text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                   aria-haspopup="listbox"
                   aria-expanded="true"
                   aria-labelledby="listbox-label"
@@ -370,9 +348,9 @@
                 class="bg-gray-50 border {{
                   addEmployeeForm.get('dateOfBirth')?.errors &&
                   isDirtyOrTouched('dateOfBirth')
-                    ? 'border-red-500 outline-red-500 dark:border-red-500'
-                    : 'border-gray-300'
-                }}  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    ? 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500'
+                    : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                }} outline-none text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
               />
 
               <div

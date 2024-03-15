@@ -37,9 +37,9 @@
                 id="email"
                 class="bg-gray-50 border {{
                   loginForm.get('email')?.errors && isDirtyOrTouched('email')
-                    ? 'border-red-500 outline-red-500 dark:border-red-500'
-                    : 'border-gray-300'
-                }} text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    ? 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500'
+                    : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                }} outline-none text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                 placeholder="ex@example.com"
               />
               <div
@@ -72,9 +72,9 @@
                 class="bg-gray-50 border {{
                   loginForm.get('password')?.errors &&
                   isDirtyOrTouched('password')
-                    ? 'border-red-500 outline-red-500 dark:border-red-500'
-                    : 'border-gray-300'
-                }} text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  ? 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500'
+                    : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                }} outline-none text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
               />
               <span
                 class="absolute right-0 mr-2 top-1/2 bottom-1/2 mt-[6px] text-gray-900 dark:text-white"

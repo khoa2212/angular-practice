@@ -69,9 +69,9 @@
             class="{{ isEdit ? 'bg-gray-50' : 'bg-gray-200' }} {{
               editEmployeeForm.get('firstName')?.errors &&
               isDirtyOrTouched('firstName')
-                ? 'border-red-500 outline-red-500 dark:border-red-500'
-                : 'border-gray-300'
-            }} border w-full md:flex-1 text-sm md:text-base border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              ? 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500'
+                    : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500'
+            }} outline-none border w-full md:flex-1 text-sm md:text-base border-gray-300 text-gray-900 text-md rounded-lg block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
           />
 
           <div
@@ -105,9 +105,9 @@
             class="{{ isEdit ? 'bg-gray-50' : 'bg-gray-200' }} {{
               editEmployeeForm.get('middleName')?.errors &&
               isDirtyOrTouched('middleName')
-                ? 'border-red-500 outline-red-500 dark:border-red-500'
-                : 'border-gray-300'
-            }} text-sm md:text-base w-full md:flex-1 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              ? 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500'
+                    : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500'
+            }} outline-none text-sm md:text-base w-full md:flex-1 border border-gray-300 text-gray-900 text-md rounded-lg block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
           />
 
           <div
@@ -141,9 +141,9 @@
             class="{{ isEdit ? 'bg-gray-50' : 'bg-gray-200' }} {{
               editEmployeeForm.get('salary')?.errors &&
               isDirtyOrTouched('salary')
-                ? 'border-red-500 outline-red-500 dark:border-red-500'
-                : 'border-gray-300'
-            }} text-sm md:text-base w-full md:flex-1 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              ? 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500'
+                    : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500'
+            }} outline-none text-sm md:text-base w-full md:flex-1 border border-gray-300 text-gray-900 text-md rounded-lg block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
           />
 
           <div
@@ -174,9 +174,9 @@
             class="{{ isEdit ? 'bg-gray-50' : 'bg-gray-200' }} {{
               editEmployeeForm.get('gender')?.errors &&
               isDirtyOrTouched('gender')
-                ? 'border-red-500 outline-red-500 dark:border-red-500'
-                : 'border-gray-300'
-            }} p-2 text-sm md:text-base w-full md:flex-1 flex flex-wrap gap-2 md:gap-10 border border-gray-300 text-md rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              ? 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500'
+                    : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500'
+            }} outline-none p-2 text-sm md:text-base w-full md:flex-1 flex flex-wrap gap-2 md:gap-10 border border-gray-300 text-md rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
           >
             <span class="flex gap-2 items-center">
               <input
@@ -233,9 +233,9 @@
             class="{{ isEdit ? 'bg-gray-50' : 'bg-gray-200' }} {{
               editEmployeeForm.get('lastName')?.errors &&
               isDirtyOrTouched('lastName')
-                ? 'border-red-500 outline-red-500 dark:border-red-500'
-                : 'border-gray-300'
-            }} text-sm md:text-base w-full md:flex-1 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              ? 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500'
+                    : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500'
+            }} outline-none text-sm md:text-base w-full md:flex-1 border border-gray-300 text-gray-900 text-md rounded-lg block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
           />
 
           <div
@@ -263,25 +263,6 @@
             class="text-sm md:text-base font-bold md:basis-1/4 dark:text-white"
             >Department:
           </label>
-          <!-- <select
-            id="department-selections"
-            formControlName="department"
-            class="{{ isEdit ? 'bg-gray-50' : 'bg-gray-200' }} {{
-              editEmployeeForm.get('department')?.errors &&
-              isDirtyOrTouched('department')
-                ? 'border-red-500 outline-red-500 dark:border-red-500'
-                : 'border-gray-300'
-            }} text-sm md:text-base w-full md:flex-1 border border-gray-300  text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2 py-2 md:py-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          >
-            <option value="0">Choose a department</option>
-            <option
-              *ngFor="let department of departments"
-              value="{{ department.id }}"
-            >
-              {{ department.departmentName }}
-            </option>
-          </select> -->
-
           <input type="text" formControlName="department" class="hidden" />
           <div class="relative text-sm md:text-base w-full md:flex-1">
             <button
@@ -293,9 +274,9 @@
               }} {{
                 editEmployeeForm.get('department')?.errors &&
                 isDirtyOrTouched('department')
-                  ? 'border-red-500 outline-red-500 dark:border-red-500'
-                  : 'border-gray-300'
-              }}  text-gray-900 text-sm md:text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                ? 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500'
+                    : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500'
+              }}  text-gray-900 text-sm md:text-base rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
               aria-haspopup="listbox"
               aria-expanded="true"
               aria-labelledby="listbox-label"
@@ -426,9 +407,9 @@
             class="{{ isEdit ? 'bg-gray-50' : 'bg-gray-200' }} {{
               editEmployeeForm.get('dateOfBirth')?.errors &&
               isDirtyOrTouched('dateOfBirth')
-                ? 'border-red-500 outline-red-500 dark:border-red-500'
-                : 'border-gray-300'
-            }} text-sm md:text-base w-full md:flex-1 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              ? 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500'
+                    : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500'
+            }} outline-none text-sm md:text-base w-full md:flex-1 border border-gray-300 text-gray-900 text-md rounded-lg block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
           />
 
           <div
