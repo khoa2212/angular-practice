@@ -15,26 +15,29 @@ import { ToastrService } from 'ngx-toastr';
 export class LoginComponent {
   isShowPassword = false;
 
-  loginForm = this.formBuilder.group({
-    email: [
-      '',
-      [
-        Validators.required,
-        noWhitespaceValidator(),
-        Validators.pattern(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,10}$/),
+  loginForm = this.formBuilder.group(
+    {
+      email: [
+        '',
+        [
+          Validators.required,
+          noWhitespaceValidator(),
+          Validators.pattern(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,10}$/),
+        ],
       ],
-    ],
-    password: [
-      '',
-      [
-        Validators.required,
-        noWhitespaceValidator(),
-        Validators.pattern(
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})/
-        ),
+      password: [
+        '',
+        [
+          Validators.required,
+          noWhitespaceValidator(),
+          Validators.pattern(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})/
+          ),
+        ],
       ],
-    ],
-  });
+    },
+    { updateOn: 'blur' }
+  );
 
   validateMessages = {
     email: [

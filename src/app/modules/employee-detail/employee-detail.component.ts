@@ -45,29 +45,32 @@ export class EmployeeDetailComponent implements OnInit {
   isShowDropDown: boolean = false;
   isDisableDropdown: boolean = true;
 
-  editEmployeeForm = this.formBuilder.group({
-    firstName: [
-      '',
-      [
-        Validators.required,
-        noWhitespaceValidator(),
-        specialCharacterValidator(),
+  editEmployeeForm = this.formBuilder.group(
+    {
+      firstName: [
+        '',
+        [
+          Validators.required,
+          noWhitespaceValidator(),
+          specialCharacterValidator(),
+        ],
       ],
-    ],
-    lastName: [
-      '',
-      [
-        Validators.required,
-        noWhitespaceValidator(),
-        specialCharacterValidator(),
+      lastName: [
+        '',
+        [
+          Validators.required,
+          noWhitespaceValidator(),
+          specialCharacterValidator(),
+        ],
       ],
-    ],
-    middleName: ['', [noWhitespaceValidator(), specialCharacterValidator()]],
-    dateOfBirth: ['', [Validators.required]],
-    salary: [0, [Validators.max(EMPLOYEE_MAX_SALARY)]],
-    department: [0, [selectBoxRequiredValidator()]],
-    gender: [Gender.FEMALE, [Validators.required]],
-  });
+      middleName: ['', [noWhitespaceValidator(), specialCharacterValidator()]],
+      dateOfBirth: ['', [Validators.required]],
+      salary: [0, [Validators.max(EMPLOYEE_MAX_SALARY)]],
+      department: [0, [selectBoxRequiredValidator()]],
+      gender: [Gender.FEMALE, [Validators.required]],
+    },
+    { updateOn: 'blur' }
+  );
 
   validateMessages = {
     firstName: [

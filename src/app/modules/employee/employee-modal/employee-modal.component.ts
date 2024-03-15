@@ -42,29 +42,32 @@ export class EmployeeModalComponent {
   departmentArrIndex: number = -1;
   isShowDropDown: boolean = false;
 
-  addEmployeeForm = this.formBuilder.group({
-    firstName: [
-      '',
-      [
-        Validators.required,
-        noWhitespaceValidator(),
-        specialCharacterValidator(),
+  addEmployeeForm = this.formBuilder.group(
+    {
+      firstName: [
+        '',
+        [
+          Validators.required,
+          noWhitespaceValidator(),
+          specialCharacterValidator(),
+        ],
       ],
-    ],
-    lastName: [
-      '',
-      [
-        Validators.required,
-        noWhitespaceValidator(),
-        specialCharacterValidator(),
+      lastName: [
+        '',
+        [
+          Validators.required,
+          noWhitespaceValidator(),
+          specialCharacterValidator(),
+        ],
       ],
-    ],
-    middleName: ['', [noWhitespaceValidator(), specialCharacterValidator()]],
-    dateOfBirth: ['', [Validators.required]],
-    salary: [0, [Validators.max(EMPLOYEE_MAX_SALARY)]],
-    department: [0, [selectBoxRequiredValidator()]],
-    gender: [Gender.FEMALE],
-  });
+      middleName: ['', [noWhitespaceValidator(), specialCharacterValidator()]],
+      dateOfBirth: ['', [Validators.required]],
+      salary: [0, [Validators.max(EMPLOYEE_MAX_SALARY)]],
+      department: [0, [selectBoxRequiredValidator()]],
+      gender: [Gender.FEMALE],
+    },
+    { updateOn: 'blur' }
+  );
 
   validateMessages = {
     firstName: [
@@ -243,6 +246,6 @@ export class EmployeeModalComponent {
     this.addEmployeeForm.controls.department.markAsTouched();
     setTimeout(() => {
       this.isShowDropDown = false;
-    }, 200)
+    }, 200);
   }
 }
