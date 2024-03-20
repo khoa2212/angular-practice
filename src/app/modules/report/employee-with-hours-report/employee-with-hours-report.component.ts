@@ -27,6 +27,7 @@ export class EmployeeWithHoursReportComponent {
   unSelectedEmployeeIds: string[] = [];
   isSelectedAll: boolean = false;
   isUnSelectedSome: boolean = false;
+  employeeIdsShowMore: number[] = [];
 
   employeeList$ = this.#employeeRefetch$.pipe(
     startWith(true),
@@ -190,6 +191,16 @@ export class EmployeeWithHoursReportComponent {
     }
 
     return { from, to };
+  }
+
+  onShowMore(id: number) {
+    if (!this.employeeIdsShowMore.includes(id)) {
+      this.employeeIdsShowMore.push(id);
+    } else {
+      this.employeeIdsShowMore = this.employeeIdsShowMore.filter(
+        (employeeId) => employeeId !== id
+      );
+    }
   }
 
   onExportExcel(): void {

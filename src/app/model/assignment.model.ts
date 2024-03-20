@@ -3,6 +3,7 @@ import { Project } from './project.model';
 
 export interface Assignment {
   id: number;
+  numberOfHour: number;
   employee: Employee;
   project: Project;
 }

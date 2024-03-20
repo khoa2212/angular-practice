@@ -71,6 +71,7 @@
                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
               />
             </th>
+            <th class="py-3 px-3 text-white sm:text-base font-bold"></th>
           </tr>
         </thead>
         <tbody *ngFor="let employee of employeeList.employees; index as i">
@@ -87,7 +88,7 @@
                   ? 'border-t-2 border-black'
                   : i === employeeList.employees.length
                   ? 'border-y'
-                  : 'border-t'
+                  : ''
               }}"
             >
               {{ i + showInfo(employeeList).from }}
@@ -98,7 +99,7 @@
                   ? 'border-t-2 border-black'
                   : i === employeeList.employees.length
                   ? 'border-y'
-                  : 'border-t'
+                  : ''
               }}"
             >
               <a
@@ -120,7 +121,7 @@
                   ? 'border-t-2 border-black'
                   : i === employeeList.employees.length
                   ? 'border-y'
-                  : 'border-t'
+                  : ''
               }}"
             >
               {{ employee.dateOfBirth }}
@@ -131,7 +132,7 @@
                   ? 'border-t-2 border-black'
                   : i === employeeList.employees.length
                   ? 'border-y'
-                  : 'border-t'
+                  : ''
               }}"
             >
               {{ employee.gender }}
@@ -142,7 +143,7 @@
                   ? 'border-t-2 border-black'
                   : i === employeeList.employees.length
                   ? 'border-y'
-                  : 'border-t'
+                  : ''
               }}"
             >
               {{ employee.salary }}
@@ -153,7 +154,7 @@
                   ? 'border-t-2 border-black'
                   : i === employeeList.employees.length
                   ? 'border-y'
-                  : 'border-t'
+                  : ''
               }}"
             >
               {{ employee.department.departmentName }}
@@ -165,7 +166,7 @@
                   ? 'border-t-2 border-black'
                   : i === employeeList.employees.length
                   ? 'border-y'
-                  : 'border-t'
+                  : ''
               }}"
             >
               <span class="flex justify-center">
@@ -181,6 +182,143 @@
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
               </span>
+            </td>
+            <td
+              class="py-2 px-3 font-normal text-base whitespace-nowrap {{
+                i === 0
+                  ? 'border-t-2 border-black'
+                  : i === employeeList.employees.length
+                  ? 'border-y'
+                  : ''
+              }}"
+            >
+              <span class="flex justify-center">
+                <span
+                  *ngIf="!employeeIdsShowMore.includes(employee.id)"
+                  class="w-fit h-fit flex cursor-pointer text-white rounded-full bg-blue-500 hover:bg-blue-700 dark:bg-blue-800 dark:hover:bg-blue-900"
+                  (click)="onShowMore(employee.id)"
+                  ><svg
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M15 18L9 12L15 6"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span
+                ><span
+                  *ngIf="employeeIdsShowMore.includes(employee.id)"
+                  class="w-fit h-fit flex cursor-pointer text-white rounded-full bg-blue-500 hover:bg-blue-700 dark:bg-blue-800 dark:hover:bg-blue-900"
+                  (click)="onShowMore(employee.id)"
+                  ><svg
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M6 9L12 15L18 9"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg></span
+              ></span>
+            </td>
+          </tr>
+          <tr
+            *ngIf="employeeIdsShowMore.includes(employee.id)"
+            class="bg-slate-100 dark:bg-slate-200 border-b border-b-gray-400"
+          >
+            <td colspan="8">
+              <table
+                class="table-auto overflow-scroll md:overflow-auto w-full text-left font-inter"
+              >
+                <thead
+                  class="rounded-lg text-base text-black font-semibold w-full"
+                >
+                  <tr>
+                    <th
+                      class="w-16 sm:text-base font-bold whitespace-nowrap"
+                    ></th>
+                    <th
+                      class="py-3 px-3 sm:text-base font-bold whitespace-nowrap"
+                    >
+                      No.
+                    </th>
+                    <th
+                      class="py-3 px-3 sm:text-base font-bold whitespace-nowrap"
+                    >
+                      Project's name
+                    </th>
+                    <th
+                      class="py-3 px-3 sm:text-base font-bold whitespace-nowrap"
+                    >
+                      Area
+                    </th>
+                    <th
+                      class="py-3 px-3 sm:text-base font-bold whitespace-nowrap"
+                    >
+                      Number of hours
+                    </th>
+                    <th
+                      class="py-3 px-3 sm:text-base font-bold whitespace-nowrap"
+                    >
+                      Project's department
+                    </th>
+                    <th
+                      class="py-3 px-3 sm:text-base font-bold whitespace-nowrap"
+                    ></th>
+                    <th
+                      class="py-3 px-3 sm:text-base font-bold whitespace-nowrap"
+                    ></th>
+                  </tr>
+                </thead>
+                <tbody
+                  *ngFor="let assignment of employee.assignments; index as j"
+                  class="text-gray-700"
+                >
+                  <tr>
+                    <td
+                      class="w-16 font-normal text-base whitespace-nowrap"
+                    ></td>
+                    <td
+                      class="py-2 px-3 font-normal text-base whitespace-nowrap"
+                    >
+                      {{ j + 1 }}
+                    </td>
+                    <td
+                      class="py-2 px-3 font-normal text-base whitespace-nowrap"
+                    >
+                      {{ assignment.project.projectName }}
+                    </td>
+                    <td
+                      class="py-2 px-3 font-normal text-base whitespace-nowrap"
+                    >
+                      {{ assignment.project.area }}
+                    </td>
+                    <td
+                      class="py-2 px-3 font-normal text-base whitespace-nowrap"
+                    >
+                      {{ assignment.numberOfHour }}
+                    </td>
+                    <td
+                      class="py-2 px-3 font-normal text-base whitespace-nowrap"
+                    >
+                      {{ assignment.project.department.departmentName }}
+                    </td>
+                    <td
+                      class="py-2 px-3 font-normal text-base whitespace-nowrap"
+                    ></td>
+                  </tr>
+                </tbody>
+              </table>
             </td>
           </tr>
         </tbody>
