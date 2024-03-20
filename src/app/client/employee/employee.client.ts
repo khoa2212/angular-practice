@@ -60,4 +60,18 @@ export class EmployeeClient {
     );
     return data;
   }
+
+  findEmployeesByHoursInProjectMangedByDepartment$(
+    departmentId: number,
+    pageNumber: number,
+    pageSize: number,
+    numberOfHour: number
+  ): Observable<EmployeeList> {
+    const data = this.httpClient.get<EmployeeList>(
+      `${ENVIRONMENT.BASE_URL}/${EMPLOYEE.WITH_LIST_ASSIGNMENT}`,
+      { params: { departmentId, pageNumber, pageSize, numberOfHour } }
+    );
+
+    return data;
+  }
 }

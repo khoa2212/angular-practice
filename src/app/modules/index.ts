@@ -10,3 +10,4 @@ export { ReportComponent as ReportComponent } from './report/report.component';
 export { ProjectWithEmployeeReportComponent as ProjectWithEmployeeReportComponent } from './report/project-with-employee-report/project-with-employee-report.component';
 export { ActivateAccountComponent as ActivateAccountComponent } from './activate-account/activate-account.component';
 export { UserComponent as UserComponent } from './user/user.component';
+export { EmployeeWithHoursReportComponent as EmployeeWithHoursReportComponent } from './report/employee-with-hours-report/employee-with-hours-report.component';

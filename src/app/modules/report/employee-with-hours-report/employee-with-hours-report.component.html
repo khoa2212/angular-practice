@@ -1,0 +1,243 @@
+<div
+  *ngIf="{ employeeList: employeeList$ | async } as data"
+  class="flex w-full flex-col gap-3 items-center"
+>
+  <div class="w-full flex justify-end">
+    <button
+      *ngIf="authService.hasRole(['ADMIN', 'USER'])"
+      title="Add employee"
+      class="{{
+        !isSelectedAll && employeeIds.length === 0
+          ? 'bg-blue-200 cursor-not-allowed'
+          : 'bg-blue-500 hover:bg-blue-800 dark:bg-blue-900 dark:hover:bg-blue-950'
+      }} rounded-md p-2 text-white"
+      (click)="onExportExcel()"
+      [disabled]="!isSelectedAll && employeeIds.length === 0"
+    >
+      Export profiles
+    </button>
+  </div>
+
+  <div *ngIf="data.employeeList as employeeList" class="w-full">
+    <div
+      class="w-full overflow-x-scroll md:overflow-auto rounded-md dark:border-gray-700"
+    >
+      <table
+        class="table-auto overflow-scroll md:overflow-auto w-full text-left font-inter border"
+      >
+        <thead class="rounded-lg text-base text-white font-semibold w-full">
+          <tr class="bg-blue-500 dark:bg-blue-900">
+            <th
+              class="py-3 px-3 text-white sm:text-base font-bold whitespace-nowrap"
+            >
+              No.
+            </th>
+            <th
+              class="py-3 px-3 text-whitesm:text-base font-bold whitespace-nowrap"
+            >
+              Full name
+            </th>
+            <th
+              class="py-3 px-3 text-white sm:text-base font-bold whitespace-nowrap"
+            >
+              Date of birth
+            </th>
+            <th
+              class="py-3 px-3 text-white sm:text-base font-bold whitespace-nowrap"
+            >
+              Gender
+            </th>
+            <th
+              class="py-3 px-3 text-white sm:text-base font-bold whitespace-nowrap"
+            >
+              Salary
+            </th>
+            <th
+              class="py-3 px-3 text-white sm:text-base font-bold whitespace-nowrap"
+            >
+              Department
+            </th>
+            <th
+              *ngIf="authService.hasRole(['ADMIN', 'USER'])"
+              class="py-3 px-3 text-white sm:text-base font-bold whitespace-nowrap flex gap-2 items-center justify-center"
+            >
+              <span>Select all</span>
+              <input
+                type="checkbox"
+                id="checkbox-0"
+                value="0"
+                (change)="onCheck($event, employeeList.employees)"
+                [checked]="isSelectedAll && !isUnSelectedSome"
+                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+              />
+            </th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let employee of employeeList.employees; index as i">
+          <tr
+            class="{{
+              i % 2 === 0
+                ? 'bg-white dark:bg-slate-300'
+                : 'bg-blue-100 dark:bg-sky-600'
+            }}"
+          >
+            <td
+              class="py-2 px-3 font-normal text-base whitespace-nowrap {{
+                i === 0
+                  ? 'border-t-2 border-black'
+                  : i === employeeList.employees.length
+                  ? 'border-y'
+                  : 'border-t'
+              }}"
+            >
+              {{ i + showInfo(employeeList).from }}
+            </td>
+            <td
+              class="py-2 px-3 font-normal text-base whitespace-nowrap {{
+                i === 0
+                  ? 'border-t-2 border-black'
+                  : i === employeeList.employees.length
+                  ? 'border-y'
+                  : 'border-t'
+              }}"
+            >
+              <a
+                routerLink="/home/employee/{{ employee.id }}"
+                class="text-blue-500 hover:text-blue-800 dark:text-blue-900 dark:hover:text-black cursor-pointer"
+                >{{
+                  (employee.middleName === null
+                    ? ""
+                    : employee.middleName + " ") +
+                    employee.firstName +
+                    " " +
+                    employee.lastName
+                }}</a
+              >
+            </td>
+            <td
+              class="py-2 px-3 font-normal text-base whitespace-nowrap {{
+                i === 0
+                  ? 'border-t-2 border-black'
+                  : i === employeeList.employees.length
+                  ? 'border-y'
+                  : 'border-t'
+              }}"
+            >
+              {{ employee.dateOfBirth }}
+            </td>
+            <td
+              class="py-2 px-3 font-normal text-base whitespace-nowrap {{
+                i === 0
+                  ? 'border-t-2 border-black'
+                  : i === employeeList.employees.length
+                  ? 'border-y'
+                  : 'border-t'
+              }}"
+            >
+              {{ employee.gender }}
+            </td>
+            <td
+              class="py-2 px-3 font-normal text-base whitespace-nowrap {{
+                i === 0
+                  ? 'border-t-2 border-black'
+                  : i === employeeList.employees.length
+                  ? 'border-y'
+                  : 'border-t'
+              }}"
+            >
+              {{ employee.salary }}
+            </td>
+            <td
+              class="py-2 px-3 font-normal text-base whitespace-nowrap {{
+                i === 0
+                  ? 'border-t-2 border-black'
+                  : i === employeeList.employees.length
+                  ? 'border-y'
+                  : 'border-t'
+              }}"
+            >
+              {{ employee.department.departmentName }}
+            </td>
+            <td
+              *ngIf="authService.hasRole(['ADMIN', 'USER'])"
+              class="py-2 px-3 font-normal text-base whitespace-nowrap {{
+                i === 0
+                  ? 'border-t-2 border-black'
+                  : i === employeeList.employees.length
+                  ? 'border-y'
+                  : 'border-t'
+              }}"
+            >
+              <span class="flex justify-center">
+                <input
+                  type="checkbox"
+                  id="checkbox-{{ employee.id }}"
+                  value="{{ employee.id }}"
+                  (change)="onCheck($event, employeeList.employees)"
+                  [checked]="
+                    (isSelectedAll && !isUnSelectedSome) ||
+                    isCheck(employee.id.toString())
+                  "
+                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                />
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div
+      class="w-full flex justify-center sm:justify-between flex-col sm:flex-row gap-5 mt-1.5 px-1 items-center"
+    >
+      <div class="text-lg dark:text-white">
+        Showing {{ showInfo(employeeList).from }} to
+        {{ showInfo(employeeList).to }}
+        of {{ employeeList.totalCount }} entries
+      </div>
+      <div class="flex">
+        <ul
+          class="flex justify-center items-center gap-x-[10px]"
+          role="navigation"
+          aria-label="Pagination"
+        >
+          <li
+            class="flex hover:bg-blue-800 make-filter items-center justify-center w-[36px] rounded-[6px] 
+            h-[36px] border-[1px] border-solid border-[#E4E4EB] dark:border-gray-700 {{
+              disablePrev()
+                ? 'bg-[#cccccc] pointer-events-none'
+                : 'cursor-pointer'
+            }}"
+            (click)="onPrev()"
+          >
+            <img
+              src="https://www.tailwindtap.com/assets/travelagency-admin/leftarrow.svg"
+            />
+          </li>
+          <li
+            *ngFor="let page of numberOfPagination"
+            class="flex hover:bg-blue-800 hover:text-white dark:hover:text-white items-center justify-center w-[36px] rounded-[6px] h-[34px] border-solid border-[1px] cursor-pointer {{
+              page === currentPage
+                ? 'text-blue-600  border-sky-500 dark:text-blue-700 dark:border-blue-800'
+                : 'border-[#E4E4EB] dark:text-white dark:border-gray-700'
+            }}"
+            (click)="onSelectPage(page)"
+          >
+            {{ page }}
+          </li>
+          <li
+            class="flex make-filter hover:bg-blue-800 items-center justify-center w-[36px] rounded-[6px] h-[36px] border-[1px] border-solid border-[#E4E4EB] dark:border-gray-700 {{
+              disableNext(employeeList)
+                ? 'bg-[#cccccc] pointer-events-none'
+                : 'cursor-pointer'
+            }}"
+            (click)="onNext(employeeList)"
+          >
+            <img
+              src="https://www.tailwindtap.com/assets/travelagency-admin/rightarrow.svg"
+            />
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

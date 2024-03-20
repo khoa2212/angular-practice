@@ -13,23 +13,27 @@ export class EmployeeService {
     pageNumber: number,
     pageSize: number,
     departmentId: number,
-    employeeFullName: string,
+    employeeFullName: string
   ): Observable<EmployeeList> {
     const employees = this.employeeClient.findEmployees$(
       pageNumber,
       pageSize,
       departmentId,
-      employeeFullName,
+      employeeFullName
     );
 
     return employees;
   }
 
-  add$(newEmployee: Omit<Employee, "id" | "department" | "status">): Observable<Employee> {
+  add$(
+    newEmployee: Omit<Employee, 'id' | 'department' | 'status'>
+  ): Observable<Employee> {
     return this.employeeClient.add$(newEmployee);
   }
 
-  update$(employee: Omit<Employee, "department" | "status">): Observable<Employee> {
+  update$(
+    employee: Omit<Employee, 'department' | 'status'>
+  ): Observable<Employee> {
     return this.employeeClient.update$(employee);
   }
 
@@ -40,4 +44,18 @@ export class EmployeeService {
   findById$(id: number): Observable<Employee> {
     return this.employeeClient.findById$(id);
   }
- }
+
+  findEmployeesByHoursInProjectMangedByDepartment$(
+    departmentId: number,
+    pageNumber: number,
+    pageSize: number,
+    numberOfHour: number
+  ): Observable<EmployeeList> {
+    return this.employeeClient.findEmployeesByHoursInProjectMangedByDepartment$(
+      departmentId,
+      pageNumber,
+      pageSize,
+      numberOfHour
+    );
+  }
+}

@@ -1,3 +1,4 @@
+import { Assignment } from "./assignment.model";
 import { Department } from "./department.model";
 import { Gender } from "./gender.enum";
 import { Status } from "./status.enum";
@@ -13,6 +14,7 @@ export interface Employee {
     status: Status
     department: Department;
     departmentId?: number;
+    assignments?: Assignment[];
 }
 
 export interface EmployeeList {
