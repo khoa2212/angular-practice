@@ -194,7 +194,7 @@
             >
               <span class="flex justify-center">
                 <span
-                  *ngIf="!employeeIdsShowMore.includes(employee.id)"
+                  *ngIf="!employeeIdsShowMore.has(employee.id)"
                   class="w-fit h-fit flex cursor-pointer text-white rounded-full bg-blue-500 hover:bg-blue-700 dark:bg-blue-800 dark:hover:bg-blue-900"
                   (click)="onShowMore(employee.id)"
                   ><svg
@@ -212,7 +212,7 @@
                       stroke-linejoin="round"
                     /></svg></span
                 ><span
-                  *ngIf="employeeIdsShowMore.includes(employee.id)"
+                  *ngIf="employeeIdsShowMore.has(employee.id)"
                   class="w-fit h-fit flex cursor-pointer text-white rounded-full bg-blue-500 hover:bg-blue-700 dark:bg-blue-800 dark:hover:bg-blue-900"
                   (click)="onShowMore(employee.id)"
                   ><svg
@@ -233,7 +233,7 @@
             </td>
           </tr>
           <tr
-            *ngIf="employeeIdsShowMore.includes(employee.id)"
+            *ngIf="employeeIdsShowMore.has(employee.id)"
             class="bg-slate-100 dark:bg-slate-200 border-b border-b-gray-400"
           >
             <td colspan="8">

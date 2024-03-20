@@ -27,7 +27,7 @@ export class EmployeeWithHoursReportComponent {
   unSelectedEmployeeIds: string[] = [];
   isSelectedAll: boolean = false;
   isUnSelectedSome: boolean = false;
-  employeeIdsShowMore: number[] = [];
+  employeeIdsShowMore: Set<Number> = new Set<Number>();
 
   employeeList$ = this.#employeeRefetch$.pipe(
     startWith(true),
@@ -194,12 +194,10 @@ export class EmployeeWithHoursReportComponent {
   }
 
   onShowMore(id: number) {
-    if (!this.employeeIdsShowMore.includes(id)) {
-      this.employeeIdsShowMore.push(id);
+    if (!this.employeeIdsShowMore.has(id)) {
+      this.employeeIdsShowMore.add(id);
     } else {
-      this.employeeIdsShowMore = this.employeeIdsShowMore.filter(
-        (employeeId) => employeeId !== id
-      );
+      this.employeeIdsShowMore.delete(id)
     }
   }
 
