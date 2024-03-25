@@ -15,6 +15,7 @@ export const EMPLOYEE = {
   UPDATE: 'employees/update',
   DELETE: 'employees/delete',
   WITH_LIST_ASSIGNMENT: 'employees/reports/total-hours/department',
+  EXPORT_PROFILE_WITH_LIST_ASSIGNMENT: 'employees/reports/total-hours/department/export-profiles'
 };
 
 export const PROJECT = {

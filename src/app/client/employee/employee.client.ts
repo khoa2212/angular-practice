@@ -74,4 +74,24 @@ export class EmployeeClient {
 
     return data;
   }
+
+  exportEmployeeProfilesByHoursInProjectMangedByDepartment$(
+    departmentId: number,
+    numberOfHour: number,
+    employeeIdsParam: string
+  ) {
+    const employees = this.httpClient.get(
+      `${ENVIRONMENT.BASE_URL}/${EMPLOYEE.EXPORT_PROFILE_WITH_LIST_ASSIGNMENT}`,
+      {
+        params: {
+          departmentId,
+          numberOfHour,
+          employeeIdsParam,
+        },
+        responseType: 'blob',
+      }
+    );
+
+    return employees;
+  }
 }

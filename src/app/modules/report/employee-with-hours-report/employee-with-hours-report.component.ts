@@ -197,7 +197,7 @@ export class EmployeeWithHoursReportComponent {
     if (!this.employeeIdsShowMore.has(id)) {
       this.employeeIdsShowMore.add(id);
     } else {
-      this.employeeIdsShowMore.delete(id)
+      this.employeeIdsShowMore.delete(id);
     }
   }
 
@@ -227,68 +227,68 @@ export class EmployeeWithHoursReportComponent {
       });
     }
 
-    // this.employeeService.exportExcelEmployeesWithEmployeesSalariesHours$(
-    //   this.numberOfEmployees,
-    //   this.totalHours,
-    //   this.totalSalaries,
-    //   this.EmployeeIdsParam
-    // ).subscribe({
-    //   next: (response) => {
-    //     let dataType = response.type;
-    //     let binaryData = [];
-    //     binaryData.push(response);
-    //     let downloadLink = document.createElement('a');
-    //     downloadLink.href = window.URL.createObjectURL(
-    //       new Blob(binaryData, { type: dataType })
-    //     );
-    //     downloadLink.setAttribute(
-    //       'download',
-    //       'Employees-with-salaries-report.xlsx'
-    //     );
-    //     document.body.appendChild(downloadLink);
-    //     downloadLink.click();
-    //   },
-    //   error: (err) => {
-    //     this.toastrService.error(err.message);
-    //   },
-    // });
+    this.employeeService
+      .exportEmployeeProfilesByHoursInProjectMangedByDepartment$(
+        this.departmentId,
+        this.numberOfHour,
+        this.employeeIdsParam
+      )
+      .subscribe({
+        next: (response) => {
+          let dataType = response.type;
+          let binaryData = [];
+          binaryData.push(response);
+          let downloadLink = document.createElement('a');
+          downloadLink.href = window.URL.createObjectURL(
+            new Blob(binaryData, { type: dataType })
+          );
+          downloadLink.setAttribute(
+            'download',
+            'employee-profiles.zip'
+          );
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+        },
+        error: (err) => {
+          this.toastrService.error(err.message);
+        },
+      });
 
-    // this.isSelectedAll = false;
-    // this.isUnSelectedSome = false;
-    // this.unSelectedEmployeeIds = [];
-    // this.EmployeeIds = [];
+    this.isSelectedAll = false;
+    this.isUnSelectedSome = false;
+    this.unSelectedEmployeeIds = [];
+    this.employeeIds = [];
   }
 
   onCheck(event: any, Employees: Employee[]) {
-    // if (event.target.value === '0') {
-    //   this.isSelectedAll = event.target.checked;
-    //   this.isUnSelectedSome = false;
-    //   this.unSelectedEmployeeIds = [];
-    //   if (event.target.checked) {
-    //     Employees.forEach((Employee) => {
-    //       this.EmployeeIds.push(Employee.id.toString());
-    //     });
-    //   } else {
-    //     this.EmployeeIds = [];
-    //   }
-    // }
-    // if (event.target.checked) {
-    //   this.EmployeeIds.push(event.target.value);
-    // } else {
-    //   if (event.target.value !== '0') {
-    //     if (this.isSelectedAll) {
-    //       this.isUnSelectedSome = true;
-    //       this.unSelectedEmployeeIds.push(event.target.value);
-    //     }
-    //   }
-    //   this.EmployeeIds = this.EmployeeIds.filter(
-    //     (item) => item !== event.target.value
-    //   );
-    // }
+    if (event.target.value === '0') {
+      this.isSelectedAll = event.target.checked;
+      this.isUnSelectedSome = false;
+      this.unSelectedEmployeeIds = [];
+      if (event.target.checked) {
+        Employees.forEach((Employee) => {
+          this.employeeIds.push(Employee.id.toString());
+        });
+      } else {
+        this.employeeIds = [];
+      }
+    }
+    if (event.target.checked) {
+      this.employeeIds.push(event.target.value);
+    } else {
+      if (event.target.value !== '0') {
+        if (this.isSelectedAll) {
+          this.isUnSelectedSome = true;
+          this.unSelectedEmployeeIds.push(event.target.value);
+        }
+      }
+      this.employeeIds = this.employeeIds.filter(
+        (item) => item !== event.target.value
+      );
+    }
   }
 
   isCheck(id: string): boolean {
-    //return this.EmployeeIds.includes(id);
-    return false;
+    return this.employeeIds.includes(id);
   }
 }

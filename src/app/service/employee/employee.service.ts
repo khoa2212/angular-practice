@@ -58,4 +58,16 @@ export class EmployeeService {
       numberOfHour
     );
   }
+
+  exportEmployeeProfilesByHoursInProjectMangedByDepartment$(
+    departmentId: number,
+    numberOfHour: number,
+    employeeIdsParam: string
+  ) {
+    return this.employeeClient.exportEmployeeProfilesByHoursInProjectMangedByDepartment$(
+      departmentId,
+      numberOfHour,
+      employeeIdsParam
+    );
+  }
 }
