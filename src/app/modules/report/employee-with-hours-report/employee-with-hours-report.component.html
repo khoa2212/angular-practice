@@ -1,8 +1,111 @@
 <div
-  *ngIf="{ employeeList: employeeList$ | async } as data"
+  *ngIf="{
+    departments: departmentList$ | async,
+    employeeList: employeeList$ | async
+  } as data"
   class="flex w-full flex-col gap-3 items-center"
 >
-  <div class="w-full flex justify-end">
+  <div class="w-full flex gap-2 justify-end">
+    <div *ngIf="data.departments as departments" class="relative md:basis-60">
+      <button
+        type="button"
+        class="relative max-h-11 overflow-y-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        aria-haspopup="listbox"
+        aria-expanded="true"
+        aria-labelledby="listbox-label"
+        (click)="onShowDropDown()"
+        (blur)="onBlurDropDown()"
+      >
+        <span class="flex items-center">
+          <span class="block truncate">{{
+            onShowDepartmentName(departments)
+          }}</span>
+        </span>
+        <span
+          class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2"
+        >
+          <svg
+            class="h-5 w-5 text-gray-400"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </span>
+      </button>
+      <ul
+        class="{{
+          isShowDropDown ? '' : 'hidden'
+        }} absolute z-3 mt-1 max-h-56 w-full overflow-y-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        tabindex="-1"
+        role="listbox"
+        aria-labelledby="listbox-label"
+        aria-activedescendant="listbox-option-3"
+      >
+        <li
+          class="text-gray-900 relative cursor-pointer select-none py-2 pl-3 pr-9 hover:bg-slate-200 dark:hover:bg-gray-600"
+          id="listbox-option-0"
+          role="option"
+          (click)="onSelectDepartment(0, -1)"
+        >
+          <div class="flex items-center">
+            <span class="block truncate dark:text-white">All departments</span>
+          </div>
+          <span
+            *ngIf="departmentId === 0"
+            class="text-blue-600 dark:text-blue-300 absolute inset-y-0 right-0 flex items-center pr-4"
+          >
+            <svg
+              class="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </span>
+        </li>
+        <li
+          *ngFor="let department of departments; index as i"
+          class="text-gray-900 relative cursor-pointer select-none py-2 pl-3 pr-9 hover:bg-slate-200 dark:hover:bg-gray-600"
+          id="listbox-option-0"
+          role="option"
+          (click)="onSelectDepartment(department.id, i)"
+        >
+          <div class="flex items-center">
+            <span class="block truncate dark:text-white">{{
+              department.departmentName
+            }}</span>
+          </div>
+          <span
+            *ngIf="department.id === departmentId"
+            class="text-blue-600 dark:text-blue-300 absolute inset-y-0 right-0 flex items-center pr-4"
+          >
+            <svg
+              class="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </span>
+        </li>
+      </ul>
+    </div>
     <button
       *ngIf="authService.hasRole(['ADMIN', 'USER'])"
       title="Add employee"
@@ -11,7 +114,7 @@
           ? 'bg-blue-200 cursor-not-allowed'
           : 'bg-blue-500 hover:bg-blue-800 dark:bg-blue-900 dark:hover:bg-blue-950'
       }} rounded-md p-2 text-white"
-      (click)="onExportExcel()"
+      (click)="onExportProfiles()"
       [disabled]="!isSelectedAll && employeeIds.length === 0"
     >
       Export profiles

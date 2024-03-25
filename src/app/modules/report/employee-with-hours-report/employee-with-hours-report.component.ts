@@ -4,8 +4,8 @@ import {
   DEFAULT_PAGE_SIZE,
   NUMBER_OF_PAGINATION,
 } from 'app/constants';
-import { Employee, EmployeeList } from 'app/model';
-import { AuthService, EmployeeService } from 'app/service';
+import { Department, Employee, EmployeeList } from 'app/model';
+import { AuthService, DepartmentService, EmployeeService } from 'app/service';
 import { ToastrService } from 'ngx-toastr';
 import { Subject, startWith, switchMap } from 'rxjs';
 
@@ -16,6 +16,7 @@ import { Subject, startWith, switchMap } from 'rxjs';
 })
 export class EmployeeWithHoursReportComponent {
   readonly #employeeRefetch$ = new Subject<void>();
+  readonly #departmentRefetch$ = new Subject<void>();
 
   currentPage: number = DEFAULT_PAGE_NUMBER;
   pageSize: number = DEFAULT_PAGE_SIZE;
@@ -29,6 +30,9 @@ export class EmployeeWithHoursReportComponent {
   isUnSelectedSome: boolean = false;
   employeeIdsShowMore: Set<Number> = new Set<Number>();
 
+  departmentArrIndex: number = -1;
+  isShowDropDown: boolean = false;
+
   employeeList$ = this.#employeeRefetch$.pipe(
     startWith(true),
     switchMap(() =>
@@ -41,10 +45,16 @@ export class EmployeeWithHoursReportComponent {
     )
   );
 
+  departmentList$ = this.#departmentRefetch$.pipe(
+    startWith(true),
+    switchMap(() => this.departmentService.findAll$())
+  );
+
   constructor(
     private employeeService: EmployeeService,
     private toastrService: ToastrService,
-    public authService: AuthService
+    public authService: AuthService,
+    private departmentService: DepartmentService
   ) {}
 
   ngOnInit(): void {
@@ -201,7 +211,47 @@ export class EmployeeWithHoursReportComponent {
     }
   }
 
-  onExportExcel(): void {
+  onSelectDepartment(id: number, index: number): void {
+    this.currentPage = 1;
+
+    this.departmentId = id;
+    this.departmentArrIndex = index;
+
+    this.employeeList$ = this.#employeeRefetch$.pipe(
+      startWith(true),
+      switchMap(() =>
+        this.employeeService.findEmployeesByHoursInProjectMangedByDepartment$(
+          this.departmentId,
+          this.currentPage,
+          this.pageSize,
+          this.numberOfHour
+        )
+      )
+    );
+
+    this.isShowDropDown = false;
+    this.chooseNumberOfPagination();
+  }
+
+  onShowDepartmentName(departments: Department[]): string {
+    if (this.departmentId === 0 || this.departmentArrIndex === -1) {
+      return 'All departments';
+    }
+
+    return departments[this.departmentArrIndex].departmentName;
+  }
+
+  onShowDropDown() {
+    this.isShowDropDown = !this.isShowDropDown;
+  }
+
+  onBlurDropDown() {
+    setTimeout(() => {
+      this.isShowDropDown = false;
+    }, 200);
+  }
+
+  onExportProfiles(): void {
     const setSelectedIds = new Set(this.employeeIds);
     const setUnSelectedIds = new Set(this.unSelectedEmployeeIds);
     const selectedIds = [...setSelectedIds];
@@ -242,10 +292,7 @@ export class EmployeeWithHoursReportComponent {
           downloadLink.href = window.URL.createObjectURL(
             new Blob(binaryData, { type: dataType })
           );
-          downloadLink.setAttribute(
-            'download',
-            'employee-profiles.zip'
-          );
+          downloadLink.setAttribute('download', 'employee-profiles.zip');
           document.body.appendChild(downloadLink);
           downloadLink.click();
         },
