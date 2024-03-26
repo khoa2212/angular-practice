@@ -8,7 +8,7 @@
   <app-loading></app-loading>
 
   <div
-    class="w-full flex flex-col md:items-center md:flex-row max-w-4xl gap-1"
+    class="flex flex-col md:items-center md:flex-row w-4/5 gap-1"
     *ngIf="!isLoading()"
   >
     <div class="flex gap-1 flex-1 max-h-11">
@@ -155,7 +155,7 @@
     </div>
   </div>
 
-  <div *ngIf="data.employeeList as employeeList" class="w-full max-w-4xl">
+  <div *ngIf="data.employeeList as employeeList" class="w-4/5">
     <div
       class="w-full overflow-x-scroll md:overflow-auto max-w-7xl 2xl:max-w-none rounded-md dark:border-gray-700"
     >
