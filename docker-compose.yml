@@ -2,7 +2,7 @@ version: "3"
 
 services:
   angular-fe:
-    container_name: dojo-ui
+    container_name: emp-manage-ui
     build:
       context: .
       dockerfile: Dockerfile
