@@ -5,7 +5,7 @@
   <app-loading></app-loading>
 
   <div class="w-4/5 flex justify-between" *ngIf="!isLoading()">
-    <div class="flex gap-1 flex-1 max-h-11">
+    <div class="hidden gap-1 flex-1 max-h-11">
       <button
         *ngIf="authService.hasRole(['ADMIN', 'USER'])"
         title="Add employee"
@@ -103,7 +103,6 @@
               }}"
             >
               <a
-                routerLink="/home/department/{{ department.id }}"
                 class="text-blue-500 hover:text-blue-800 dark:text-blue-900 dark:hover:text-black cursor-pointer"
                 >{{ department.departmentName }}</a
               >
