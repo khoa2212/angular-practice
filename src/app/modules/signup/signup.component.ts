@@ -56,7 +56,7 @@ export class SignupComponent {
     displayName: [
       {
         type: 'required',
-        message: 'Email is required',
+        message: 'Display name is required',
       },
       {
         type: 'whiteSpaceOnly',

@@ -161,6 +161,11 @@ export class EmployeeModalComponent {
       this.addEmployeeForm.controls.department.setValue(
         this.selectedEmployee.department.id ?? 0
       );
+      const departmentIndex = this.departments?.findIndex(dep => dep.id === this.selectedEmployee?.department.id) ?? -1;
+      ;
+      this.departmentArrIndex = departmentIndex
+      this.departmentId = this.departments?.[departmentIndex].id ?? 0;
+
     } else {
       this.addEmployeeForm.reset({
         firstName: '',
@@ -234,7 +239,7 @@ export class EmployeeModalComponent {
     if (this.departmentId === 0 || this.departmentArrIndex === -1) {
       return 'All departments';
     }
-
+    
     return this.departments?.[this.departmentArrIndex].departmentName ?? '';
   }
 
