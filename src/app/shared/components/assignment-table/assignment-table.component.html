@@ -2,7 +2,7 @@
   *ngIf="{ assignmentList: assignmentList$ | async } as data"
   class="flex w-full flex-col gap-3 items-center"
 >
-  <div class="w-full flex justify-between">
+  <div class="w-full hidden justify-between">
     <button
       *ngIf="authService.hasRole(['ADMIN', 'USER'])"
       title="Add assignment"
@@ -35,12 +35,6 @@
               class="py-3 px-3 text-white sm:text-base font-bold whitespace-nowrap"
             >
               Employee
-            </th>
-            <th
-              *ngIf="authService.hasRole(['ADMIN', 'USER'])"
-              class="py-3 px-3 text-white sm:text-base font-bold whitespace-nowrap flex justify-center"
-            >
-              Action
             </th>
           </tr>
         </thead>
@@ -98,30 +92,6 @@
                   " " +
                   employee.lastName
               }}
-            </td>
-            <td
-              *ngIf="authService.hasRole(['ADMIN', 'USER'])"
-              class="py-2 px-3 font-normal text-base whitespace-nowrap {{
-                i === 0
-                  ? 'border-t-2 border-black'
-                  : i === assignmentList.assignments.length
-                  ? 'border-y'
-                  : 'border-t'
-              }}"
-            >
-              <span class="flex gap-2 justify-center">
-                <img
-                  class="cursor-pointer w-5 h-5"
-                  src="../../../assets/pen.png"
-                  alt="Edit"
-                />
-                <img
-                  *ngIf="authService.hasRole(['ADMIN'])"
-                  class="cursor-pointer w-5 h-5"
-                  src="../../../assets/delete.png"
-                  alt="Delete"
-                />
-              </span>
             </td>
           </tr>
         </tbody>

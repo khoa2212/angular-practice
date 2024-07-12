@@ -5,7 +5,7 @@
   <app-loading></app-loading>
 
   <div class="w-full flex justify-between max-w-4xl" *ngIf="!isLoading()">
-    <div class="flex gap-1 flex-1 max-h-11">
+    <div class="hidden gap-1 flex-1 max-h-11">
       <button
         *ngIf="authService.hasRole(['ADMIN', 'USER'])"
         title="Add employee"
@@ -79,12 +79,6 @@
               class="py-3 px-3 text-white sm:text-base font-bold whitespace-nowrap"
             >
               Avatar
-            </th>
-            <th
-              *ngIf="authService.hasRole(['ADMIN', 'USER'])"
-              class="py-3 px-3 text-white sm:text-base font-bold whitespace-nowrap flex justify-center"
-            >
-              Action
             </th>
           </tr>
         </thead>
@@ -165,30 +159,6 @@
                 src="{{ user.avatar }}"
                 alt="{{ 'avatar' + (i + 1) }}"
               />
-            </td>
-            <td
-              *ngIf="authService.hasRole(['ADMIN', 'USER'])"
-              class="py-2 px-3 font-normal text-base whitespace-nowrap {{
-                i === 0
-                  ? 'border-t-2 border-black'
-                  : i === userList.users.length
-                  ? 'border-y'
-                  : 'border-t'
-              }}"
-            >
-              <span class="flex gap-2 justify-center">
-                <img
-                  class="cursor-pointer w-5 h-5"
-                  src="../../../assets/pen.png"
-                  alt="Edit"
-                />
-                <img
-                  *ngIf="authService.hasRole(['ADMIN'])"
-                  class="cursor-pointer w-5 h-5"
-                  src="../../../assets/delete.png"
-                  alt="Delete"
-                />
-              </span>
             </td>
           </tr>
         </tbody>
